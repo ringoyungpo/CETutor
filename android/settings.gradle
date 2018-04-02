@@ -1,0 +1,3 @@
+rootProject.name = 'CETutor'
+
+include ':app'
