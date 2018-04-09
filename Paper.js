@@ -7,10 +7,10 @@
 import React, {Component} from 'react'
 import {Platform, StyleSheet, Text, View} from 'react-native'
 import {TabNavigator} from 'react-navigation'
-import Writing from './paper/Writing'
-import Listening from './paper/Listening'
-import Reading from './paper/Reading'
-import Translation from './paper/Translation'
+import Writing from './app/paper/Writing'
+import Listening from './app/paper/Listening'
+import Reading from './app/paper/Reading'
+import Translation from './app/paper/Translation'
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
