@@ -6,21 +6,21 @@
 
 import React, {Component} from 'react'
 import {Text, View} from 'react-native'
-import Menu from './Menu'
-import Paper from './Paper'
+import Menu from './app/Menu'
+import Paper from './app/Paper'
 import {StackNavigator} from 'react-navigation'
 
 export default StackNavigator({
+  Paper: {
+    screen: Paper,
+    navigationOptions: {
+      header: null
+    }
+  },
   Menu: {
     screen: Menu,
     navigationOptions: {
       header: null
     }
   },
-  Paper: {
-    screen: Paper,
-    navigationOptions: {
-      header: null
-    }
-  }
 })

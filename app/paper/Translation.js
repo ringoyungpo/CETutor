@@ -19,20 +19,23 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
+type Props = {
+  selected: boolean
+}
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {this.props.navigation.state.params.level}
+        <Text style={styles.part}>
+          Part IV translation
         </Text>
-        <Text style={styles.instructions}>
-          {this.props.navigation.state.params.category}
-        </Text>
-        <Text style={styles.instructions}>
-          Translation
-        </Text>
+        {
+          this.props.selected?(
+            <Text style={styles.instructions}>
+              Translation
+            </Text>
+          ): null
+        }
       </View>
     );
   }
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  part: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,

@@ -5,51 +5,68 @@
  */
 
 import React, {Component} from 'react'
-import {Platform, StyleSheet, Text, View} from 'react-native'
+import {
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableHighlight,
+} from 'react-native'
 import {TabNavigator} from 'react-navigation'
-import Writing from './app/paper/Writing'
-import Listening from './app/paper/Listening'
-import Reading from './app/paper/Reading'
-import Translation from './app/paper/Translation'
+import Writing from './paper/Writing'
+import Listening from './paper/Listening'
+import Reading from './paper/Reading'
+import Translation from './paper/Translation'
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu'
-});
-
-export default TabNavigator({
-  Writing: {
-    screen: Writing,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Listening: {
-    screen: Listening,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Reading: {
-    screen: Reading,
-    navigationOptions: {
-      header: null
-    }
-  },
-  Translation: {
-    screen: Translation,
-    navigationOptions: {
-      header: null
+type Props = {}
+type State = {
+  selectPart: ?string,
+  answers: {
+    writing: ?string
+  }
+}
+export default class Paper extends Component<Props, State>{
+  constructor(props: any){
+    super(props)
+    this.state = {
+      selectPart: null,
+      answers: {writing: ''}
     }
   }
-})
+
+  _partSelect = (part) => ()=>{
+
+    this.setState({
+      selectPart: this.state.selectPart === part ? null : part
+    })
+  }
+
+  render = ()=>(
+    <ScrollView contentContainerStyle={styles.container}>
+      <TouchableHighlight onPress={this._partSelect('Writing')}>
+        <Writing selected={this.state.selectPart === 'Writing'}
+          onSubmit={(text)=>{this.setState({answers: {writing: text}})}}/>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={this._partSelect('Listening')}>
+        <Listening selected={this.state.selectPart === 'Listening'}/>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={this._partSelect('Reading')}>
+        <Reading selected={this.state.selectPart === 'Reading'}/>
+      </TouchableHighlight>
+      <TouchableHighlight onPress={this._partSelect('Translation')}>
+        <Translation selected={this.state.selectPart === 'Translation'}/>
+      </TouchableHighlight>
+      <Text>
+        {this.state.answers.writing}
+      </Text>
+    </ScrollView>
+  )
+}
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    paddingVertical: 20
   },
   welcome: {
     fontSize: 20,

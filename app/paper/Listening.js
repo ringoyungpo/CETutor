@@ -12,27 +12,23 @@ import {
   View
 } from 'react-native';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-type Props = {};
+type Props = {
+  selected: boolean
+}
 export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {this.props.navigation.state.params.level}
+        <Text style={styles.part}>
+          Part II Listening Comprehension
         </Text>
-        <Text style={styles.instructions}>
-          {this.props.navigation.state.params.category}
-        </Text>
-        <Text style={styles.instructions}>
-          Listening Comprehension
-        </Text>
+        {
+          this.props.selected?(
+            <Text style={styles.section}>
+              Listening
+            </Text>
+          ): null
+        }
       </View>
     );
   }
@@ -45,12 +41,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
+  part: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+  section: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
