@@ -57,17 +57,37 @@ export default class Paper extends Component<Props, State>{
         </TouchableHighlight>
         <Writing
           onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
-          isSelected={this.state.partSelected === 'Writing'}/>
+          isSelected={this.state.partSelected === 'Writing'}
+        />
+
         <TouchableHighlight onPress={this._partSelect('Listening')}>
-          <Listening selected={this.state.partSelected === 'Listening'}/>
+          <View style={styles.container}>
+            <Text style={styles.part}>
+              Part II Listening Comprehension
+            </Text>
+          </View>
         </TouchableHighlight>
+        <Listening
+          // onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
+          isSelected={this.state.partSelected === 'Listening'}
+        />
+
         <TouchableHighlight onPress={this._partSelect('Reading')}>
           <Reading selected={this.state.partSelected === 'Reading'}/>
         </TouchableHighlight>
+
         <TouchableHighlight onPress={this._partSelect('Translation')}>
-          <Translation selected={this.state.partSelected === 'Translation'}
-            onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}/>
+          <View style={styles.container}>
+            <Text style={styles.part}>
+              Part IV translation
+            </Text>
+          </View>
         </TouchableHighlight>
+        <Translation
+          onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}
+          isSelected={this.state.partSelected === 'Translation'}
+        />
+
         <Text>
           {this.state.answers.writing}
         </Text>

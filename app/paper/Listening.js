@@ -14,12 +14,12 @@ import {
 } from 'react-native';
 
 type Props = {
-  selected: boolean
+  isSelected: boolean
 }
 type State = {
   directions: string,
   sections: any,
-  sectionSelected: string
+  sectionSelected: ?string
 }
 
 export default class App extends Component<Props, State> {
@@ -86,34 +86,34 @@ export default class App extends Component<Props, State> {
           ]
         }
       },
-      sectionSelected: ''
+      sectionSelected: null
     }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.part}>
-          Part II Listening Comprehension
-        </Text>
-        {
-          this.props.selected?
-            Object.keys(this.state.sections).map((key)=>(
-              <TouchableHighlight key={key} onPress={()=>{this.state.sectionSelected = key}}>
-                <View>
-                  <Text style={styles.section}>
-                    Section {key}
-                  </Text>
-                  {
-                    this.state.sectionSelected ==key?(
-                      <Text>
-                        haha
-                      </Text>
-                    ):null
 
-                  }
-                </View>
-              </TouchableHighlight>
+        {
+          this.props.isSelected?
+            Object.keys(this.state.sections).map((key,index)=>(
+              <View key={index} style={styles.container}>
+                <TouchableHighlight
+                  onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
+                  <View style={styles.container}>
+                    <Text style={styles.section}>
+                      Section {key}
+                    </Text>
+                  </View>
+                </TouchableHighlight>
+                {
+                  this.state.sectionSelected == key?(
+                    <Text>
+                      {this.state.sections[key].directions}
+                    </Text>
+                  ):null
+                }
+              </View>
             ))
           : null
         }
@@ -124,7 +124,6 @@ export default class App extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -135,7 +134,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   section: {
-    fontSize: 18,
     textAlign: 'center',
     margin: 10,
   },

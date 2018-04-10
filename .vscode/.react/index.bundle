@@ -61553,31 +61553,52 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 onPress: _this._partSelect('Listening'),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 61
+                  lineNumber: 63
                 }
               },
-              _react2.default.createElement(_Listening2.default, {
-                selected: _this.state.partSelected === 'Listening',
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 62
-                }
-              })
+              _react2.default.createElement(
+                _reactNative.View,
+                {
+                  style: styles.container,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 64
+                  }
+                },
+                _react2.default.createElement(
+                  _reactNative.Text,
+                  {
+                    style: styles.part,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 65
+                    }
+                  },
+                  "Part II Listening Comprehension"
+                )
+              )
             ),
+            _react2.default.createElement(_Listening2.default, {
+              isSelected: _this.state.partSelected === 'Listening',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 70
+              }
+            }),
             _react2.default.createElement(
               _reactNative.TouchableHighlight,
               {
                 onPress: _this._partSelect('Reading'),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 64
+                  lineNumber: 75
                 }
               },
               _react2.default.createElement(_Reading2.default, {
                 selected: _this.state.partSelected === 'Reading',
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 65
+                  lineNumber: 76
                 }
               })
             ),
@@ -61587,30 +61608,51 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 onPress: _this._partSelect('Translation'),
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 67
+                  lineNumber: 79
                 }
               },
-              _react2.default.createElement(_Translation2.default, {
-                selected: _this.state.partSelected === 'Translation',
-                onSubmit: function onSubmit(text) {
-                  _this.setState({
-                    answers: _extends({}, _this.state.answers, {
-                      translation: text
-                    })
-                  });
+              _react2.default.createElement(
+                _reactNative.View,
+                {
+                  style: styles.container,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 80
+                  }
                 },
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 68
-                }
-              })
+                _react2.default.createElement(
+                  _reactNative.Text,
+                  {
+                    style: styles.part,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 81
+                    }
+                  },
+                  "Part IV translation"
+                )
+              )
             ),
+            _react2.default.createElement(_Translation2.default, {
+              onSubmit: function onSubmit(text) {
+                _this.setState({
+                  answers: _extends({}, _this.state.answers, {
+                    translation: text
+                  })
+                });
+              },
+              isSelected: _this.state.partSelected === 'Translation',
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 86
+              }
+            }),
             _react2.default.createElement(
               _reactNative.Text,
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 71
+                  lineNumber: 91
                 }
               },
               _this.state.answers.writing
@@ -61620,7 +61662,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 74
+                  lineNumber: 94
                 }
               },
               _this.state.answers.translation
@@ -73920,7 +73962,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             }]
           }
         },
-        sectionSelected: ''
+        sectionSelected: null
       };
       return _this;
     }
@@ -73939,61 +73981,63 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               lineNumber: 95
             }
           },
-          _react3.default.createElement(
-            _reactNative.Text,
-            {
-              style: styles.part,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 96
-              }
-            },
-            "Part II Listening Comprehension"
-          ),
-          this.props.selected ? Object.keys(this.state.sections).map(function (key) {
+          this.props.isSelected ? Object.keys(this.state.sections).map(function (key, index) {
             return _react3.default.createElement(
-              _reactNative.TouchableHighlight,
+              _reactNative.View,
               {
-                key: key,
-                onPress: function onPress() {
-                  _this2.state.sectionSelected = key;
-                },
+                key: index,
+                style: styles.container,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 102
+                  lineNumber: 100
                 }
               },
               _react3.default.createElement(
-                _reactNative.View,
+                _reactNative.TouchableHighlight,
                 {
+                  onPress: function onPress() {
+                    _this2.setState({
+                      sectionSelected: _this2.state.sectionSelected == key ? null : key
+                    });
+                  },
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 103
+                    lineNumber: 101
                   }
                 },
                 _react3.default.createElement(
-                  _reactNative.Text,
+                  _reactNative.View,
                   {
-                    style: styles.section,
+                    style: styles.container,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 104
+                      lineNumber: 103
                     }
                   },
-                  "Section ",
-                  key
-                ),
-                _this2.state.sectionSelected == key ? _react3.default.createElement(
-                  _reactNative.Text,
-                  {
-                    __source: {
-                      fileName: _jsxFileName,
-                      lineNumber: 109
-                    }
-                  },
-                  "haha"
-                ) : null
-              )
+                  _react3.default.createElement(
+                    _reactNative.Text,
+                    {
+                      style: styles.section,
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 104
+                      }
+                    },
+                    "Section ",
+                    key
+                  )
+                )
+              ),
+              _this2.state.sectionSelected == key ? _react3.default.createElement(
+                _reactNative.Text,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 111
+                  }
+                },
+                _this2.state.sections[key].directions
+              ) : null
             );
           }) : null
         );
@@ -74007,7 +74051,6 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var styles = _reactNative.StyleSheet.create({
     container: {
-      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       backgroundColor: '#F5FCFF'
@@ -74018,7 +74061,6 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       margin: 10
     },
     section: {
-      fontSize: 18,
       textAlign: 'center',
       margin: 10
     },
@@ -74235,23 +74277,12 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               lineNumber: 35
             }
           },
-          _react3.default.createElement(
-            _reactNative.Text,
-            {
-              style: styles.part,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 36
-              }
-            },
-            "Part IV translation"
-          ),
-          this.props.selected ? _react3.default.createElement(
+          this.props.isSelected ? _react3.default.createElement(
             _reactNative.View,
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 41
+                lineNumber: 38
               }
             },
             _react3.default.createElement(
@@ -74260,7 +74291,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 42
+                  lineNumber: 39
                 }
               },
               this.state.directions
@@ -74280,7 +74311,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               maxLength: 40,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 45
+                lineNumber: 42
               }
             })
           ) : null

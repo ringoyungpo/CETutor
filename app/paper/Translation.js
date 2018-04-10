@@ -13,7 +13,7 @@ import {
 } from 'react-native'
 
 type Props = {
-  selected: boolean,
+  isSelected: boolean,
   onSubmit: Function
 }
 type State = {
@@ -33,11 +33,8 @@ export default class App extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.part}>
-          Part IV translation
-        </Text>
         {
-          this.props.selected?(
+          this.props.isSelected?(
             <View>
               <Text style={styles.directions}>
                 {this.state.directions}
