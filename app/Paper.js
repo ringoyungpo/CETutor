@@ -23,7 +23,8 @@ type Props = {}
 type State = {
   selectPart: ?string,
   answers: {
-    writing: ?string
+    writing: ?string,
+    translation: ?string
   }
 }
 export default class Paper extends Component<Props, State>{
@@ -31,12 +32,14 @@ export default class Paper extends Component<Props, State>{
     super(props)
     this.state = {
       selectPart: null,
-      answers: {writing: ''}
+      answers: {
+        writing: '',
+        translation: ''
+      }
     }
   }
 
-  _partSelect = (part) => ()=>{
-
+  _partSelect = (part) => () => {
     this.setState({
       selectPart: this.state.selectPart === part ? null : part
     })
@@ -46,7 +49,7 @@ export default class Paper extends Component<Props, State>{
     <ScrollView contentContainerStyle={styles.container}>
       <TouchableHighlight onPress={this._partSelect('Writing')}>
         <Writing selected={this.state.selectPart === 'Writing'}
-          onSubmit={(text)=>{this.setState({answers: {writing: text}})}}/>
+          onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}/>
       </TouchableHighlight>
       <TouchableHighlight onPress={this._partSelect('Listening')}>
         <Listening selected={this.state.selectPart === 'Listening'}/>
@@ -55,10 +58,14 @@ export default class Paper extends Component<Props, State>{
         <Reading selected={this.state.selectPart === 'Reading'}/>
       </TouchableHighlight>
       <TouchableHighlight onPress={this._partSelect('Translation')}>
-        <Translation selected={this.state.selectPart === 'Translation'}/>
+        <Translation selected={this.state.selectPart === 'Translation'}
+          onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}/>
       </TouchableHighlight>
       <Text>
         {this.state.answers.writing}
+      </Text>
+      <Text>
+        {this.state.answers.translation}
       </Text>
     </ScrollView>
   )
