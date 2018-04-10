@@ -61478,32 +61478,62 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       _this._partSelect = function (part) {
         return function () {
           _this.setState({
-            selectPart: _this.state.selectPart === part ? null : part
+            partSelected: _this.state.partSelected === part ? null : part
           });
         };
       };
 
       _this.render = function () {
         return _react2.default.createElement(
-          _reactNative.ScrollView,
+          _reactNative.View,
           {
-            contentContainerStyle: styles.container,
+            style: styles.container,
             __source: {
               fileName: _jsxFileName,
               lineNumber: 49
             }
           },
           _react2.default.createElement(
-            _reactNative.TouchableHighlight,
+            _reactNative.ScrollView,
             {
-              onPress: _this._partSelect('Writing'),
+              contentContainerStyle: styles.contentContainer,
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 50
               }
             },
+            _react2.default.createElement(
+              _reactNative.TouchableHighlight,
+              {
+                onPress: _this._partSelect('Writing'),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 51
+                }
+              },
+              _react2.default.createElement(
+                _reactNative.View,
+                {
+                  style: styles.container,
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 52
+                  }
+                },
+                _react2.default.createElement(
+                  _reactNative.Text,
+                  {
+                    style: styles.part,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 53
+                    }
+                  },
+                  "Part I Writing"
+                )
+              )
+            ),
             _react2.default.createElement(_Writing2.default, {
-              selected: _this.state.selectPart === 'Writing',
               onSubmit: function onSubmit(text) {
                 _this.setState({
                   answers: _extends({}, _this.state.answers, {
@@ -61511,95 +61541,96 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   })
                 });
               },
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 51
-              }
-            })
-          ),
-          _react2.default.createElement(
-            _reactNative.TouchableHighlight,
-            {
-              onPress: _this._partSelect('Listening'),
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 54
-              }
-            },
-            _react2.default.createElement(_Listening2.default, {
-              selected: _this.state.selectPart === 'Listening',
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 55
-              }
-            })
-          ),
-          _react2.default.createElement(
-            _reactNative.TouchableHighlight,
-            {
-              onPress: _this._partSelect('Reading'),
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 57
-              }
-            },
-            _react2.default.createElement(_Reading2.default, {
-              selected: _this.state.selectPart === 'Reading',
+              isSelected: _this.state.partSelected === 'Writing',
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 58
               }
-            })
-          ),
-          _react2.default.createElement(
-            _reactNative.TouchableHighlight,
-            {
-              onPress: _this._partSelect('Translation'),
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 60
-              }
-            },
-            _react2.default.createElement(_Translation2.default, {
-              selected: _this.state.selectPart === 'Translation',
-              onSubmit: function onSubmit(text) {
-                _this.setState({
-                  answers: _extends({}, _this.state.answers, {
-                    translation: text
-                  })
-                });
+            }),
+            _react2.default.createElement(
+              _reactNative.TouchableHighlight,
+              {
+                onPress: _this._partSelect('Listening'),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 61
+                }
               },
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 61
-              }
-            })
-          ),
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 64
-              }
-            },
-            _this.state.answers.writing
-          ),
-          _react2.default.createElement(
-            _reactNative.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 67
-              }
-            },
-            _this.state.answers.translation
+              _react2.default.createElement(_Listening2.default, {
+                selected: _this.state.partSelected === 'Listening',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 62
+                }
+              })
+            ),
+            _react2.default.createElement(
+              _reactNative.TouchableHighlight,
+              {
+                onPress: _this._partSelect('Reading'),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 64
+                }
+              },
+              _react2.default.createElement(_Reading2.default, {
+                selected: _this.state.partSelected === 'Reading',
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 65
+                }
+              })
+            ),
+            _react2.default.createElement(
+              _reactNative.TouchableHighlight,
+              {
+                onPress: _this._partSelect('Translation'),
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 67
+                }
+              },
+              _react2.default.createElement(_Translation2.default, {
+                selected: _this.state.partSelected === 'Translation',
+                onSubmit: function onSubmit(text) {
+                  _this.setState({
+                    answers: _extends({}, _this.state.answers, {
+                      translation: text
+                    })
+                  });
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 68
+                }
+              })
+            ),
+            _react2.default.createElement(
+              _reactNative.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 71
+                }
+              },
+              _this.state.answers.writing
+            ),
+            _react2.default.createElement(
+              _reactNative.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 74
+                }
+              },
+              _this.state.answers.translation
+            )
           )
         );
       };
 
       _this.state = {
-        selectPart: null,
+        partSelected: '',
         answers: {
           writing: '',
           translation: ''
@@ -61615,9 +61646,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var styles = _reactNative.StyleSheet.create({
     container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF'
+    },
+    contentContainer: {
       paddingVertical: 20
     },
-    welcome: {
+    part: {
       fontSize: 20,
       textAlign: 'center',
       margin: 10
@@ -73703,26 +73740,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 34
+              lineNumber: 35
             }
           },
-          _react3.default.createElement(
-            _reactNative.Text,
-            {
-              style: styles.part,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 35
-              }
-            },
-            "Part I Writing"
-          ),
-          this.props.selected ? _react3.default.createElement(
+          this.props.isSelected ? _react3.default.createElement(
             _reactNative.View,
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 40
+                lineNumber: 38
               }
             },
             _react3.default.createElement(
@@ -73731,7 +73757,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 41
+                  lineNumber: 39
                 }
               },
               this.state.directions
@@ -73751,7 +73777,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               maxLength: 40,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 44
+                lineNumber: 42
               }
             })
           ) : null
@@ -73843,7 +73869,58 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
       _this.state = {
-        directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.'
+        directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+        sections: {
+          A: {
+            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+            questions: [{
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }, {
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }]
+          },
+          B: {
+            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+            questions: [{
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }, {
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }]
+          },
+          C: {
+            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+            questions: [{
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }, {
+              question: 'What is the news report mainly about?',
+              A: 'The news report mainly about A?',
+              B: 'The news report mainly about B?',
+              C: 'The news report mainly about C?',
+              D: 'The news report mainly about D?'
+            }]
+          }
+        },
+        sectionSelected: ''
       };
       return _this;
     }
@@ -73851,13 +73928,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     _createClass(App, [{
       key: "render",
       value: function render() {
+        var _this2 = this;
+
         return _react3.default.createElement(
           _reactNative.View,
           {
             style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 32
+              lineNumber: 95
             }
           },
           _react3.default.createElement(
@@ -73866,31 +73945,57 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.part,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 33
+                lineNumber: 96
               }
             },
             "Part II Listening Comprehension"
           ),
-          this.props.selected ? _react3.default.createElement(
-            _reactNative.View,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 38
-              }
-            },
-            _react3.default.createElement(
-              _reactNative.Text,
+          this.props.selected ? Object.keys(this.state.sections).map(function (key) {
+            return _react3.default.createElement(
+              _reactNative.TouchableHighlight,
               {
-                style: styles.directions,
+                key: key,
+                onPress: function onPress() {
+                  _this2.state.sectionSelected = key;
+                },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 39
+                  lineNumber: 102
                 }
               },
-              this.state.directions
-            )
-          ) : null
+              _react3.default.createElement(
+                _reactNative.View,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 103
+                  }
+                },
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  {
+                    style: styles.section,
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 104
+                    }
+                  },
+                  "Section ",
+                  key
+                ),
+                _this2.state.sectionSelected == key ? _react3.default.createElement(
+                  _reactNative.Text,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 109
+                    }
+                  },
+                  "haha"
+                ) : null
+              )
+            );
+          }) : null
         );
       }
     }]);
@@ -73909,6 +74014,11 @@ __d(function (global, _require, module, exports, _dependencyMap) {
     },
     part: {
       fontSize: 20,
+      textAlign: 'center',
+      margin: 10
+    },
+    section: {
+      fontSize: 18,
       textAlign: 'center',
       margin: 10
     },
@@ -74147,7 +74257,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             _react3.default.createElement(
               _reactNative.Text,
               {
-                style: styles.question,
+                style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
                   lineNumber: 42
@@ -74195,7 +74305,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       textAlign: 'center',
       margin: 10
     },
-    question: {
+    directions: {
       textAlign: 'center',
       color: '#333333',
       marginBottom: 5

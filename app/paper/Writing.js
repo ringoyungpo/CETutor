@@ -10,11 +10,12 @@ import {
   Text,
   View,
   TextInput,
+  TouchableHighlight,
 } from 'react-native'
 
 type Props = {
-  selected: boolean,
-  onSubmit: Function
+  isSelected: boolean,
+  onSubmit: Function,
 }
 type State = {
   directions: string,
@@ -32,11 +33,8 @@ export default class App extends Component<Props, State> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.part}>
-          Part I Writing
-        </Text>
         {
-          this.props.selected?(
+          this.props.isSelected?(
             <View>
               <Text style={styles.directions}>
                 {this.state.directions}
@@ -51,7 +49,6 @@ export default class App extends Component<Props, State> {
             </View>
           ): null
         }
-
       </View>
     );
   }
