@@ -15,7 +15,18 @@ import {
 type Props = {
   selected: boolean
 }
-export default class App extends Component<Props> {
+type State = {
+  directions: string
+}
+
+export default class App extends Component<Props, State> {
+  constructor(props: any){
+    super(props)
+    this.state={
+      directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.'
+    }
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -24,9 +35,11 @@ export default class App extends Component<Props> {
         </Text>
         {
           this.props.selected?(
-            <Text style={styles.section}>
-              Listening
-            </Text>
+            <View>
+              <Text style={styles.directions}>
+                {this.state.directions}
+              </Text>
+            </View>
           ): null
         }
       </View>
@@ -46,7 +59,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  section: {
+  directions: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,

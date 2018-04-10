@@ -38,7 +38,7 @@ export default class App extends Component<Props, State> {
         {
           this.props.selected?(
             <View>
-              <Text style={styles.question}>
+              <Text style={styles.directions}>
                 {this.state.directions}
               </Text>
               <TextInput
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  question: {
+  directions: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,

@@ -73728,7 +73728,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             _react3.default.createElement(
               _reactNative.Text,
               {
-                style: styles.question,
+                style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
                   lineNumber: 41
@@ -73776,7 +73776,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       textAlign: 'center',
       margin: 10
     },
-    question: {
+    directions: {
       textAlign: 'center',
       color: '#333333',
       marginBottom: 5
@@ -73837,10 +73837,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   var App = _wrapComponent("App")(function (_Component) {
     _inherits(App, _Component);
 
-    function App() {
+    function App(props) {
       _classCallCheck(this, App);
 
-      return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+      _this.state = {
+        directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.'
+      };
+      return _this;
     }
 
     _createClass(App, [{
@@ -73852,7 +73857,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 21
+              lineNumber: 32
             }
           },
           _react3.default.createElement(
@@ -73861,21 +73866,30 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.part,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 22
+                lineNumber: 33
               }
             },
             "Part II Listening Comprehension"
           ),
           this.props.selected ? _react3.default.createElement(
-            _reactNative.Text,
+            _reactNative.View,
             {
-              style: styles.section,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 27
+                lineNumber: 38
               }
             },
-            "Listening"
+            _react3.default.createElement(
+              _reactNative.Text,
+              {
+                style: styles.directions,
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 39
+                }
+              },
+              this.state.directions
+            )
           ) : null
         );
       }
@@ -73898,7 +73912,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       textAlign: 'center',
       margin: 10
     },
-    section: {
+    directions: {
       textAlign: 'center',
       color: '#333333',
       marginBottom: 5
@@ -73954,10 +73968,15 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   var App = _wrapComponent("App")(function (_Component) {
     _inherits(App, _Component);
 
-    function App() {
+    function App(props) {
       _classCallCheck(this, App);
 
-      return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+      var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+
+      _this.state = {
+        directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.'
+      };
+      return _this;
     }
 
     _createClass(App, [{
@@ -73969,7 +73988,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 20
+              lineNumber: 32
             }
           },
           _react3.default.createElement(
@@ -73978,7 +73997,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               style: styles.part,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 21
+                lineNumber: 33
               }
             },
             "Part III Reading comprehension"
@@ -73988,30 +74007,19 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 26
+                lineNumber: 38
               }
             },
             _react3.default.createElement(
               _reactNative.Text,
               {
-                style: styles.instructions,
+                style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 27
+                  lineNumber: 39
                 }
               },
-              "Reading"
-            ),
-            _react3.default.createElement(
-              _reactNative.Text,
-              {
-                style: styles.instructions,
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 30
-                }
-              },
-              "Reading Comprehension"
+              this.state.directions
             )
           ) : null
         );
@@ -74035,7 +74043,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       textAlign: 'center',
       margin: 10
     },
-    instructions: {
+    directions: {
       textAlign: 'center',
       color: '#333333',
       marginBottom: 5
