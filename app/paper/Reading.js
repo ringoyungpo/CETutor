@@ -5,15 +5,16 @@
  */
 
 import React, { Component } from 'react'
+
 import {
-  Platform,
-  StyleSheet,
   Text,
-  View
-} from 'react-native'
+  Card,
+  CardItem,
+  H3,
+  Textarea,
+} from 'native-base'
 
 type Props = {
-  selected: boolean
 }
 type State = {
   directions: string
@@ -29,39 +30,22 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.part}>
-          Part III Reading comprehension
-        </Text>
-        {
+      <Card>
+        <CardItem>
+          <Text>
+            {this.state.directions}
+          </Text>
+        </CardItem>
+        {/* {
           this.props.selected?(
-            <View>
-              <Text style={styles.directions}>
+            <CardItem>
+              <Text>
                 {this.state.directions}
               </Text>
-            </View>
+            </CardItem>
           ): null
-        }
-      </View>
+        } */}
+      </Card>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  part: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  directions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

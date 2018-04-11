@@ -38,7 +38,7 @@ export default class Paper extends Component<Props, State>{
   constructor(props: any){
     super(props)
     this.state = {
-      partSelected: 'Listening',
+      partSelected: 'Translation',
       answers: {
         writing: '',
         translation: ''
@@ -81,31 +81,39 @@ export default class Paper extends Component<Props, State>{
               />
             ):null
           }
-        </Card>
-
-
-        <TouchableHighlight onPress={this._partSelect('Reading')}>
-          <Reading selected={this.state.partSelected === 'Reading'}/>
-        </TouchableHighlight>
-
-        <TouchableHighlight onPress={this._partSelect('Translation')}>
-          <View style={styles.container}>
-            <Text style={styles.part}>
+          <CardItem>
+            <H2 onPress={this._partSelect('Reading')}>
+              Part III Reading comprehension
+            </H2>
+          </CardItem>
+          {
+            this.state.partSelected === 'Reading'?(
+              <Reading
+                // onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
+              />
+            ):null
+          }
+          <CardItem button onPress={this._partSelect('Translation')}>
+            <H2>
               Part IV translation
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <Translation
-          onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}
-          isSelected={this.state.partSelected === 'Translation'}
-        />
+            </H2>
+          </CardItem>
+          {
+            this.state.partSelected === 'Translation'?(
+              <Translation
+                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}>
+              </Translation>
+            ):null
+          }
+        </Card>
+        
+        <Text>
+          {this.state.answers.writing}
+        </Text>
+        <Text>
+          {this.state.answers.translation}
+        </Text>
       </Content>
-      <Text>
-        {this.state.answers.writing}
-      </Text>
-      <Text>
-        {this.state.answers.translation}
-      </Text>
     </Container>
   )
 }

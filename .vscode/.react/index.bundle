@@ -61575,96 +61575,94 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   fileName: _jsxFileName,
                   lineNumber: 79
                 }
-              }) : null
-            ),
-            _react2.default.createElement(
-              _reactNative.TouchableHighlight,
-              {
-                onPress: _this._partSelect('Reading'),
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 87
-                }
-              },
-              _react2.default.createElement(_Reading2.default, {
-                selected: _this.state.partSelected === 'Reading',
-                __source: {
-                  fileName: _jsxFileName,
-                  lineNumber: 88
-                }
-              })
-            ),
-            _react2.default.createElement(
-              _reactNative.TouchableHighlight,
-              {
-                onPress: _this._partSelect('Translation'),
+              }) : null,
+              _react2.default.createElement(
+                _nativeBase.CardItem,
+                {
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 84
+                  }
+                },
+                _react2.default.createElement(
+                  _nativeBase.H2,
+                  {
+                    onPress: _this._partSelect('Reading'),
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 85
+                    }
+                  },
+                  "Part III Reading comprehension"
+                )
+              ),
+              _this.state.partSelected === 'Reading' ? _react2.default.createElement(_Reading2.default, {
                 __source: {
                   fileName: _jsxFileName,
                   lineNumber: 91
                 }
-              },
+              }) : null,
               _react2.default.createElement(
-                _reactNative.View,
+                _nativeBase.CardItem,
                 {
-                  style: styles.container,
+                  button: true,
+                  onPress: _this._partSelect('Translation'),
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 92
+                    lineNumber: 96
                   }
                 },
                 _react2.default.createElement(
-                  _nativeBase.Text,
+                  _nativeBase.H2,
                   {
-                    style: styles.part,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 93
+                      lineNumber: 97
                     }
                   },
                   "Part IV translation"
                 )
-              )
+              ),
+              _this.state.partSelected === 'Translation' ? _react2.default.createElement(_Translation2.default, {
+                onSubmit: function onSubmit(text) {
+                  _this.setState({
+                    answers: _extends({}, _this.state.answers, {
+                      translation: text
+                    })
+                  });
+                },
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 103
+                }
+              }) : null
             ),
-            _react2.default.createElement(_Translation2.default, {
-              onSubmit: function onSubmit(text) {
-                _this.setState({
-                  answers: _extends({}, _this.state.answers, {
-                    translation: text
-                  })
-                });
+            _react2.default.createElement(
+              _nativeBase.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 110
+                }
               },
-              isSelected: _this.state.partSelected === 'Translation',
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 98
-              }
-            })
-          ),
-          _react2.default.createElement(
-            _nativeBase.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 103
-              }
-            },
-            _this.state.answers.writing
-          ),
-          _react2.default.createElement(
-            _nativeBase.Text,
-            {
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 106
-              }
-            },
-            _this.state.answers.translation
+              _this.state.answers.writing
+            ),
+            _react2.default.createElement(
+              _nativeBase.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 113
+                }
+              },
+              _this.state.answers.translation
+            )
           )
         );
       };
 
       _this.state = {
-        partSelected: 'Listening',
+        partSelected: 'Translation',
         answers: {
           writing: '',
           translation: ''
@@ -73800,7 +73798,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 40
+                lineNumber: 41
               }
             },
             _react3.default.createElement(
@@ -73808,7 +73806,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 41
+                  lineNumber: 42
                 }
               },
               this.state.directions
@@ -73826,7 +73824,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 46
+              lineNumber: 47
             }
           })
         );
@@ -74132,7 +74130,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  var _reactNative = _require(_dependencyMap[2], "react-native");
+  var _nativeBase = _require(_dependencyMap[2], "native-base");
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74179,45 +74177,32 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       key: "render",
       value: function render() {
         return _react3.default.createElement(
-          _reactNative.View,
+          _nativeBase.Card,
           {
-            style: styles.container,
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 32
+              lineNumber: 33
             }
           },
           _react3.default.createElement(
-            _reactNative.Text,
-            {
-              style: styles.part,
-              __source: {
-                fileName: _jsxFileName,
-                lineNumber: 33
-              }
-            },
-            "Part III Reading comprehension"
-          ),
-          this.props.selected ? _react3.default.createElement(
-            _reactNative.View,
+            _nativeBase.CardItem,
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 38
+                lineNumber: 34
               }
             },
             _react3.default.createElement(
-              _reactNative.Text,
+              _nativeBase.Text,
               {
-                style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 39
+                  lineNumber: 35
                 }
               },
               this.state.directions
             )
-          ) : null
+          )
         );
       }
     }]);
@@ -74226,26 +74211,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   }(_react2.Component));
 
   exports.default = App;
-
-  var styles = _reactNative.StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF'
-    },
-    part: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10
-    },
-    directions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5
-    }
-  });
-},571,[118,179,12],"app/paper/Reading.js");
+},571,[118,179,574],"app/paper/Reading.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
@@ -74263,7 +74229,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
   var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  var _reactNative = _require(_dependencyMap[2], "react-native");
+  var _nativeBase = _require(_dependencyMap[2], "native-base");
 
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -74313,52 +74279,67 @@ __d(function (global, _require, module, exports, _dependencyMap) {
         var _this2 = this;
 
         return _react3.default.createElement(
-          _reactNative.View,
+          _nativeBase.Card,
           {
-            style: styles.container,
             __source: {
               fileName: _jsxFileName,
               lineNumber: 35
             }
           },
-          this.props.isSelected ? _react3.default.createElement(
-            _reactNative.View,
+          _react3.default.createElement(
+            _nativeBase.CardItem,
             {
+              header: true,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 38
+                lineNumber: 36
               }
             },
             _react3.default.createElement(
-              _reactNative.Text,
+              _nativeBase.Text,
               {
-                style: styles.directions,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 39
+                  lineNumber: 37
                 }
               },
-              this.state.directions
-            ),
-            _react3.default.createElement(_reactNative.TextInput, {
-              multiline: true,
-              numberOfLines: 4,
-              onChangeText: function onChangeText(text) {
-                _this2.setState({
-                  text: text
-                });
-
-                _this2.props.onSubmit(text);
-              },
-              value: this.state.text,
-              editable: true,
-              maxLength: 40,
+              "Directions:"
+            )
+          ),
+          _react3.default.createElement(
+            _nativeBase.CardItem,
+            {
               __source: {
                 fileName: _jsxFileName,
                 lineNumber: 42
               }
-            })
-          ) : null
+            },
+            _react3.default.createElement(
+              _nativeBase.Text,
+              {
+                __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 43
+                }
+              },
+              this.state.directions
+            )
+          ),
+          _react3.default.createElement(_nativeBase.Textarea, {
+            rowSpan: 5,
+            placeholder: "\u5199\u4E0B\u60A8\u7684\u7B54\u6848...",
+            onChangeText: function onChangeText(text) {
+              _this2.setState({
+                text: text
+              });
+
+              _this2.props.onSubmit(text);
+            },
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 48
+            }
+          })
         );
       }
     }]);
@@ -74367,26 +74348,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
   }(_react2.Component));
 
   exports.default = App;
-
-  var styles = _reactNative.StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: '#F5FCFF'
-    },
-    part: {
-      fontSize: 20,
-      textAlign: 'center',
-      margin: 10
-    },
-    directions: {
-      textAlign: 'center',
-      color: '#333333',
-      marginBottom: 5
-    }
-  });
-},572,[118,179,12],"app/paper/Translation.js");
+},572,[118,179,574],"app/paper/Translation.js");
 __d(function (global, _require, module, exports, _dependencyMap) {
   Object.defineProperty(exports, "__esModule", {
     value: true
