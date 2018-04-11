@@ -50,7 +50,7 @@ export default class Paper extends Component<Props, State>{
     this.setState({
       partSelected: this.state.partSelected === part?null:part
     })
-    console.log(part);
+    // console.log(part);
   }
 
   render = ()=>(
