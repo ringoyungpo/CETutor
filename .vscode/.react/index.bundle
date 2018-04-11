@@ -73913,52 +73913,52 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       _this.state = {
         directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
         sections: {
-          A: {
+          a: {
             directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
             questions: [{
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }, {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }]
           },
-          B: {
+          b: {
             directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
             questions: [{
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }, {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }]
           },
-          C: {
+          c: {
             directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
             questions: [{
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }, {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?'
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?'
             }]
           }
         },
@@ -74024,19 +74024,67 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                       }
                     },
                     "Section ",
-                    key
+                    key.toUpperCase()
                   )
                 )
               ),
               _this2.state.sectionSelected == key ? _react3.default.createElement(
-                _reactNative.Text,
+                _reactNative.View,
                 {
                   __source: {
                     fileName: _jsxFileName,
                     lineNumber: 111
                   }
                 },
-                _this2.state.sections[key].directions
+                _react3.default.createElement(
+                  _reactNative.Text,
+                  {
+                    __source: {
+                      fileName: _jsxFileName,
+                      lineNumber: 112
+                    }
+                  },
+                  _this2.state.sections[key].directions
+                ),
+                _this2.state.sections[key].questions.map(function (item, index) {
+                  return _react3.default.createElement(
+                    _reactNative.View,
+                    {
+                      key: index,
+                      __source: {
+                        fileName: _jsxFileName,
+                        lineNumber: 117
+                      }
+                    },
+                    _react3.default.createElement(
+                      _reactNative.Text,
+                      {
+                        __source: {
+                          fileName: _jsxFileName,
+                          lineNumber: 118
+                        }
+                      },
+                      item.question
+                    ),
+                    Object.keys(item).filter(function (key) {
+                      return key.length == 1;
+                    }).map(function (key, index) {
+                      return _react3.default.createElement(
+                        _reactNative.Text,
+                        {
+                          key: index,
+                          __source: {
+                            fileName: _jsxFileName,
+                            lineNumber: 123
+                          }
+                        },
+                        key.toUpperCase(),
+                        ": ",
+                        item[key]
+                      );
+                    })
+                  );
+                })
               ) : null
             );
           }) : null

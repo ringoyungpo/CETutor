@@ -28,60 +28,60 @@ export default class App extends Component<Props, State> {
     this.state={
       directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
       sections:{
-        A: {
+        a: {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             },
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             }
           ]
         },
-        B: {
+        b: {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             },
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             }
           ]
         },
-        C: {
+        c: {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             },
             {
               question: 'What is the news report mainly about?',
-              A: 'The news report mainly about A?',
-              B: 'The news report mainly about B?',
-              C: 'The news report mainly about C?',
-              D: 'The news report mainly about D?',
+              a: 'The news report mainly about A?',
+              b: 'The news report mainly about B?',
+              c: 'The news report mainly about C?',
+              d: 'The news report mainly about D?',
             }
           ]
         }
@@ -102,15 +102,31 @@ export default class App extends Component<Props, State> {
                   onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
                   <View style={styles.container}>
                     <Text style={styles.section}>
-                      Section {key}
+                      Section {key.toUpperCase()}
                     </Text>
                   </View>
                 </TouchableHighlight>
                 {
                   this.state.sectionSelected == key?(
-                    <Text>
-                      {this.state.sections[key].directions}
-                    </Text>
+                    <View>
+                      <Text>
+                        {this.state.sections[key].directions}
+                      </Text>
+                      {
+                        this.state.sections[key].questions.map((item,index)=>(
+                          <View key={index}>
+                            <Text>{item.question}</Text>
+                            {
+                              Object.keys(item)
+                              .filter((key)=>key.length==1)
+                              .map((key, index)=>(
+                                <Text key={index}>{key.toUpperCase()}: {item[key]}</Text>
+                              ))
+                            }
+                          </View>
+                        ))
+                      }
+                    </View>
                   ):null
                 }
               </View>
