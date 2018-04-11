@@ -61482,8 +61482,6 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           _this.setState({
             partSelected: _this.state.partSelected === part ? null : part
           });
-
-          console.log(part);
         };
       };
 
@@ -61666,7 +61664,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       };
 
       _this.state = {
-        partSelected: 'Writing',
+        partSelected: 'Listening',
         answers: {
           writing: '',
           translation: ''
@@ -119846,58 +119844,36 @@ __d(function (global, _require, module, exports, _dependencyMap) {
       var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
       _this.state = {
-        directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-        sections: {
-          a: {
-            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-            questions: [{
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }, {
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }]
-          },
-          b: {
-            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-            questions: [{
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }, {
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }]
-          },
-          c: {
-            directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-            questions: [{
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }, {
-              question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?'
-            }]
-          }
-        },
-        sectionSelected: null
+        sections: [{
+          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          questions: [{
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }, {
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }]
+        }, {
+          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          questions: [{
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }, {
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }]
+        }, {
+          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          questions: [{
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }, {
+            question: 'What is the news report mainly about?',
+            options: ['The news report mainly about A?', 'The news report mainly about B?', 'The news report mainly about C?', 'The news report mainly about D?']
+          }]
+        }],
+        answers: null,
+        sectionSelected: 'a'
       };
       return _this;
     }
@@ -119912,17 +119888,17 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 95
+              lineNumber: 116
             }
           },
-          Object.keys(this.state.sections).map(function (key, index) {
+          this.state.sections.map(function (sectionUnit, sectionIndex) {
             return _react3.default.createElement(
               _nativeBase.View,
               {
-                key: index,
+                key: sectionIndex,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 98
+                  lineNumber: 119
                 }
               },
               _react3.default.createElement(
@@ -119931,12 +119907,12 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   button: true,
                   onPress: function onPress() {
                     _this2.setState({
-                      sectionSelected: _this2.state.sectionSelected == key ? null : key
+                      sectionSelected: _this2.state.sectionSelected == String.fromCharCode(sectionIndex + 65) ? null : String.fromCharCode(sectionIndex + 65)
                     });
                   },
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 99
+                    lineNumber: 120
                   }
                 },
                 _react3.default.createElement(
@@ -119944,19 +119920,19 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 100
+                      lineNumber: 121
                     }
                   },
                   "Section ",
-                  key.toUpperCase()
+                  String.fromCharCode(sectionIndex + 65)
                 )
               ),
-              _this2.state.sectionSelected === key ? _react3.default.createElement(
+              _this2.state.sectionSelected === String.fromCharCode(sectionIndex + 65) ? _react3.default.createElement(
                 _nativeBase.View,
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 106
+                    lineNumber: 127
                   }
                 },
                 _react3.default.createElement(
@@ -119965,7 +119941,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     header: true,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 107
+                      lineNumber: 128
                     }
                   },
                   _react3.default.createElement(
@@ -119973,7 +119949,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 108
+                        lineNumber: 129
                       }
                     },
                     "Directions:"
@@ -119984,7 +119960,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 112
+                      lineNumber: 133
                     }
                   },
                   _react3.default.createElement(
@@ -119992,20 +119968,20 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 113
+                        lineNumber: 134
                       }
                     },
-                    _this2.state.sections[key].directions
+                    _this2.state.sections[sectionIndex].directions
                   )
                 ),
-                _this2.state.sections[key].questions.map(function (item, index) {
+                _this2.state.sections[sectionIndex].questions.map(function (questionUnit, questionIndex) {
                   return _react3.default.createElement(
                     _nativeBase.View,
                     {
-                      key: index,
+                      key: questionIndex,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 119
+                        lineNumber: 140
                       }
                     },
                     _react3.default.createElement(
@@ -120014,7 +119990,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         header: true,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 120
+                          lineNumber: 141
                         }
                       },
                       _react3.default.createElement(
@@ -120022,22 +119998,24 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         {
                           __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 121
+                            lineNumber: 142
                           }
                         },
-                        item.question
+                        questionUnit.question
                       )
                     ),
-                    Object.keys(item).filter(function (key) {
-                      return key.length == 1;
-                    }).map(function (key, index) {
+                    questionUnit.options.map(function (option, optionIndex) {
                       return _react3.default.createElement(
                         _nativeBase.CardItem,
                         {
-                          key: index,
+                          key: optionIndex,
+                          button: true,
+                          onPress: function onPress() {
+                            console.log(String.fromCharCode(sectionIndex + 65) + questionIndex.toString() + String.fromCharCode(optionIndex + 65));
+                          },
                           __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 127
+                            lineNumber: 146
                           }
                         },
                         _react3.default.createElement(
@@ -120045,12 +120023,28 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                           {
                             __source: {
                               fileName: _jsxFileName,
-                              lineNumber: 128
+                              lineNumber: 147
                             }
                           },
-                          key.toUpperCase(),
+                          String.fromCharCode(optionIndex + 65),
                           ": ",
-                          item[key]
+                          option
+                        ),
+                        _react3.default.createElement(
+                          _nativeBase.Right,
+                          {
+                            __source: {
+                              fileName: _jsxFileName,
+                              lineNumber: 148
+                            }
+                          },
+                          _react3.default.createElement(_nativeBase.Radio, {
+                            selected: false,
+                            __source: {
+                              fileName: _jsxFileName,
+                              lineNumber: 149
+                            }
+                          })
                         )
                       );
                     })

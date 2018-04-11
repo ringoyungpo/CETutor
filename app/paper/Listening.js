@@ -12,81 +12,101 @@ import {
   CardItem,
   H3,
   Textarea,
+  Right,
+  Radio,
 } from 'native-base'
 
 type Props = {
 }
+
 type State = {
-  directions: string,
-  sections: any,
+  sections: Array<{
+    directions: string,
+    questions: Array<{
+      question: string,
+      options: Array<string>,
+    }>
+  }>,
   sectionSelected: ?string
 }
 
 export default class App extends Component<Props, State> {
-  constructor(props: any){
+  constructor(props: Props){
     super(props)
     this.state={
-      directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-      sections:{
-        a: {
+      sections:[
+        {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             },
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             }
           ]
         },
-        b: {
+        {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             },
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             }
           ]
         },
-        c: {
+        {
           directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           questions: [
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             },
             {
               question: 'What is the news report mainly about?',
-              a: 'The news report mainly about A?',
-              b: 'The news report mainly about B?',
-              c: 'The news report mainly about C?',
-              d: 'The news report mainly about D?',
+              options: [
+                'The news report mainly about A?',
+                'The news report mainly about B?',
+                'The news report mainly about C?',
+                'The news report mainly about D?',
+              ]
             }
           ]
         }
-      },
-      sectionSelected: null
+      ],
+      answers: null,
+      sectionSelected: 'a'
     }
   }
 
@@ -94,15 +114,15 @@ export default class App extends Component<Props, State> {
     return (
       <View>
         {
-          Object.keys(this.state.sections).map((key,index)=>(
-            <View key={index}>
-              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
+          this.state.sections.map((sectionUnit,sectionIndex)=>(
+            <View key={sectionIndex}>
+              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == String.fromCharCode(sectionIndex+65) ? null : String.fromCharCode(sectionIndex+65)})}}>
                 <H3>
-                    Section {key.toUpperCase()}
+                    Section {String.fromCharCode(sectionIndex+65)}
                 </H3>
               </CardItem>
               {
-                this.state.sectionSelected === key?(
+                this.state.sectionSelected === String.fromCharCode(sectionIndex+65)?(
                   <View>
                     <CardItem header>
                       <Text>
@@ -111,21 +131,22 @@ export default class App extends Component<Props, State> {
                     </CardItem>
                     <CardItem>
                       <Text>
-                        {this.state.sections[key].directions}
+                        {this.state.sections[sectionIndex].directions}
                       </Text>
                     </CardItem>
                     {
-                      this.state.sections[key].questions.map((item,index)=>(
-                        <View key={index}>
+                      this.state.sections[sectionIndex].questions.map((questionUnit,questionIndex)=>(
+                        <View key={questionIndex}>
                           <CardItem header>
-                            <Text>{item.question}</Text>
+                            <Text>{questionUnit.question}</Text>
                           </CardItem>
                           {
-                            Object.keys(item)
-                            .filter((key)=>key.length==1)
-                            .map((key, index)=>(
-                              <CardItem key={index}>
-                                <Text>{key.toUpperCase()}: {item[key]}</Text>
+                            questionUnit.options.map((option, optionIndex)=>(
+                              <CardItem key={optionIndex} button onPress={()=>{console.log(String.fromCharCode(sectionIndex+65) + questionIndex.toString() + String.fromCharCode(optionIndex+65))}}>
+                                <Text>{String.fromCharCode(optionIndex+65)}: {option}</Text>
+                                <Right>
+                                  <Radio selected={false} />
+                                </Right>
                               </CardItem>
                             ))
                           }

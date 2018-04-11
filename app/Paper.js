@@ -38,7 +38,7 @@ export default class Paper extends Component<Props, State>{
   constructor(props: any){
     super(props)
     this.state = {
-      partSelected: 'Writing',
+      partSelected: 'Listening',
       answers: {
         writing: '',
         translation: ''
