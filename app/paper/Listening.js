@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 
 import {
   Text,
-  Card,
+  View,
   CardItem,
   H3,
   Textarea,
@@ -92,10 +92,10 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <Card>
+      <View>
         {
           Object.keys(this.state.sections).map((key,index)=>(
-            <Card key={index}>
+            <View key={index}>
               <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
                 <H3>
                     Section {key.toUpperCase()}
@@ -103,7 +103,7 @@ export default class App extends Component<Props, State> {
               </CardItem>
               {
                 this.state.sectionSelected === key?(
-                  <Card>
+                  <View>
                     <CardItem header>
                       <Text>
                         Directions:
@@ -116,7 +116,7 @@ export default class App extends Component<Props, State> {
                     </CardItem>
                     {
                       this.state.sections[key].questions.map((item,index)=>(
-                        <Card key={index}>
+                        <View key={index}>
                           <CardItem header>
                             <Text>{item.question}</Text>
                           </CardItem>
@@ -129,16 +129,16 @@ export default class App extends Component<Props, State> {
                               </CardItem>
                             ))
                           }
-                        </Card>
+                        </View>
                       ))
                     }
-                  </Card>
+                  </View>
                 ):null
               }
-            </Card>
+            </View>
           ))
         }
-      </Card>
+      </View>
     );
   }
 }

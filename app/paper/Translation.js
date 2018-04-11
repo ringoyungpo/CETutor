@@ -6,14 +6,14 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
-  TextInput,
-} from 'react-native'
+  CardItem,
+  H2,
+  Textarea,
+} from 'native-base'
 
 type Props = {
-  isSelected: boolean,
   onSubmit: Function
 }
 type State = {
@@ -32,43 +32,23 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
-        {
-          this.props.isSelected?(
-            <View>
-              <Text style={styles.directions}>
-                {this.state.directions}
-              </Text>
-              <TextInput
-                multiline = {true}
-                numberOfLines = {4}
-                onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}
-                value={this.state.text}
-                editable = {true}
-                maxLength = {40}/>
-            </View>
-          ): null
-        }
+      <View>
+        <CardItem header>
+          <Text>
+            Directions:
+          </Text>
+        </CardItem>
+
+        <CardItem>
+          <Text>
+            {this.state.directions}
+          </Text>
+        </CardItem>
+
+        <Textarea rowSpan={5} placeholder="Write your answer here..."
+        onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}/>
+
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  part: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  directions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
