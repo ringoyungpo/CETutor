@@ -10,6 +10,7 @@ import {
   Card,
   CardItem,
   H2,
+  View,
   Textarea,
 } from 'native-base'
 
@@ -31,7 +32,7 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <Card>
+      <View>
         <CardItem header>
           <Text>
             Directions:
@@ -45,9 +46,9 @@ export default class App extends Component<Props, State> {
         </CardItem>
 
         <Textarea rowSpan={5} placeholder="Write your answer here..."
-        onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}/>
+        onChangeText={(text) => {this.props.onSubmit(text)}}/>
 
-      </Card>
+      </View>
     );
   }
 }

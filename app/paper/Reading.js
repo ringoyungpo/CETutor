@@ -8,7 +8,7 @@ import React, { Component } from 'react'
 
 import {
   Text,
-  Card,
+  View,
   CardItem,
   H3,
   Textarea,
@@ -30,7 +30,7 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <Card>
+      <View>
         <CardItem>
           <Text>
             {this.state.directions}
@@ -45,7 +45,7 @@ export default class App extends Component<Props, State> {
             </CardItem>
           ): null
         } */}
-      </Card>
+      </View>
     );
   }
 }

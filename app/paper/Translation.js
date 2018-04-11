@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import {
   Text,
-  Card,
+  View,
   CardItem,
   H2,
   Textarea,
@@ -32,7 +32,7 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <Card>
+      <View>
         <CardItem header>
           <Text>
             Directions:
@@ -45,10 +45,10 @@ export default class App extends Component<Props, State> {
           </Text>
         </CardItem>
 
-        <Textarea rowSpan={5} placeholder="写下您的答案..."
+        <Textarea rowSpan={5} placeholder="Write your answer here..."
         onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}/>
 
-      </Card>
+      </View>
     );
   }
 }

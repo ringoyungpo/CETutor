@@ -38,7 +38,7 @@ export default class Paper extends Component<Props, State>{
   constructor(props: any){
     super(props)
     this.state = {
-      partSelected: 'Translation',
+      partSelected: 'Writing',
       answers: {
         writing: '',
         translation: ''
@@ -50,6 +50,7 @@ export default class Paper extends Component<Props, State>{
     this.setState({
       partSelected: this.state.partSelected === part?null:part
     })
+    console.log(part);
   }
 
   render = ()=>(
@@ -65,7 +66,7 @@ export default class Paper extends Component<Props, State>{
           {
             this.state.partSelected === 'Writing'?(
               <Writing
-                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}>
+                onSubmit={(text)=>{console.log(text);this.setState({answers: {...this.state.answers, writing: text}})}}>
               </Writing>
             ):null
           }
@@ -106,7 +107,7 @@ export default class Paper extends Component<Props, State>{
             ):null
           }
         </Card>
-        
+
         <Text>
           {this.state.answers.writing}
         </Text>
