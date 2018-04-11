@@ -6,13 +6,20 @@
 
 import React, {Component} from 'react'
 import {
-  Platform,
   ScrollView,
   StyleSheet,
-  Text,
   View,
   TouchableHighlight,
 } from 'react-native'
+import {
+  Header,
+  Container,
+  Content,
+  Text,
+  Card,
+  CardItem,
+  H2,
+} from 'native-base'
 import {TabNavigator} from 'react-navigation'
 import Writing from './paper/Writing'
 import Listening from './paper/Listening'
@@ -31,7 +38,7 @@ export default class Paper extends Component<Props, State>{
   constructor(props: any){
     super(props)
     this.state = {
-      partSelected: '',
+      partSelected: 'Listening',
       answers: {
         writing: '',
         translation: ''
@@ -46,31 +53,36 @@ export default class Paper extends Component<Props, State>{
   }
 
   render = ()=>(
-    <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.contentContainer}>
-        <TouchableHighlight onPress={this._partSelect('Writing')}>
-          <View style={styles.container}>
-            <Text style={styles.part}>
+    <Container>
+      <Header/>
+      <Content>
+        <Card>
+          <CardItem button onPress={this._partSelect('Writing')}>
+            <H2>
               Part I Writing
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <Writing
-          onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
-          isSelected={this.state.partSelected === 'Writing'}
-        />
-
-        <TouchableHighlight onPress={this._partSelect('Listening')}>
-          <View style={styles.container}>
-            <Text style={styles.part}>
+            </H2>
+          </CardItem>
+          {
+            this.state.partSelected === 'Writing'?(
+              <Writing
+                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}>
+              </Writing>
+            ):null
+          }
+          <CardItem>
+            <H2 onPress={this._partSelect('Listening')}>
               Part II Listening Comprehension
-            </Text>
-          </View>
-        </TouchableHighlight>
-        <Listening
-          // onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
-          isSelected={this.state.partSelected === 'Listening'}
-        />
+            </H2>
+          </CardItem>
+          {
+            this.state.partSelected === 'Listening'?(
+              <Listening
+                // onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
+              />
+            ):null
+          }
+        </Card>
+
 
         <TouchableHighlight onPress={this._partSelect('Reading')}>
           <Reading selected={this.state.partSelected === 'Reading'}/>
@@ -87,15 +99,14 @@ export default class Paper extends Component<Props, State>{
           onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}
           isSelected={this.state.partSelected === 'Translation'}
         />
-
-        <Text>
-          {this.state.answers.writing}
-        </Text>
-        <Text>
-          {this.state.answers.translation}
-        </Text>
-      </ScrollView>
-    </View>
+      </Content>
+      <Text>
+        {this.state.answers.writing}
+      </Text>
+      <Text>
+        {this.state.answers.translation}
+      </Text>
+    </Container>
   )
 }
 
@@ -111,7 +122,6 @@ const styles = StyleSheet.create({
   },
   part: {
     fontSize: 20,
-    textAlign: 'center',
     margin: 10,
   },
   instructions: {

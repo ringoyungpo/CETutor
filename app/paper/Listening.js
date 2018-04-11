@@ -4,17 +4,17 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+
 import {
-  Platform,
-  StyleSheet,
   Text,
-  View,
-  TouchableHighlight
-} from 'react-native';
+  Card,
+  CardItem,
+  H3,
+  Textarea,
+} from 'native-base'
 
 type Props = {
-  isSelected: boolean
 }
 type State = {
   directions: string,
@@ -92,70 +92,53 @@ export default class App extends Component<Props, State> {
 
   render() {
     return (
-      <View style={styles.container}>
-
+      <Card>
         {
-          this.props.isSelected?
-            Object.keys(this.state.sections).map((key,index)=>(
-              <View key={index} style={styles.container}>
-                <TouchableHighlight
-                  onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
-                  <View style={styles.container}>
-                    <Text style={styles.section}>
-                      Section {key.toUpperCase()}
-                    </Text>
-                  </View>
-                </TouchableHighlight>
-                {
-                  this.state.sectionSelected == key?(
-                    <View>
+          Object.keys(this.state.sections).map((key,index)=>(
+            <Card key={index}>
+              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == key ? null : key})}}>
+                <H3>
+                    Section {key.toUpperCase()}
+                </H3>
+              </CardItem>
+              {
+                this.state.sectionSelected === key?(
+                  <Card>
+                    <CardItem header>
+                      <Text>
+                        Directions:
+                      </Text>
+                    </CardItem>
+                    <CardItem>
                       <Text>
                         {this.state.sections[key].directions}
                       </Text>
-                      {
-                        this.state.sections[key].questions.map((item,index)=>(
-                          <View key={index}>
+                    </CardItem>
+                    {
+                      this.state.sections[key].questions.map((item,index)=>(
+                        <Card key={index}>
+                          <CardItem header>
                             <Text>{item.question}</Text>
-                            {
-                              Object.keys(item)
-                              .filter((key)=>key.length==1)
-                              .map((key, index)=>(
-                                <Text key={index}>{key.toUpperCase()}: {item[key]}</Text>
-                              ))
-                            }
-                          </View>
-                        ))
-                      }
-                    </View>
-                  ):null
-                }
-              </View>
-            ))
-          : null
+                          </CardItem>
+                          {
+                            Object.keys(item)
+                            .filter((key)=>key.length==1)
+                            .map((key, index)=>(
+                              <CardItem key={index}>
+                                <Text>{key.toUpperCase()}: {item[key]}</Text>
+                              </CardItem>
+                            ))
+                          }
+                        </Card>
+                      ))
+                    }
+                  </Card>
+                ):null
+              }
+            </Card>
+          ))
         }
-      </View>
+      </Card>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  part: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  section: {
-    textAlign: 'center',
-    margin: 10,
-  },
-  directions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
