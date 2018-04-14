@@ -14,7 +14,8 @@ import {
 } from 'native-base'
 
 type Props = {
-  onSubmit: Function
+  onSubmit: Function,
+  value: ?string,
 }
 type State = {
   directions: string,
@@ -45,8 +46,12 @@ export default class App extends Component<Props, State> {
           </Text>
         </CardItem>
 
-        <Textarea rowSpan={5} placeholder="Write your answer here..."
-        onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}/>
+        <Textarea
+          rowSpan={5}
+          value={this.props.value}
+          placeholder="Write your answer here..."
+          onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}
+        />
 
       </View>
     );
