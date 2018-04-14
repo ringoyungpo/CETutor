@@ -16,7 +16,7 @@ import {
 
 type Props = {
   onSubmit: Function,
-  text: ?string,
+  value: ?string,
 }
 type State = {
   directions: string,
