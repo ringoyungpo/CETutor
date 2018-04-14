@@ -25,7 +25,10 @@ type State = {
     directions: string,
     modules: Array<{
       moduleTitle: string,
-      questions: Array<string>,
+      questions: Array<{
+        optionSelected: ?number,
+        options: Array<string>
+      }>,
     }>
   }>,
   sectionSelected: ?number
@@ -43,10 +46,39 @@ export default class App extends Component<Props, State> {
             {
               moduleTitle: '1What is the news report mainly about?',
               questions: [
-                '1The news report mainly about A?',
-                '1The news report mainly about B?',
-                '1The news report mainly about C?',
-                '1The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                },
               ]
             },
           ]
@@ -58,19 +90,61 @@ export default class App extends Component<Props, State> {
             {
               moduleTitle: '2What is the news report mainly about?',
               questions: [
-                '2The news report mainly about A?',
-                '2The news report mainly about B?',
-                '2The news report mainly about C?',
-                '2The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },
               ]
             },
             {
               moduleTitle: '2What is the news report mainly about?',
               questions: [
-                '2The news report mainly about A?',
-                '2The news report mainly about B?',
-                '2The news report mainly about C?',
-                '2The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '2The news report mainly about A?',
+                    '2The news report mainly about B?',
+                    '2The news report mainly about C?',
+                    '2The news report mainly about D?',
+                  ]
+                },
               ]
             }
           ]
@@ -82,27 +156,66 @@ export default class App extends Component<Props, State> {
             {
               moduleTitle: '3What is the news report mainly about?',
               questions: [
-                '3The news report mainly about A?',
-                '3The news report mainly about B?',
-                '3The news report mainly about C?',
-                '3The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },
               ]
             },
             {
               moduleTitle: '3What is the news report mainly about?',
               questions: [
-                '3The news report mainly about A?',
-                '3The news report mainly about B?',
-                '3The news report mainly about C?',
-                '3The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },
               ]
             },{
               moduleTitle: '3What is the news report mainly about?',
               questions: [
-                '3The news report mainly about A?',
-                '3The news report mainly about B?',
-                '3The news report mainly about C?',
-                '3The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },{
+                  optionSelected: null,
+									options: [
+                    '3The news report mainly about A?',
+                    '3The news report mainly about B?',
+                    '3The news report mainly about C?',
+                    '3The news report mainly about D?',
+                  ]
+                },
               ]
             },
           ]
@@ -113,51 +226,74 @@ export default class App extends Component<Props, State> {
             {
               moduleTitle: '4What is the news report mainly about?',
               questions: [
-                '4The news report mainly about A?',
-                '4The news report mainly about B?',
-                '4The news report mainly about C?',
-                '4The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '4The news report mainly about A?',
+                    '4The news report mainly about B?',
+                    '4The news report mainly about C?',
+                    '4The news report mainly about D?',
+                  ]
+                },
               ]
             },{
               moduleTitle: '4What is the news report mainly about?',
               questions: [
-                '4The news report mainly about A?',
-                '4The news report mainly about B?',
-                '4The news report mainly about C?',
-                '4The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '4The news report mainly about A?',
+                    '4The news report mainly about B?',
+                    '4The news report mainly about C?',
+                    '4The news report mainly about D?',
+                  ]
+                },
               ]
             },{
               moduleTitle: '4What is the news report mainly about?',
               questions: [
-                '4The news report mainly about A?',
-                '4The news report mainly about B?',
-                '4The news report mainly about C?',
-                '4The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '4The news report mainly about A?',
+                    '4The news report mainly about B?',
+                    '4The news report mainly about C?',
+                    '4The news report mainly about D?',
+                  ]
+                },
               ]
             },{
               moduleTitle: '4What is the news report mainly about?',
               questions: [
-                '4The news report mainly about A?',
-                '4The news report mainly about B?',
-                '4The news report mainly about C?',
-                '4The news report mainly about D?',
+                {
+                  optionSelected: null,
+									options: [
+                    '4The news report mainly about A?',
+                    '4The news report mainly about B?',
+                    '4The news report mainly about C?',
+                    '4The news report mainly about D?',
+                  ]
+                },
               ]
             },
           ]
         },
       ],
-      answers: null,
       sectionSelected: null,
     }
   }
 
   render() {
+    let stateTemp = this.state
     return (
       <View>
         {
-          this.state.sections.map((sectionValue,sectionIndex)=>(
+          stateTemp.sections.map((sectionValue,sectionIndex)=>(
             <View key={sectionIndex}>
-              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == sectionIndex ? null : sectionIndex})}}>
+              <CardItem button onPress={()=>{
+                stateTemp.sectionSelected = stateTemp.sectionSelected == sectionIndex ? null : sectionIndex
+                this.setState(stateTemp)
+              }}>
                 <H3>
                     Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
                 </H3>
@@ -172,27 +308,51 @@ export default class App extends Component<Props, State> {
                     </CardItem>
                     <CardItem>
                       <Text>
-                        {this.state.sections[sectionIndex].directions}
+                        {sectionValue.directions}
                       </Text>
                     </CardItem>
                     {
-                      this.state.sections[sectionIndex].modules.map((modulesValue,modulesIndex)=>(
+                      sectionValue.modules.map((modulesValue,modulesIndex)=>(
                         <View key={modulesIndex}>
                           <CardItem header>
                             <Text>{modulesValue.moduleTitle}</Text>
                           </CardItem>
                           {
                             modulesValue.questions.map((questionValue, questionIndex)=>(
-                              <CardItem key={questionIndex} button onPress={()=>{console.log(JSON.stringify({
-                                sectionIndex: sectionIndex,
-                                modulesIndex: modulesIndex,
-                                questionIndex: questionIndex,
-                              }))}}>
-                                <Text>{String.fromCharCode(questionIndex+65)}: {questionValue}</Text>
-                                <Right>
-                                  <Radio selected={false} />
-                                </Right>
-                              </CardItem>
+                              <View key={questionIndex}>
+                                <CardItem header>
+                                  <Text>
+                                    {questionIndex + 1}.
+                                  </Text>
+                                </CardItem>
+                                {
+                                  questionValue.options.map((optionValue, optionIndex)=>(
+                                    <CardItem key={optionIndex} button onPress={()=>{
+                                      questionValue.optionSelected = questionValue.optionSelected!==optionIndex?(
+                                        optionIndex
+                                      ):(
+                                        null
+                                      )
+                                      // console.log(JSON.stringify({
+                                      //   sectionIndex: sectionIndex,
+                                      //   modulesIndex: modulesIndex,
+                                      //   questionIndex: questionIndex,
+                                      //   optionIndex: optionIndex,
+                                      // }))
+                                      console.log(JSON.stringify(
+                                        this.state.sections[sectionIndex].modules[modulesIndex].questions[questionIndex].optionSelected
+                                      ))
+
+                                      this.setState(stateTemp)
+                                    }}>
+                                      <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
+                                      <Right>
+                                        <Radio selected={optionIndex===questionValue.optionSelected} />
+                                      </Right>
+                                    </CardItem>
+                                  ))
+                                }
+                              </View>
                             ))
                           }
                         </View>
