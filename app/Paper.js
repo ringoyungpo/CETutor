@@ -104,8 +104,9 @@ export default class Paper extends Component<Props, State>{
           {
             this.state.partSelected === 'Translation'?(
               <Translation
-                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}>
-              </Translation>
+                value={this.state.answers.translation}                
+                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, translation: text}})}}
+              />
             ):null
           }
         </Card>
