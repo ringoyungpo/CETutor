@@ -66,8 +66,10 @@ export default class Paper extends Component<Props, State>{
           {
             this.state.partSelected === 'Writing'?(
               <Writing
-                onSubmit={(text)=>{console.log(text);this.setState({answers: {...this.state.answers, writing: text}})}}>
-              </Writing>
+                value={this.state.answers.writing}
+                onSubmit={(text)=>{console.log(text);this.setState({answers: {...this.state.answers, writing: text}})}}
+              />
+
             ):null
           }
           <CardItem>

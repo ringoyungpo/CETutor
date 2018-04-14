@@ -61538,6 +61538,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 )
               ),
               _this.state.partSelected === 'Writing' ? _react2.default.createElement(_Writing2.default, {
+                value: _this.state.answers.writing,
                 onSubmit: function onSubmit(text) {
                   console.log(text);
 
@@ -61557,7 +61558,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 73
+                    lineNumber: 75
                   }
                 },
                 _react2.default.createElement(
@@ -61566,7 +61567,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     onPress: _this._partSelect('Listening'),
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 74
+                      lineNumber: 76
                     }
                   },
                   "Part II Listening Comprehension"
@@ -61575,7 +61576,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               _this.state.partSelected === 'Listening' ? _react2.default.createElement(_Listening2.default, {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 80
+                  lineNumber: 82
                 }
               }) : null,
               _react2.default.createElement(
@@ -61583,7 +61584,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 85
+                    lineNumber: 87
                   }
                 },
                 _react2.default.createElement(
@@ -61592,7 +61593,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     onPress: _this._partSelect('Reading'),
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 86
+                      lineNumber: 88
                     }
                   },
                   "Part III Reading comprehension"
@@ -61601,7 +61602,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               _this.state.partSelected === 'Reading' ? _react2.default.createElement(_Reading2.default, {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 92
+                  lineNumber: 94
                 }
               }) : null,
               _react2.default.createElement(
@@ -61611,7 +61612,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   onPress: _this._partSelect('Translation'),
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 97
+                    lineNumber: 99
                   }
                 },
                 _react2.default.createElement(
@@ -61619,7 +61620,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 98
+                      lineNumber: 100
                     }
                   },
                   "Part IV translation"
@@ -61635,7 +61636,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 },
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 104
+                  lineNumber: 106
                 }
               }) : null
             ),
@@ -61644,7 +61645,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 111
+                  lineNumber: 113
                 }
               },
               _this.state.answers.writing
@@ -61654,7 +61655,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 114
+                  lineNumber: 116
                 }
               },
               _this.state.answers.translation
@@ -119712,7 +119713,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
 
       _this.state = {
         directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-        text: ''
+        text: null
       };
       return _this;
     }
@@ -119727,7 +119728,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 35
+              lineNumber: 36
             }
           },
           _react3.default.createElement(
@@ -119736,7 +119737,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               header: true,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 36
+                lineNumber: 37
               }
             },
             _react3.default.createElement(
@@ -119744,7 +119745,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 37
+                  lineNumber: 38
                 }
               },
               "Directions:"
@@ -119755,7 +119756,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
             {
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 42
+                lineNumber: 43
               }
             },
             _react3.default.createElement(
@@ -119763,7 +119764,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
               {
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 43
+                  lineNumber: 44
                 }
               },
               this.state.directions
@@ -119771,13 +119772,14 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           ),
           _react3.default.createElement(_nativeBase.Textarea, {
             rowSpan: 5,
+            value: this.props.value,
             placeholder: "Write your answer here...",
             onChangeText: function onChangeText(text) {
               _this2.props.onSubmit(text);
             },
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 48
+              lineNumber: 49
             }
           })
         );
@@ -119888,7 +119890,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
           {
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 116
+              lineNumber: 115
             }
           },
           this.state.sections.map(function (sectionUnit, sectionIndex) {
@@ -119898,7 +119900,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 key: sectionIndex,
                 __source: {
                   fileName: _jsxFileName,
-                  lineNumber: 119
+                  lineNumber: 118
                 }
               },
               _react3.default.createElement(
@@ -119912,7 +119914,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   },
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 120
+                    lineNumber: 119
                   }
                 },
                 _react3.default.createElement(
@@ -119920,7 +119922,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 121
+                      lineNumber: 120
                     }
                   },
                   "Section ",
@@ -119932,7 +119934,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                 {
                   __source: {
                     fileName: _jsxFileName,
-                    lineNumber: 127
+                    lineNumber: 126
                   }
                 },
                 _react3.default.createElement(
@@ -119941,7 +119943,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     header: true,
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 128
+                      lineNumber: 127
                     }
                   },
                   _react3.default.createElement(
@@ -119949,7 +119951,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 129
+                        lineNumber: 128
                       }
                     },
                     "Directions:"
@@ -119960,7 +119962,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                   {
                     __source: {
                       fileName: _jsxFileName,
-                      lineNumber: 133
+                      lineNumber: 132
                     }
                   },
                   _react3.default.createElement(
@@ -119968,7 +119970,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                     {
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 134
+                        lineNumber: 133
                       }
                     },
                     _this2.state.sections[sectionIndex].directions
@@ -119981,7 +119983,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                       key: questionIndex,
                       __source: {
                         fileName: _jsxFileName,
-                        lineNumber: 140
+                        lineNumber: 139
                       }
                     },
                     _react3.default.createElement(
@@ -119990,7 +119992,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         header: true,
                         __source: {
                           fileName: _jsxFileName,
-                          lineNumber: 141
+                          lineNumber: 140
                         }
                       },
                       _react3.default.createElement(
@@ -119998,7 +120000,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                         {
                           __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 142
+                            lineNumber: 141
                           }
                         },
                         questionUnit.question
@@ -120015,7 +120017,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                           },
                           __source: {
                             fileName: _jsxFileName,
-                            lineNumber: 146
+                            lineNumber: 145
                           }
                         },
                         _react3.default.createElement(
@@ -120023,7 +120025,7 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                           {
                             __source: {
                               fileName: _jsxFileName,
-                              lineNumber: 147
+                              lineNumber: 146
                             }
                           },
                           String.fromCharCode(optionIndex + 65),
@@ -120035,14 +120037,14 @@ __d(function (global, _require, module, exports, _dependencyMap) {
                           {
                             __source: {
                               fileName: _jsxFileName,
-                              lineNumber: 148
+                              lineNumber: 147
                             }
                           },
                           _react3.default.createElement(_nativeBase.Radio, {
                             selected: false,
                             __source: {
                               fileName: _jsxFileName,
-                              lineNumber: 149
+                              lineNumber: 148
                             }
                           })
                         )
