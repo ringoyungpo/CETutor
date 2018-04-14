@@ -21,13 +21,14 @@ type Props = {
 
 type State = {
   sections: Array<{
+    sectionTitle: string,
     directions: string,
-    questions: Array<{
-      question: string,
-      options: Array<string>,
+    modules: Array<{
+      moduleTitle: string,
+      questions: Array<string>,
     }>
   }>,
-  sectionSelected: ?string
+  sectionSelected: ?number
 }
 
 export default class App extends Component<Props, State> {
@@ -36,77 +37,117 @@ export default class App extends Component<Props, State> {
     this.state={
       sections:[
         {
-          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          questions: [
+          directions: '1Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          sectionTitle: 'News Report',
+          modules: [
             {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
+              moduleTitle: '1What is the news report mainly about?',
+              questions: [
+                '1The news report mainly about A?',
+                '1The news report mainly about B?',
+                '1The news report mainly about C?',
+                '1The news report mainly about D?',
+              ]
+            },
+          ]
+        },
+        {
+          directions: '2Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          sectionTitle: 'Conversation',
+          modules: [
+            {
+              moduleTitle: '2What is the news report mainly about?',
+              questions: [
+                '2The news report mainly about A?',
+                '2The news report mainly about B?',
+                '2The news report mainly about C?',
+                '2The news report mainly about D?',
               ]
             },
             {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
+              moduleTitle: '2What is the news report mainly about?',
+              questions: [
+                '2The news report mainly about A?',
+                '2The news report mainly about B?',
+                '2The news report mainly about C?',
+                '2The news report mainly about D?',
               ]
             }
           ]
         },
         {
-          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          questions: [
+          directions: '3Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          sectionTitle: 'Passange',
+          modules: [
             {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
+              moduleTitle: '3What is the news report mainly about?',
+              questions: [
+                '3The news report mainly about A?',
+                '3The news report mainly about B?',
+                '3The news report mainly about C?',
+                '3The news report mainly about D?',
               ]
             },
             {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
+              moduleTitle: '3What is the news report mainly about?',
+              questions: [
+                '3The news report mainly about A?',
+                '3The news report mainly about B?',
+                '3The news report mainly about C?',
+                '3The news report mainly about D?',
               ]
-            }
+            },{
+              moduleTitle: '3What is the news report mainly about?',
+              questions: [
+                '3The news report mainly about A?',
+                '3The news report mainly about B?',
+                '3The news report mainly about C?',
+                '3The news report mainly about D?',
+              ]
+            },
+          ]
+        },{
+          directions: '4Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          sectionTitle: 'Record',
+          modules: [
+            {
+              moduleTitle: '4What is the news report mainly about?',
+              questions: [
+                '4The news report mainly about A?',
+                '4The news report mainly about B?',
+                '4The news report mainly about C?',
+                '4The news report mainly about D?',
+              ]
+            },{
+              moduleTitle: '4What is the news report mainly about?',
+              questions: [
+                '4The news report mainly about A?',
+                '4The news report mainly about B?',
+                '4The news report mainly about C?',
+                '4The news report mainly about D?',
+              ]
+            },{
+              moduleTitle: '4What is the news report mainly about?',
+              questions: [
+                '4The news report mainly about A?',
+                '4The news report mainly about B?',
+                '4The news report mainly about C?',
+                '4The news report mainly about D?',
+              ]
+            },{
+              moduleTitle: '4What is the news report mainly about?',
+              questions: [
+                '4The news report mainly about A?',
+                '4The news report mainly about B?',
+                '4The news report mainly about C?',
+                '4The news report mainly about D?',
+              ]
+            },
           ]
         },
-        {
-          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          questions: [
-            {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
-              ]
-            },
-            {
-              question: 'What is the news report mainly about?',
-              options: [
-                'The news report mainly about A?',
-                'The news report mainly about B?',
-                'The news report mainly about C?',
-                'The news report mainly about D?',
-              ]
-            }
-          ]
-        }
       ],
       answers: null,
-      sectionSelected: 'a'
+      sectionSelected: null,
     }
   }
 
@@ -114,15 +155,15 @@ export default class App extends Component<Props, State> {
     return (
       <View>
         {
-          this.state.sections.map((sectionUnit,sectionIndex)=>(
+          this.state.sections.map((sectionValue,sectionIndex)=>(
             <View key={sectionIndex}>
-              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == String.fromCharCode(sectionIndex+65) ? null : String.fromCharCode(sectionIndex+65)})}}>
+              <CardItem button onPress={()=>{this.setState({sectionSelected: this.state.sectionSelected == sectionIndex ? null : sectionIndex})}}>
                 <H3>
-                    Section {String.fromCharCode(sectionIndex+65)}
+                    Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
                 </H3>
               </CardItem>
               {
-                this.state.sectionSelected === String.fromCharCode(sectionIndex+65)?(
+                this.state.sectionSelected === sectionIndex?(
                   <View>
                     <CardItem header>
                       <Text>
@@ -135,15 +176,19 @@ export default class App extends Component<Props, State> {
                       </Text>
                     </CardItem>
                     {
-                      this.state.sections[sectionIndex].questions.map((questionUnit,questionIndex)=>(
-                        <View key={questionIndex}>
+                      this.state.sections[sectionIndex].modules.map((modulesValue,modulesIndex)=>(
+                        <View key={modulesIndex}>
                           <CardItem header>
-                            <Text>{questionUnit.question}</Text>
+                            <Text>{modulesValue.moduleTitle}</Text>
                           </CardItem>
                           {
-                            questionUnit.options.map((option, optionIndex)=>(
-                              <CardItem key={optionIndex} button onPress={()=>{console.log(String.fromCharCode(sectionIndex+65) + questionIndex.toString() + String.fromCharCode(optionIndex+65))}}>
-                                <Text>{String.fromCharCode(optionIndex+65)}: {option}</Text>
+                            modulesValue.questions.map((questionValue, questionIndex)=>(
+                              <CardItem key={questionIndex} button onPress={()=>{console.log(JSON.stringify({
+                                sectionIndex: sectionIndex,
+                                modulesIndex: modulesIndex,
+                                questionIndex: questionIndex,
+                              }))}}>
+                                <Text>{String.fromCharCode(questionIndex+65)}: {questionValue}</Text>
                                 <Right>
                                   <Radio selected={false} />
                                 </Right>
