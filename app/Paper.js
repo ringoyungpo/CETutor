@@ -6,18 +6,13 @@
 
 import React, {Component} from 'react'
 import {
-  ScrollView,
-  StyleSheet,
-  View,
-  TouchableHighlight,
-} from 'react-native'
-import {
   Header,
   Container,
   Content,
   Text,
   Card,
   CardItem,
+  H1,
   H2,
 } from 'native-base'
 import {TabNavigator} from 'react-navigation'
@@ -38,10 +33,10 @@ export default class Paper extends Component<Props, State>{
   constructor(props: any){
     super(props)
     this.state = {
-      partSelected: 'Listening',
+      partSelected: null,
       answers: {
-        writing: '',
-        translation: ''
+        writing: null,
+        translation: null,
       }
     }
   }
@@ -58,6 +53,11 @@ export default class Paper extends Component<Props, State>{
       <Header/>
       <Content>
         <Card>
+          <CardItem>
+            <H1>
+              Paper
+            </H1>
+          </CardItem>
           <CardItem button onPress={this._partSelect('Writing')}>
             <H2>
               Part I Writing
@@ -67,7 +67,7 @@ export default class Paper extends Component<Props, State>{
             this.state.partSelected === 'Writing'?(
               <Writing
                 value={this.state.answers.writing}
-                onSubmit={(text)=>{console.log(text);this.setState({answers: {...this.state.answers, writing: text}})}}
+                onSubmit={(text)=>{this.setState({answers: {...this.state.answers, writing: text}})}}
               />
 
             ):null
@@ -98,7 +98,7 @@ export default class Paper extends Component<Props, State>{
           }
           <CardItem button onPress={this._partSelect('Translation')}>
             <H2>
-              Part IV translation
+              Part IV Translation
             </H2>
           </CardItem>
           {
@@ -111,34 +111,56 @@ export default class Paper extends Component<Props, State>{
           }
         </Card>
 
-        <Text>
-          {this.state.answers.writing}
-        </Text>
-        <Text>
-          {this.state.answers.translation}
-        </Text>
+        <Card>
+          <CardItem>
+            <H1>
+              Answer Sheet
+            </H1>
+          </CardItem>
+          <CardItem>
+            <H2>
+              Part I Writing
+            </H2>
+          </CardItem>
+          {
+            this.state.answers.writing&&(
+              this.state.answers.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
+            )?(
+              <CardItem>
+                <Text>
+                  {this.state.answers.writing}
+                </Text>
+              </CardItem>
+            ):null
+          }
+          <CardItem>
+            <H2>
+              Part II Listening Comprehension
+            </H2>
+          </CardItem>
+          <CardItem>
+            <H2>
+              Part III Reading Comprehension
+            </H2>
+          </CardItem>
+          <CardItem>
+            <H2>
+              Part IV Translation
+            </H2>
+          </CardItem>
+          {
+            this.state.answers.translation&&(
+              this.state.answers.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
+            )?(
+              <CardItem>
+                <Text>
+                  {this.state.answers.translation}
+                </Text>
+              </CardItem>
+            ):null
+          }
+        </Card>
       </Content>
     </Container>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  contentContainer: {
-    paddingVertical: 20
-  },
-  part: {
-    fontSize: 20,
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
-  }
-});
