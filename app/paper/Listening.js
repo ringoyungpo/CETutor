@@ -17,6 +17,7 @@ import {
 } from 'native-base'
 
 type Props = {
+  onSubmit: Function,
 }
 
 type State = {
@@ -284,7 +285,7 @@ export default class App extends Component<Props, State> {
   }
 
   render() {
-    let stateTemp = this.state
+    const stateTemp = this.state
     return (
       <View>
         {
@@ -315,6 +316,9 @@ export default class App extends Component<Props, State> {
                       sectionValue.modules.map((modulesValue,modulesIndex)=>(
                         <View key={modulesIndex}>
                           <CardItem header>
+                            <Text>{sectionValue.sectionTitle} {modulesIndex + 1}</Text>
+                          </CardItem>
+                          <CardItem header>
                             <Text>{modulesValue.moduleTitle}</Text>
                           </CardItem>
                           {
@@ -339,11 +343,16 @@ export default class App extends Component<Props, State> {
                                       //   questionIndex: questionIndex,
                                       //   optionIndex: optionIndex,
                                       // }))
-                                      console.log(JSON.stringify(
-                                        this.state.sections[sectionIndex].modules[modulesIndex].questions[questionIndex].optionSelected
-                                      ))
+                                      // console.log(JSON.stringify(
+                                      //   stateTemp.sections[sectionIndex].modules[modulesIndex].questions[questionIndex].optionSelected
+                                      // ))
+
+                                      this.props.onSubmit(stateTemp)
 
                                       this.setState(stateTemp)
+
+
+
                                     }}>
                                       <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
                                       <Right>
