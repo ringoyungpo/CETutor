@@ -18,10 +18,21 @@ import {
 
 type Props = {
   onSubmit: Function,
+  sections: ?Array<{
+    sectionTitle: string,
+    directions: string,
+    modules: Array<{
+      moduleTitle: string,
+      questions: Array<{
+        optionSelected: ?number,
+        options: Array<string>
+      }>,
+    }>
+  }>
 }
 
 type State = {
-  sections: Array<{
+  sections: ?Array<{
     sectionTitle: string,
     directions: string,
     modules: Array<{
@@ -40,247 +51,7 @@ export default class App extends Component<Props, State> {
   constructor(props: Props){
     super(props)
     this.state={
-      sections:[
-        {
-          directions: '1Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          sectionTitle: 'News Report',
-          modules: [
-            {
-              moduleTitle: '1What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '1The news report mainly about A?',
-                    '1The news report mainly about B?',
-                    '1The news report mainly about C?',
-                    '1The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '1The news report mainly about A?',
-                    '1The news report mainly about B?',
-                    '1The news report mainly about C?',
-                    '1The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '1The news report mainly about A?',
-                    '1The news report mainly about B?',
-                    '1The news report mainly about C?',
-                    '1The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '1The news report mainly about A?',
-                    '1The news report mainly about B?',
-                    '1The news report mainly about C?',
-                    '1The news report mainly about D?',
-                  ]
-                },
-              ]
-            },
-          ]
-        },
-        {
-          directions: '2Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          sectionTitle: 'Conversation',
-          modules: [
-            {
-              moduleTitle: '2What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },
-              ]
-            },
-            {
-              moduleTitle: '2What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '2The news report mainly about A?',
-                    '2The news report mainly about B?',
-                    '2The news report mainly about C?',
-                    '2The news report mainly about D?',
-                  ]
-                },
-              ]
-            }
-          ]
-        },
-        {
-          directions: '3Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          sectionTitle: 'Passange',
-          modules: [
-            {
-              moduleTitle: '3What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },
-              ]
-            },
-            {
-              moduleTitle: '3What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },
-              ]
-            },{
-              moduleTitle: '3What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },{
-                  optionSelected: null,
-									options: [
-                    '3The news report mainly about A?',
-                    '3The news report mainly about B?',
-                    '3The news report mainly about C?',
-                    '3The news report mainly about D?',
-                  ]
-                },
-              ]
-            },
-          ]
-        },{
-          directions: '4Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-          sectionTitle: 'Record',
-          modules: [
-            {
-              moduleTitle: '4What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '4The news report mainly about A?',
-                    '4The news report mainly about B?',
-                    '4The news report mainly about C?',
-                    '4The news report mainly about D?',
-                  ]
-                },
-              ]
-            },{
-              moduleTitle: '4What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '4The news report mainly about A?',
-                    '4The news report mainly about B?',
-                    '4The news report mainly about C?',
-                    '4The news report mainly about D?',
-                  ]
-                },
-              ]
-            },{
-              moduleTitle: '4What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '4The news report mainly about A?',
-                    '4The news report mainly about B?',
-                    '4The news report mainly about C?',
-                    '4The news report mainly about D?',
-                  ]
-                },
-              ]
-            },{
-              moduleTitle: '4What is the news report mainly about?',
-              questions: [
-                {
-                  optionSelected: null,
-									options: [
-                    '4The news report mainly about A?',
-                    '4The news report mainly about B?',
-                    '4The news report mainly about C?',
-                    '4The news report mainly about D?',
-                  ]
-                },
-              ]
-            },
-          ]
-        },
-      ],
+      sections: this.props.sections,
       sectionSelected: null,
     }
   }
@@ -288,7 +59,7 @@ export default class App extends Component<Props, State> {
   render() {
     const stateTemp = this.state
     let optionSelected
-    return (
+    return stateTemp.sections?(
       <View>
         {
           stateTemp.sections.map((sectionValue,sectionIndex)=>(
@@ -353,10 +124,6 @@ export default class App extends Component<Props, State> {
                                       this.props.onSubmit(sectionIndex, modulesIndex, questionIndex, optionSelected)
 
                                       this.setState(stateTemp)
-
-
-
-
                                     }}>
                                       <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
                                       <Right>
@@ -378,6 +145,6 @@ export default class App extends Component<Props, State> {
           ))
         }
       </View>
-    );
+    ):null
   }
 }

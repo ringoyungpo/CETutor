@@ -25,13 +25,17 @@ import Translation from './paper/Translation'
 type Props = {}
 type State = {
   partSelected: ?string,
-  answers: {
+  paperData: {
     writing: ?string,
     listening: ?{
-      sections: Array<?{
-        modules: Array<?{
-          questions: Array<?{
-            optionSelected: ?number
+      sections: ?Array<{
+        sectionTitle: string,
+        directions: string,
+        modules: Array<{
+          moduleTitle: string,
+          questions: Array<{
+            optionSelected: ?number,
+            options: Array<string>
           }>,
         }>
       }>
@@ -44,9 +48,251 @@ export default class Paper extends Component<Props, State>{
     super(props)
     this.state = {
       partSelected: null,
-      answers: {
+      paperData: {
         writing: null,
-        listening: null,
+        listening: {
+          sections:[
+            {
+              directions: '1Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+              sectionTitle: 'News Report',
+              modules: [
+                {
+                  moduleTitle: '1What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '1The news report mainly about A?',
+                        '1The news report mainly about B?',
+                        '1The news report mainly about C?',
+                        '1The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '1The news report mainly about A?',
+                        '1The news report mainly about B?',
+                        '1The news report mainly about C?',
+                        '1The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '1The news report mainly about A?',
+                        '1The news report mainly about B?',
+                        '1The news report mainly about C?',
+                        '1The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '1The news report mainly about A?',
+                        '1The news report mainly about B?',
+                        '1The news report mainly about C?',
+                        '1The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },
+              ]
+            },
+            {
+              directions: '2Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+              sectionTitle: 'Conversation',
+              modules: [
+                {
+                  moduleTitle: '2What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },
+                {
+                  moduleTitle: '2What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '2The news report mainly about A?',
+                        '2The news report mainly about B?',
+                        '2The news report mainly about C?',
+                        '2The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                }
+              ]
+            },
+            {
+              directions: '3Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+              sectionTitle: 'Passange',
+              modules: [
+                {
+                  moduleTitle: '3What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },
+                {
+                  moduleTitle: '3What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },{
+                  moduleTitle: '3What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },{
+                      optionSelected: null,
+    									options: [
+                        '3The news report mainly about A?',
+                        '3The news report mainly about B?',
+                        '3The news report mainly about C?',
+                        '3The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },
+              ]
+            },{
+              directions: '4Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+              sectionTitle: 'Record',
+              modules: [
+                {
+                  moduleTitle: '4What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '4The news report mainly about A?',
+                        '4The news report mainly about B?',
+                        '4The news report mainly about C?',
+                        '4The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },{
+                  moduleTitle: '4What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '4The news report mainly about A?',
+                        '4The news report mainly about B?',
+                        '4The news report mainly about C?',
+                        '4The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },{
+                  moduleTitle: '4What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '4The news report mainly about A?',
+                        '4The news report mainly about B?',
+                        '4The news report mainly about C?',
+                        '4The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },{
+                  moduleTitle: '4What is the news report mainly about?',
+                  questions: [
+                    {
+                      optionSelected: null,
+    									options: [
+                        '4The news report mainly about A?',
+                        '4The news report mainly about B?',
+                        '4The news report mainly about C?',
+                        '4The news report mainly about D?',
+                      ]
+                    },
+                  ]
+                },
+              ]
+            },
+          ]
+        },
         translation: null,
       }
     }
@@ -76,10 +322,10 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              this.state.partSelected === 'Writing'?(
+              stateTemp.paperData&&this.state.partSelected === 'Writing'?(
                 <Writing
-                  value={stateTemp.answers.writing}
-                  onSubmit={(text)=>{this.setState({answers: {...stateTemp.answers, writing: text}})}}
+                  value={stateTemp.paperData.writing}
+                  onSubmit={(text)=>{this.setState({paperData: {...stateTemp.paperData, writing: text}})}}
                 />
 
               ):null
@@ -90,10 +336,13 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.partSelected === 'Listening'?(
+              stateTemp.paperData&&stateTemp.partSelected === 'Listening'&&(
+                stateTemp.paperData.listening
+              )?(
                 <Listening
+                  sections={stateTemp.paperData.listening.sections}
                   onSubmit={(sectionIndex, modulesIndex, questionIndex, optionSelected)=>{
-                    // stateTemp.answers.listening = listeningAnswers
+                    // stateTemp.paperData.listening = listeningAnswers
                     // console.log(JSON.stringify({
                     //   sectionIndex: sectionIndex,
                     //   modulesIndex: modulesIndex,
@@ -101,13 +350,13 @@ export default class Paper extends Component<Props, State>{
                     //   optionSelected: optionSelected
                     // }))
 
-                    stateTemp.answers.listening = (
-                      stateTemp.answers.listening?(
-                        stateTemp.answers.listening
+                    stateTemp.paperData.listening = (
+                      stateTemp.paperData.listening?(
+                        stateTemp.paperData.listening
                       ):{}
                     )
 
-                    let listening = stateTemp.answers.listening
+                    let listening = stateTemp.paperData.listening
 
                     listening.sections =(
                       listening.sections?(
@@ -159,7 +408,7 @@ export default class Paper extends Component<Props, State>{
 
                     questionValue.optionSelected = optionSelected
 
-                    console.log(JSON.stringify(stateTemp.answers.listening))
+                    // console.log(JSON.stringify(stateTemp.paperData.listening))
                     this.setState(stateTemp)
                   }}
                 />
@@ -171,9 +420,9 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.partSelected === 'Reading'?(
+              stateTemp.paperData&&stateTemp.partSelected === 'Reading'?(
                 <Reading
-                  // onSubmit={(text)=>{this.setState({answers: {...stateTemp.answers, writing: text}})}}
+                  // onSubmit={(text)=>{this.setState({paperData: {...stateTemp.paperData, writing: text}})}}
                 />
               ):null
             }
@@ -183,11 +432,11 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.partSelected === 'Translation'?(
+              stateTemp.paperData&&stateTemp.partSelected === 'Translation'?(
                 <Translation
-                  value={stateTemp.answers.translation}
+                  value={stateTemp.paperData.translation}
                   onSubmit={(text)=>{
-                    stateTemp.answers.translation = text
+                    stateTemp.paperData.translation = text
                     this.setState(stateTemp)
                   }}
                 />
@@ -207,12 +456,12 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.answers.writing&&(
-                stateTemp.answers.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
+              stateTemp.paperData&&stateTemp.paperData.writing&&(
+                stateTemp.paperData.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
               )?(
                 <CardItem>
                   <Text>
-                    {stateTemp.answers.writing}
+                    {stateTemp.paperData.writing}
                   </Text>
                 </CardItem>
               ):null
@@ -223,9 +472,9 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.answers&&stateTemp.answers.listening&&(
-                stateTemp.answers.listening.sections&&(
-                  stateTemp.answers.listening.sections.filter((sectionValue)=>(
+              stateTemp.paperData&&stateTemp.paperData.listening&&(
+                stateTemp.paperData.listening.sections&&(
+                  stateTemp.paperData.listening.sections.filter((sectionValue)=>(
                     sectionValue&&sectionValue.modules&&(
                       sectionValue.modules.filter((moduleValue)=>(
                         moduleValue&&moduleValue.questions&&(
@@ -240,7 +489,7 @@ export default class Paper extends Component<Props, State>{
               )?(
                 <CardItem>
                   <Text>
-                    {JSON.stringify(stateTemp.answers.listening)}
+                    {JSON.stringify(stateTemp.paperData.listening)}
                   </Text>
                 </CardItem>
               ):null
@@ -256,12 +505,12 @@ export default class Paper extends Component<Props, State>{
               </H2>
             </CardItem>
             {
-              stateTemp.answers.translation&&(
-                stateTemp.answers.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
+              stateTemp.paperData&&stateTemp.paperData.translation&&(
+                stateTemp.paperData.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
               )?(
                 <CardItem>
                   <Text>
-                    {this.state.answers.translation}
+                    {this.state.paperData.translation}
                   </Text>
                 </CardItem>
               ):null
