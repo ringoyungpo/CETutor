@@ -15,6 +15,7 @@ import {
   H1,
   H2,
   H3,
+  View,
 } from 'native-base'
 import {TabNavigator} from 'react-navigation'
 import Writing from './paper/Writing'
@@ -25,10 +26,10 @@ import Translation from './paper/Translation'
 type Props = {}
 type State = {
   partSelected: ?string,
-  paperData: {
+  paperData: ?{
     writing: ?string,
-    listening: ?{
-      sections: ?Array<{
+    listening: {
+      sections: Array<{
         sectionTitle: string,
         directions: string,
         modules: Array<{
@@ -298,224 +299,226 @@ export default class Paper extends Component<Props, State>{
     }
   }
 
-  _partSelect = (stateTemp, part) => () => {
-    stateTemp.partSelected = stateTemp.partSelected === part?null:part
-    this.setState(stateTemp)
+  _partSelect = (part) => () => {
+    this.setState({partSelected: this.state.partSelected===part?null:part})
     // console.log(part);
   }
 
   render(){
-    const stateTemp = this.state
+    const paperDataTemp = this.state.paperData
     return (
       <Container>
         <Header/>
         <Content>
-          <Card>
-            <CardItem>
-              <H1>
-                Paper
-              </H1>
-            </CardItem>
-            <CardItem button onPress={this._partSelect(stateTemp,'Writing')}>
-              <H2>
-                Part I Writing
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&this.state.partSelected === 'Writing'?(
-                <Writing
-                  value={stateTemp.paperData.writing}
-                  onSubmit={(text)=>{this.setState({paperData: {...stateTemp.paperData, writing: text}})}}
-                />
+          {
+            paperDataTemp?(
+              <View>
+                  <Card>
+                    <CardItem>
+                      <H1>
+                        Paper
+                      </H1>
+                    </CardItem>
+                    <CardItem button onPress={this._partSelect('Writing')}>
+                      <H2>
+                        Part I Writing
+                      </H2>
+                    </CardItem>
+                    {
+                      this.state.partSelected === 'Writing'?(
+                        <Writing
+                          value={paperDataTemp.writing}
+                          onSubmit={(text)=>{this.setState({paperData: paperDataTemp})}}
+                        />
+                      ):null
+                    }
+                    <CardItem>
+                      <H2 onPress={this._partSelect('Listening')}>
+                        Part II Listening Comprehension
+                      </H2>
+                    </CardItem>
+                    {
+                      this.state.partSelected === 'Listening'?(
+                        <Listening
+                          sections={paperDataTemp.listening.sections}
+                          onSubmit={(sectionIndex, modulesIndex, questionIndex, optionSelected)=>{
+                            // paperDataTemp.listening = listeningAnswers
+                            // console.log(JSON.stringify({
+                            //   sectionIndex: sectionIndex,
+                            //   modulesIndex: modulesIndex,
+                            //   questionIndex: questionIndex,
+                            //   optionSelected: optionSelected
+                            // }))
 
-              ):null
-            }
-            <CardItem>
-              <H2 onPress={this._partSelect(stateTemp,'Listening')}>
-                Part II Listening Comprehension
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.partSelected === 'Listening'&&(
-                stateTemp.paperData.listening
-              )?(
-                <Listening
-                  sections={stateTemp.paperData.listening.sections}
-                  onSubmit={(sectionIndex, modulesIndex, questionIndex, optionSelected)=>{
-                    // stateTemp.paperData.listening = listeningAnswers
-                    // console.log(JSON.stringify({
-                    //   sectionIndex: sectionIndex,
-                    //   modulesIndex: modulesIndex,
-                    //   questionIndex: questionIndex,
-                    //   optionSelected: optionSelected
-                    // }))
+                            paperDataTemp.listening = (
+                              paperDataTemp.listening?(
+                                paperDataTemp.listening
+                              ):{}
+                            )
 
-                    stateTemp.paperData.listening = (
-                      stateTemp.paperData.listening?(
-                        stateTemp.paperData.listening
-                      ):{}
-                    )
+                            let listening = paperDataTemp.listening
 
-                    let listening = stateTemp.paperData.listening
+                            listening.sections =(
+                              listening.sections?(
+                                listening.sections
+                              ):[]
+                            )
 
-                    listening.sections =(
-                      listening.sections?(
-                        listening.sections
-                      ):[]
-                    )
+                            let sections = listening.sections
 
-                    let sections = listening.sections
+                            sections[sectionIndex] = (
+                              sections[sectionIndex]?(
+                                sections[sectionIndex]
+                              ):{}
+                            )
 
-                    sections[sectionIndex] = (
-                      sections[sectionIndex]?(
-                        sections[sectionIndex]
-                      ):{}
-                    )
+                            let sectionValue = sections[sectionIndex]
 
-                    let sectionValue = sections[sectionIndex]
+                            sectionValue.modules = (
+                              sectionValue.modules?(
+                                sectionValue.modules
+                              ):[]
+                            )
 
-                    sectionValue.modules = (
-                      sectionValue.modules?(
-                        sectionValue.modules
-                      ):[]
-                    )
+                            let modules = sectionValue.modules
 
-                    let modules = sectionValue.modules
+                            modules[modulesIndex]=(
+                              modules[modulesIndex]?(
+                                modules[modulesIndex]
+                              ):{}
+                            )
 
-                    modules[modulesIndex]=(
-                      modules[modulesIndex]?(
-                        modules[modulesIndex]
-                      ):{}
-                    )
+                            let moduleValue = modules[modulesIndex]
 
-                    let moduleValue = modules[modulesIndex]
+                            moduleValue.questions=(
+                              moduleValue.questions?(
+                                moduleValue.questions
+                              ):[]
+                            )
 
-                    moduleValue.questions=(
-                      moduleValue.questions?(
-                        moduleValue.questions
-                      ):[]
-                    )
+                            let questions = moduleValue.questions
 
-                    let questions = moduleValue.questions
+                            questions[questionIndex]=(
+                              questions[questionIndex]?(
+                                questions[questionIndex]
+                              ):{}
+                            )
 
-                    questions[questionIndex]=(
-                      questions[questionIndex]?(
-                        questions[questionIndex]
-                      ):{}
-                    )
+                            let questionValue = questions[questionIndex]
 
-                    let questionValue = questions[questionIndex]
+                            questionValue.optionSelected = optionSelected
 
-                    questionValue.optionSelected = optionSelected
+                            // console.log(JSON.stringify(paperDataTemp.listening))
+                            this.setState({paperData: paperDataTemp})
+                          }}
+                        />
+                      ):null
+                    }
+                    <CardItem>
+                      <H2 onPress={this._partSelect('Reading')}>
+                        Part III Reading comprehension
+                      </H2>
+                    </CardItem>
+                    {
+                      this.state.partSelected === 'Reading'?(
+                        <Reading
+                          // onSubmit={(text)=>{this.setState({paperData: {...paperDataTemp, writing: text}})}}
+                        />
+                      ):null
+                    }
+                    <CardItem button onPress={this._partSelect('Translation')}>
+                      <H2>
+                        Part IV Translation
+                      </H2>
+                    </CardItem>
+                    {
+                      this.state.partSelected === 'Translation'?(
+                        <Translation
+                          value={paperDataTemp.translation}
+                          onSubmit={(text)=>{
+                            paperDataTemp.translation = text
+                            this.setState({paperData:paperDataTemp})
+                          }}
+                        />
+                      ):null
+                    }
+                  </Card>
 
-                    // console.log(JSON.stringify(stateTemp.paperData.listening))
-                    this.setState(stateTemp)
-                  }}
-                />
-              ):null
-            }
-            <CardItem>
-              <H2 onPress={this._partSelect(stateTemp, 'Reading')}>
-                Part III Reading comprehension
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.partSelected === 'Reading'?(
-                <Reading
-                  // onSubmit={(text)=>{this.setState({paperData: {...stateTemp.paperData, writing: text}})}}
-                />
-              ):null
-            }
-            <CardItem button onPress={this._partSelect(stateTemp,'Translation')}>
-              <H2>
-                Part IV Translation
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.partSelected === 'Translation'?(
-                <Translation
-                  value={stateTemp.paperData.translation}
-                  onSubmit={(text)=>{
-                    stateTemp.paperData.translation = text
-                    this.setState(stateTemp)
-                  }}
-                />
-              ):null
-            }
-          </Card>
-
-          <Card>
-            <CardItem>
-              <H1>
-                Answer Sheet
-              </H1>
-            </CardItem>
-            <CardItem>
-              <H2>
-                Part I Writing
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.paperData.writing&&(
-                stateTemp.paperData.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
-              )?(
-                <CardItem>
-                  <Text>
-                    {stateTemp.paperData.writing}
-                  </Text>
-                </CardItem>
-              ):null
-            }
-            <CardItem>
-              <H2>
-                Part II Listening Comprehension
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.paperData.listening&&(
-                stateTemp.paperData.listening.sections&&(
-                  stateTemp.paperData.listening.sections.filter((sectionValue)=>(
-                    sectionValue&&sectionValue.modules&&(
-                      sectionValue.modules.filter((moduleValue)=>(
-                        moduleValue&&moduleValue.questions&&(
-                          moduleValue.questions.filter((questionValue)=>(
-                            questionValue&&questionValue.optionSelected!==null
+                  <Card>
+                    <CardItem>
+                      <H1>
+                        Answer Sheet
+                      </H1>
+                    </CardItem>
+                    <CardItem>
+                      <H2>
+                        Part I Writing
+                      </H2>
+                    </CardItem>
+                    {
+                      paperDataTemp.writing&&(
+                        paperDataTemp.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
+                      )?(
+                        <CardItem>
+                          <Text>
+                            {paperDataTemp.writing}
+                          </Text>
+                        </CardItem>
+                      ):null
+                    }
+                    <CardItem>
+                      <H2>
+                        Part II Listening Comprehension
+                      </H2>
+                    </CardItem>
+                    {
+                      paperDataTemp.listening&&(
+                        paperDataTemp.listening.sections&&(
+                          paperDataTemp.listening.sections.filter((sectionValue)=>(
+                            sectionValue&&sectionValue.modules&&(
+                              sectionValue.modules.filter((moduleValue)=>(
+                                moduleValue&&moduleValue.questions&&(
+                                  moduleValue.questions.filter((questionValue)=>(
+                                    questionValue&&questionValue.optionSelected!==null
+                                  )).length
+                                )
+                              )).length
+                            )
                           )).length
                         )
-                      )).length
-                    )
-                  )).length
-                )
-              )?(
-                <CardItem>
-                  <Text>
-                    {JSON.stringify(stateTemp.paperData.listening)}
-                  </Text>
-                </CardItem>
-              ):null
-            }
-            <CardItem>
-              <H2>
-                Part III Reading Comprehension
-              </H2>
-            </CardItem>
-            <CardItem>
-              <H2>
-                Part IV Translation
-              </H2>
-            </CardItem>
-            {
-              stateTemp.paperData&&stateTemp.paperData.translation&&(
-                stateTemp.paperData.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
-              )?(
-                <CardItem>
-                  <Text>
-                    {this.state.paperData.translation}
-                  </Text>
-                </CardItem>
-              ):null
-            }
-          </Card>
+                      )?(
+                        <CardItem>
+                          <Text>
+                            {JSON.stringify(paperDataTemp.listening)}
+                          </Text>
+                        </CardItem>
+                      ):null
+                    }
+                    <CardItem>
+                      <H2>
+                        Part III Reading Comprehension
+                      </H2>
+                    </CardItem>
+                    <CardItem>
+                      <H2>
+                        Part IV Translation
+                      </H2>
+                    </CardItem>
+                    {
+                      paperDataTemp.translation&&(
+                        paperDataTemp.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
+                      )?(
+                        <CardItem>
+                          <Text>
+                            {paperDataTemp.translation}
+                          </Text>
+                        </CardItem>
+                      ):null
+                    }
+                  </Card>
+              </View>
+            ):null
+          }
         </Content>
       </Container>
     )
