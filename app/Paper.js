@@ -44,7 +44,11 @@ type State = {
         }>
       }>
     },
-    translation: ?string
+    translation: {
+      directions: string,
+      passage: string,
+      answer: ?string,
+    }
   }
 }
 export default class Paper extends Component<Props, State>{
@@ -300,7 +304,11 @@ export default class Paper extends Component<Props, State>{
             },
           ]
         },
-        translation: null,
+        translation: {
+          directions: 'For this part, you are allowed 30 minted to translate a passage from Chinese into English. You should write your answer on Answer Sheet 2.',
+          passage:'乌镇是浙江的一座古老水镇，坐落在京杭大运河河畔。这是一处迷人的地方，有许多古桥、中式旅店和餐馆。在过去一千年里，乌镇的水系和生活方式并未经历多少变化，是一座展现古文明的博物馆。乌镇所有房屋都用石木建筑。数百年来，当地沿着河边建起了住宅和集市。无数宽敞美丽的庭院藏身于屋舍之间，游客们每到一处都会有惊喜的发现。',
+          answer: null
+        },
       }
     }
   }
@@ -383,9 +391,9 @@ export default class Paper extends Component<Props, State>{
                     {
                       this.state.partSelected === 'Translation'?(
                         <Translation
-                          value={paperDataTemp.translation}
-                          onSubmit={(text)=>{
-                            paperDataTemp.translation = text
+                          translation={paperDataTemp.translation}
+                          onSubmit={(words)=>{
+                            paperDataTemp.translation.answer = words
                             this.setState({paperData:paperDataTemp})
                           }}
                         />
@@ -485,12 +493,12 @@ export default class Paper extends Component<Props, State>{
                       </H2>
                     </CardItem>
                     {
-                      paperDataTemp.translation&&(
-                        paperDataTemp.translation.replace(/(^\s*)|(\s*$)/g, "").length !==0
+                      paperDataTemp.translation.answer&&(
+                        paperDataTemp.translation.answer.replace(/(^\s*)|(\s*$)/g, "").length !==0
                       )?(
                         <CardItem>
                           <Text>
-                            {paperDataTemp.translation}
+                            {paperDataTemp.translation.answer}
                           </Text>
                         </CardItem>
                       ):null

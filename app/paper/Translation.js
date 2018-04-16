@@ -15,19 +15,25 @@ import {
 
 type Props = {
   onSubmit: Function,
-  value: ?string,
+  translation: {
+    directions: string,
+    passage: string,
+    answer: ?string
+  },
 }
 type State = {
   directions: string,
-  text ?: string
+  passage: string,
+  answer : ?string
 }
 
 export default class App extends Component<Props, State> {
   constructor(props: any){
     super(props)
     this.state={
-      directions:'乌镇是浙江的一座古老水镇，坐落在京杭大运河河畔。这是一处迷人的地方，有许多古桥、中式旅店和餐馆。在过去一千年里，乌镇的水系和生活方式并未经历多少变化，是一座展现古文明的博物馆。乌镇所有房屋都用石木建筑。数百年来，当地沿着河边建起了住宅和集市。无数宽敞美丽的庭院藏身于屋舍之间，游客们每到一处都会有惊喜的发现。',
-      text: ''
+      directions: this.props.translation.directions,
+      passage:this.props.translation.passage,
+      answer: this.props.translation.answer
     }
   }
 
@@ -46,11 +52,17 @@ export default class App extends Component<Props, State> {
           </Text>
         </CardItem>
 
+        <CardItem>
+          <Text>
+            {this.state.passage}
+          </Text>
+        </CardItem>
+
         <Textarea
           rowSpan={5}
-          value={this.props.value}
+          value={this.state.answer}
           placeholder="Write your answer here..."
-          onChangeText={(text) => {this.setState({text});this.props.onSubmit(text)}}
+          onChangeText={(words) => {this.setState({answer: words});this.props.onSubmit(words)}}
         />
 
       </View>
