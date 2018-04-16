@@ -16,18 +16,21 @@ import {
 
 type Props = {
   onSubmit: Function,
-  value: ?string,
+  writing: {
+    directions: string,
+    essay : ?string
+  }
 }
 type State = {
   directions: string,
-  text : ?string
+  essay : ?string
 }
 export default class App extends Component<Props, State> {
   constructor(props: any){
     super(props)
     this.state={
-      directions:'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
-      text: null
+      directions: this.props.writing.directions,
+      essay: this.props.writing.essay
     }
   }
 
@@ -48,9 +51,9 @@ export default class App extends Component<Props, State> {
 
         <Textarea
           rowSpan={5}
-          value={this.props.value}
+          value={this.state.essay}
           placeholder="Write your answer here..."
-          onChangeText={(text) => {this.props.onSubmit(text)}}
+          onChangeText={(words) => {this.setState({essay: words});this.props.onSubmit(words)}}
         />
 
       </View>

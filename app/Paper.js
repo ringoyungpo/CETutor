@@ -27,7 +27,10 @@ type Props = {}
 type State = {
   partSelected: ?string,
   paperData: ?{
-    writing: ?string,
+    writing: {
+      directions: string,
+      essay : ?string
+    },
     listening: {
       sections: Array<{
         sectionTitle: string,
@@ -50,7 +53,10 @@ export default class Paper extends Component<Props, State>{
     this.state = {
       partSelected: null,
       paperData: {
-        writing: null,
+        writing: {
+          directions:'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          essay: null
+        },
         listening: {
           sections:[
             {
@@ -327,8 +333,11 @@ export default class Paper extends Component<Props, State>{
                     {
                       this.state.partSelected === 'Writing'?(
                         <Writing
-                          value={paperDataTemp.writing}
-                          onSubmit={(text)=>{this.setState({paperData: paperDataTemp})}}
+                          writing={paperDataTemp.writing}
+                          onSubmit={(words)=>{
+                            paperDataTemp.writing.essay = words
+                            this.setState({paperData: paperDataTemp})
+                          }}
                         />
                       ):null
                     }
@@ -341,72 +350,12 @@ export default class Paper extends Component<Props, State>{
                       this.state.partSelected === 'Listening'?(
                         <Listening
                           sections={paperDataTemp.listening.sections}
-                          onSubmit={(sectionIndex, modulesIndex, questionIndex, optionSelected)=>{
-                            // paperDataTemp.listening = listeningAnswers
-                            // console.log(JSON.stringify({
-                            //   sectionIndex: sectionIndex,
-                            //   modulesIndex: modulesIndex,
-                            //   questionIndex: questionIndex,
-                            //   optionSelected: optionSelected
-                            // }))
-
-                            paperDataTemp.listening = (
-                              paperDataTemp.listening?(
-                                paperDataTemp.listening
-                              ):{}
-                            )
-
-                            let listening = paperDataTemp.listening
-
-                            listening.sections =(
-                              listening.sections?(
-                                listening.sections
-                              ):[]
-                            )
-
-                            let sections = listening.sections
-
-                            sections[sectionIndex] = (
-                              sections[sectionIndex]?(
-                                sections[sectionIndex]
-                              ):{}
-                            )
-
-                            let sectionValue = sections[sectionIndex]
-
-                            sectionValue.modules = (
-                              sectionValue.modules?(
-                                sectionValue.modules
-                              ):[]
-                            )
-
-                            let modules = sectionValue.modules
-
-                            modules[modulesIndex]=(
-                              modules[modulesIndex]?(
-                                modules[modulesIndex]
-                              ):{}
-                            )
-
-                            let moduleValue = modules[modulesIndex]
-
-                            moduleValue.questions=(
-                              moduleValue.questions?(
-                                moduleValue.questions
-                              ):[]
-                            )
-
-                            let questions = moduleValue.questions
-
-                            questions[questionIndex]=(
-                              questions[questionIndex]?(
-                                questions[questionIndex]
-                              ):{}
-                            )
-
-                            let questionValue = questions[questionIndex]
-
-                            questionValue.optionSelected = optionSelected
+                          onSubmit={(sectionIndex, moduleIndex, questionIndex, optionSelected)=>{
+                            paperDataTemp.listening.sections[
+                              sectionIndex
+                            ].modules[moduleIndex].questions[
+                              questionIndex
+                            ].optionSelected = optionSelected
 
                             // console.log(JSON.stringify(paperDataTemp.listening))
                             this.setState({paperData: paperDataTemp})
@@ -456,12 +405,12 @@ export default class Paper extends Component<Props, State>{
                       </H2>
                     </CardItem>
                     {
-                      paperDataTemp.writing&&(
-                        paperDataTemp.writing.replace(/(^\s*)|(\s*$)/g, "").length !==0
+                      paperDataTemp.writing.essay&&(
+                        paperDataTemp.writing.essay.replace(/(^\s*)|(\s*$)/g, "").length !==0
                       )?(
                         <CardItem>
                           <Text>
-                            {paperDataTemp.writing}
+                            {paperDataTemp.writing.essay}
                           </Text>
                         </CardItem>
                       ):null
@@ -472,26 +421,57 @@ export default class Paper extends Component<Props, State>{
                       </H2>
                     </CardItem>
                     {
-                      paperDataTemp.listening&&(
-                        paperDataTemp.listening.sections&&(
-                          paperDataTemp.listening.sections.filter((sectionValue)=>(
-                            sectionValue&&sectionValue.modules&&(
-                              sectionValue.modules.filter((moduleValue)=>(
-                                moduleValue&&moduleValue.questions&&(
-                                  moduleValue.questions.filter((questionValue)=>(
-                                    questionValue&&questionValue.optionSelected!==null
-                                  )).length
-                                )
-                              )).length
-                            )
+                      paperDataTemp.listening.sections.filter((sectionValue)=>(
+                        sectionValue.modules.filter((moduleValue)=>(
+                          moduleValue.questions.filter((questionValue)=>(
+                            questionValue&&questionValue.optionSelected!==null
                           )).length
-                        )
-                      )?(
-                        <CardItem>
-                          <Text>
-                            {JSON.stringify(paperDataTemp.listening)}
-                          </Text>
-                        </CardItem>
+                        )).length
+                      )).length?(
+                        // <CardItem>
+                        //   <Text>
+                        //     {JSON.stringify(paperDataTemp.listening)}
+                        //   </Text>
+                        // </CardItem>
+                        <View>
+                          {
+                            paperDataTemp.listening.sections.map((sectionValue, sectionIndex)=>(
+                              sectionValue.modules.filter((moduleValue)=>(
+                                moduleValue.questions.filter((questionValue)=>(
+                                  questionValue&&questionValue.optionSelected!==null
+                                )).length
+                              )).length?(
+                                <View key={sectionIndex}>
+                                  <CardItem>
+                                    <H3>
+                                      Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
+                                    </H3>
+                                  </CardItem>
+                                  {
+                                    sectionValue.modules.map((moduleValue, moduleIndex)=>(
+                                      <View key={moduleIndex}>
+                                        <CardItem header>
+                                          <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
+                                        </CardItem>
+                                        <CardItem>
+                                          <Text>
+                                            {
+                                              moduleValue.questions.map((questionValue, questionIndex)=>(
+                                                `${questionIndex + 1}. ${questionValue.optionSelected===null?'  ':String.fromCharCode(questionValue.optionSelected + 65)}  `
+                                              )).reduce((accumulator, currentValue)=>(
+                                                accumulator + currentValue
+                                              ))
+                                            }
+                                          </Text>
+                                        </CardItem>
+                                      </View>
+                                    ))
+                                  }
+                                </View>
+                              ):null
+                            ))
+                          }
+                        </View>
                       ):null
                     }
                     <CardItem>

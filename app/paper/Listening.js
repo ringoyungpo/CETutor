@@ -86,16 +86,16 @@ export default class App extends Component<Props, State> {
                       </Text>
                     </CardItem>
                     {
-                      sectionValue.modules.map((modulesValue,modulesIndex)=>(
-                        <View key={modulesIndex}>
+                      sectionValue.modules.map((moduleValue,moduleIndex)=>(
+                        <View key={moduleIndex}>
                           <CardItem header>
-                            <Text>{sectionValue.sectionTitle} {modulesIndex + 1}</Text>
+                            <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
                           </CardItem>
                           <CardItem header>
-                            <Text>{modulesValue.moduleTitle}</Text>
+                            <Text>{moduleValue.moduleTitle}</Text>
                           </CardItem>
                           {
-                            modulesValue.questions.map((questionValue, questionIndex)=>(
+                            moduleValue.questions.map((questionValue, questionIndex)=>(
                               <View key={questionIndex}>
                                 <CardItem header>
                                   <Text>
@@ -114,14 +114,14 @@ export default class App extends Component<Props, State> {
                                       questionValue.optionSelected = optionSelected
                                       // console.log(JSON.stringify({
                                       //   sectionIndex: sectionIndex,
-                                      //   modulesIndex: modulesIndex,
+                                      //   moduleIndex: moduleIndex,
                                       //   questionIndex: questionIndex,
                                       //   optionIndex: optionIndex,
                                       // }))
                                       // console.log(JSON.stringify(
-                                      //   stateTemp.sections[sectionIndex].modules[modulesIndex].questions[questionIndex].optionSelected
+                                      //   stateTemp.sections[sectionIndex].modules[moduleIndex].questions[questionIndex].optionSelected
                                       // ))
-                                      this.props.onSubmit(sectionIndex, modulesIndex, questionIndex, optionSelected)
+                                      this.props.onSubmit(sectionIndex, moduleIndex, questionIndex, optionSelected)
 
                                       this.setState(stateTemp)
                                     }}>
