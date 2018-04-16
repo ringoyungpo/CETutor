@@ -14,6 +14,7 @@ import {
   CardItem,
   H1,
   H2,
+  H3,
 } from 'native-base'
 import {TabNavigator} from 'react-navigation'
 import Writing from './paper/Writing'
@@ -27,18 +28,13 @@ type State = {
   answers: {
     writing: ?string,
     listening: ?{
-      sections: Array<{
-        sectionTitle: string,
-        directions: string,
-        modules: Array<{
-          moduleTitle: string,
-          questions: Array<{
-            optionSelected: ?number,
-            options: Array<string>
+      sections: Array<?{
+        modules: Array<?{
+          questions: Array<?{
+            optionSelected: ?number
           }>,
         }>
-      }>,
-      sectionSelected: ?number
+      }>
     },
     translation: ?string
   }
@@ -96,9 +92,75 @@ export default class Paper extends Component<Props, State>{
             {
               stateTemp.partSelected === 'Listening'?(
                 <Listening
-                  onSubmit={(listeningAnswers)=>{
-                    stateTemp.answers.listening = listeningAnswers
+                  onSubmit={(sectionIndex, modulesIndex, questionIndex, optionSelected)=>{
+                    // stateTemp.answers.listening = listeningAnswers
+                    // console.log(JSON.stringify({
+                    //   sectionIndex: sectionIndex,
+                    //   modulesIndex: modulesIndex,
+                    //   questionIndex: questionIndex,
+                    //   optionSelected: optionSelected
+                    // }))
+
+                    stateTemp.answers.listening = (
+                      stateTemp.answers.listening?(
+                        stateTemp.answers.listening
+                      ):{}
+                    )
+
+                    let listening = stateTemp.answers.listening
+
+                    listening.sections =(
+                      listening.sections?(
+                        listening.sections
+                      ):[]
+                    )
+
+                    let sections = listening.sections
+
+                    sections[sectionIndex] = (
+                      sections[sectionIndex]?(
+                        sections[sectionIndex]
+                      ):{}
+                    )
+
+                    let sectionValue = sections[sectionIndex]
+
+                    sectionValue.modules = (
+                      sectionValue.modules?(
+                        sectionValue.modules
+                      ):[]
+                    )
+
+                    let modules = sectionValue.modules
+
+                    modules[modulesIndex]=(
+                      modules[modulesIndex]?(
+                        modules[modulesIndex]
+                      ):{}
+                    )
+
+                    let moduleValue = modules[modulesIndex]
+
+                    moduleValue.questions=(
+                      moduleValue.questions?(
+                        moduleValue.questions
+                      ):[]
+                    )
+
+                    let questions = moduleValue.questions
+
+                    questions[questionIndex]=(
+                      questions[questionIndex]?(
+                        questions[questionIndex]
+                      ):{}
+                    )
+
+                    let questionValue = questions[questionIndex]
+
+                    questionValue.optionSelected = optionSelected
+
                     console.log(JSON.stringify(stateTemp.answers.listening))
+                    this.setState(stateTemp)
                   }}
                 />
               ):null
@@ -160,6 +222,29 @@ export default class Paper extends Component<Props, State>{
                 Part II Listening Comprehension
               </H2>
             </CardItem>
+            {
+              stateTemp.answers&&stateTemp.answers.listening&&(
+                stateTemp.answers.listening.sections&&(
+                  stateTemp.answers.listening.sections.filter((sectionValue)=>(
+                    sectionValue&&sectionValue.modules&&(
+                      sectionValue.modules.filter((moduleValue)=>(
+                        moduleValue&&moduleValue.questions&&(
+                          moduleValue.questions.filter((questionValue)=>(
+                            questionValue&&questionValue.optionSelected!==null
+                          )).length
+                        )
+                      )).length
+                    )
+                  )).length
+                )
+              )?(
+                <CardItem>
+                  <Text>
+                    {JSON.stringify(stateTemp.answers.listening)}
+                  </Text>
+                </CardItem>
+              ):null
+            }
             <CardItem>
               <H2>
                 Part III Reading Comprehension

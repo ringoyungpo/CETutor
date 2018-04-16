@@ -35,6 +35,7 @@ type State = {
   sectionSelected: ?number
 }
 
+
 export default class App extends Component<Props, State> {
   constructor(props: Props){
     super(props)
@@ -286,6 +287,7 @@ export default class App extends Component<Props, State> {
 
   render() {
     const stateTemp = this.state
+    let optionSelected
     return (
       <View>
         {
@@ -332,11 +334,13 @@ export default class App extends Component<Props, State> {
                                 {
                                   questionValue.options.map((optionValue, optionIndex)=>(
                                     <CardItem key={optionIndex} button onPress={()=>{
-                                      questionValue.optionSelected = questionValue.optionSelected!==optionIndex?(
+                                      optionSelected = questionValue.optionSelected!==optionIndex?(
                                         optionIndex
                                       ):(
                                         null
                                       )
+
+                                      questionValue.optionSelected = optionSelected
                                       // console.log(JSON.stringify({
                                       //   sectionIndex: sectionIndex,
                                       //   modulesIndex: modulesIndex,
@@ -346,10 +350,10 @@ export default class App extends Component<Props, State> {
                                       // console.log(JSON.stringify(
                                       //   stateTemp.sections[sectionIndex].modules[modulesIndex].questions[questionIndex].optionSelected
                                       // ))
-
-                                      this.props.onSubmit(stateTemp)
+                                      this.props.onSubmit(sectionIndex, modulesIndex, questionIndex, optionSelected)
 
                                       this.setState(stateTemp)
+
 
 
 
