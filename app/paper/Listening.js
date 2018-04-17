@@ -14,15 +14,24 @@ import {
   Textarea,
   Right,
   Radio,
+  Icon,
+  Item,
 } from 'native-base'
+
+import util from 'util'
 
 type Props = {
   onSubmit: Function,
+  scrollToTop: Function,
   sections: ?Array<{
     sectionTitle: string,
     directions: string,
     modules: Array<{
       moduleTitle: string,
+      moduleSound: {
+        url: string,
+        status: number,
+      },
       questions: Array<{
         optionSelected: ?number,
         options: Array<string>
@@ -37,6 +46,10 @@ type State = {
     directions: string,
     modules: Array<{
       moduleTitle: string,
+      moduleSound: {
+        url: string,
+        status: number,
+      },
       questions: Array<{
         optionSelected: ?number,
         options: Array<string>
@@ -64,9 +77,11 @@ export default class App extends Component<Props, State> {
         {
           stateTemp.sections.map((sectionValue,sectionIndex)=>(
             <View key={sectionIndex}>
-              <CardItem button onPress={()=>{
+              <CardItem button onPress={(even)=>{
                 stateTemp.sectionSelected = stateTemp.sectionSelected == sectionIndex ? null : sectionIndex
-                this.setState(stateTemp)
+
+                // console.log(util.inspect(even.nativeEvent.locationX))
+                this.setState(stateTemp, ()=>{this.props.scrollToTop()})
               }}>
                 <H3>
                     Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
@@ -90,6 +105,11 @@ export default class App extends Component<Props, State> {
                         <View key={moduleIndex}>
                           <CardItem header>
                             <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
+                            <Right>
+                              <Icon
+                                name='ios-headset-outline'
+                              />
+                            </Right>
                           </CardItem>
                           <CardItem header>
                             <Text>{moduleValue.moduleTitle}</Text>
@@ -126,9 +146,18 @@ export default class App extends Component<Props, State> {
                                       this.setState(stateTemp)
                                     }}>
                                       <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
-                                      <Right>
-                                        <Radio selected={optionIndex===questionValue.optionSelected} />
-                                      </Right>
+                                      {
+                                        optionIndex===questionValue.optionSelected?(
+                                          <Right>
+                                            <Icon
+                                              name='radio-button-on'
+                                              style={{color:'#000'}}
+                                            />
+                                            {/* <Item>
+                                            </Item> */}
+                                          </Right>
+                                        ):null
+                                      }
                                     </CardItem>
                                   ))
                                 }
