@@ -16,9 +16,11 @@ import {
   Radio,
   Icon,
   Item,
+  Button,
 } from 'native-base'
 
 import util from 'util'
+import Sound from 'react-native-sound'
 
 type Props = {
   onSubmit: Function,
@@ -63,11 +65,14 @@ type State = {
 export default class App extends Component<Props, State> {
   constructor(props: Props){
     super(props)
+    Sound.setCategory('Playback')
     this.state={
       sections: this.props.sections,
       sectionSelected: null,
     }
   }
+
+
 
   render() {
     const stateTemp = this.state
@@ -77,7 +82,7 @@ export default class App extends Component<Props, State> {
         {
           stateTemp.sections.map((sectionValue,sectionIndex)=>(
             <View key={sectionIndex}>
-              <CardItem button onPress={(even)=>{
+              <CardItem button onPress={()=>{
                 stateTemp.sectionSelected = stateTemp.sectionSelected == sectionIndex ? null : sectionIndex
 
                 // console.log(util.inspect(even.nativeEvent.locationX))
@@ -106,9 +111,47 @@ export default class App extends Component<Props, State> {
                           <CardItem header>
                             <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
                             <Right>
-                              <Icon
-                                name='ios-headset-outline'
-                              />
+                              <Button transparent dark onPress={()=>{
+                                const callback = (error, sound) => {
+                                  if (error) {
+                                    alert(error.message);
+                                    // setTestState(testInfo, component, 'fail');
+                                    return;
+                                  }
+                                  // setTestState(testInfo, component, 'playing');
+                                  // Run optional pre-play callback
+                                  // testInfo.onPrepared && testInfo.onPrepared(sound, component);
+                                  sound.play(() => {
+                                    // Success counts as getting to the end
+                                    // setTestState(testInfo, component, 'win');
+                                    // Release when it's done so we're not using up resources
+                                    sound.release();
+                                  });
+                                }
+
+
+                                const sound = new Sound(
+                                  moduleValue.moduleSound.url,
+                                  null,error=>callback(error, sound)
+                                )
+
+                                // sound.play(
+                                //   (success) => {
+                                //     if (success) {
+                                //       console.log('successfully finished playing');
+                                //     } else {
+                                //       console.log('playback failed due to audio decoding errors');
+                                //       // reset the player to its uninitialized state (android only)
+                                //       // this is the only option to recover after an error occured and use the player again
+                                //       sound.release();
+                                //     }
+                                //   }
+                                // )
+                              }}>
+                                <Icon
+                                  name='ios-headset-outline'
+                                />
+                              </Button>
                             </Right>
                           </CardItem>
                           <CardItem header>
@@ -153,8 +196,6 @@ export default class App extends Component<Props, State> {
                                               name='radio-button-on'
                                               style={{color:'#000'}}
                                             />
-                                            {/* <Item>
-                                            </Item> */}
                                           </Right>
                                         ):null
                                       }

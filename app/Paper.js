@@ -421,7 +421,7 @@ export default class Paper extends Component<Props, State>{
                     }
                     <CardItem>
                       <H2 onPress={this._partSelect('Reading')}>
-                        Part III Reading comprehension
+                        Part III Reading Comprehension
                       </H2>
                     </CardItem>
                     {
