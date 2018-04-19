@@ -77,7 +77,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '1Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -125,7 +125,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '2Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -159,7 +159,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '2Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -199,7 +199,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '3Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -225,7 +225,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '3Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -250,7 +250,7 @@ export default class Paper extends Component<Props, State>{
                   moduleTitle: '3Questions are based on what you have heard?',
                   moduleSound:{
 										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 0,
+										status: 2,
 									},
 									questions: [
                     {
@@ -282,7 +282,7 @@ export default class Paper extends Component<Props, State>{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
 						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 0,
+						// 				status: 2,
 						// 			},
 						// 			questions: [
             //         {
@@ -299,7 +299,7 @@ export default class Paper extends Component<Props, State>{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
 						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 0,
+						// 				status: 2,
 						// 			},
 						// 			questions: [
             //         {
@@ -316,7 +316,7 @@ export default class Paper extends Component<Props, State>{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
 						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 0,
+						// 				status: 2,
 						// 			},
 						// 			questions: [
             //         {
@@ -333,7 +333,7 @@ export default class Paper extends Component<Props, State>{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
 						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 0,
+						// 				status: 2,
 						// 			},
 						// 			questions: [
             //         {

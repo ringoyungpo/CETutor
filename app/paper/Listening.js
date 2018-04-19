@@ -111,47 +111,83 @@ export default class App extends Component<Props, State> {
                           <CardItem header>
                             <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
                             <Right>
-                              <Button transparent dark onPress={()=>{
-                                const callback = (error, sound) => {
-                                  if (error) {
-                                    alert(error.message);
-                                    // setTestState(testInfo, component, 'fail');
-                                    return;
-                                  }
-                                  // setTestState(testInfo, component, 'playing');
-                                  // Run optional pre-play callback
-                                  // testInfo.onPrepared && testInfo.onPrepared(sound, component);
-                                  sound.play(() => {
-                                    // Success counts as getting to the end
-                                    // setTestState(testInfo, component, 'win');
-                                    // Release when it's done so we're not using up resources
-                                    sound.release();
-                                  });
-                                }
+                              {
+                                stateTemp.sections&&stateTemp.sections.filter((sectionValue)=>(
+                                  sectionValue.modules.filter((moduleValue)=>(
+                                    moduleValue.moduleSound.status===1
+                                  )).length
+                                )).length?(
+                                  moduleValue.moduleSound.status?(
+                                    moduleValue.moduleSound.status===1?(
+                                      <Icon
+                                        name='ios-headset'
+                                        style={{ color: '#000' }}
+                                      />
+                                    ):(
+                                      <Icon
+                                        name='ios-headset-outline'
+                                      />
+                                    )
+                                  ):undefined
+                                ):(
+                                  moduleValue.moduleSound.status?(
+                                    moduleValue.moduleSound.status===1?(
+                                      <Icon
+                                        name='ios-headset'
+                                        style={{ color: '#000' }}
+                                      />
+                                    ):(
+                                      <Button small transparent dark onPress={()=>{
+                                        moduleValue.moduleSound.status = 1
+                                        this.setState(stateTemp)
+                                        const callback = (error, sound) => {
+                                          if (error) {
+                                            alert(error.message);
+                                            // setTestState(testInfo, component, 'fail');
+                                            return;
+                                          }
+                                          // setTestState(testInfo, component, 'playing');
+                                          // Run optional pre-play callback
+                                          // testInfo.onPrepared && testInfo.onPrepared(sound, component);
+                                          sound.play(() => {
+                                            // Success counts as getting to the end
+                                            // setTestState(testInfo, component, 'win');
+                                            // Release when it's done so we're not using up resources
+                                            sound.release()
+                                            moduleValue.moduleSound.status = 0
+                                            this.setState(stateTemp)
+
+                                          });
+                                        }
 
 
-                                const sound = new Sound(
-                                  moduleValue.moduleSound.url,
-                                  null,error=>callback(error, sound)
+                                        let sound = new Sound(
+                                          moduleValue.moduleSound.url,
+                                          undefined,
+                                          error=>callback(error, sound)
+                                        )
+
+                                        // sound.play(
+                                        //   (success) => {
+                                        //     if (success) {
+                                        //       console.log('successfully finished playing');
+                                        //     } else {
+                                        //       console.log('playback failed due to audio decoding errors');
+                                        //       // reset the player to its uninitialized state (android only)
+                                        //       // this is the only option to recover after an error occured and use the player again
+                                        //       sound.release();
+                                        //     }
+                                        //   }
+                                        // )
+                                      }}>
+                                        <Icon
+                                          name='ios-headset-outline'
+                                        />
+                                      </Button>
+                                    )
+                                  ):undefined
                                 )
-
-                                // sound.play(
-                                //   (success) => {
-                                //     if (success) {
-                                //       console.log('successfully finished playing');
-                                //     } else {
-                                //       console.log('playback failed due to audio decoding errors');
-                                //       // reset the player to its uninitialized state (android only)
-                                //       // this is the only option to recover after an error occured and use the player again
-                                //       sound.release();
-                                //     }
-                                //   }
-                                // )
-                              }}>
-                                <Icon
-                                  name='ios-headset-outline'
-                                />
-                              </Button>
+                              }
                             </Right>
                           </CardItem>
                           <CardItem header>
