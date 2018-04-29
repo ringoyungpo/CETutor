@@ -14,15 +14,26 @@ import {
   Textarea,
   Right,
   Radio,
+  Icon,
+  Item,
+  Button,
 } from 'native-base'
+
+import util from 'util'
+import Sound from 'react-native-sound'
 
 type Props = {
   onSubmit: Function,
+  scrollToTop: Function,
   sections: ?Array<{
     sectionTitle: string,
     directions: string,
     modules: Array<{
       moduleTitle: string,
+      moduleSound: {
+        url: string,
+        status: number,
+      },
       questions: Array<{
         optionSelected: ?number,
         options: Array<string>
@@ -37,6 +48,10 @@ type State = {
     directions: string,
     modules: Array<{
       moduleTitle: string,
+      moduleSound: {
+        url: string,
+        status: number,
+      },
       questions: Array<{
         optionSelected: ?number,
         options: Array<string>
@@ -50,11 +65,14 @@ type State = {
 export default class App extends Component<Props, State> {
   constructor(props: Props){
     super(props)
+    Sound.setCategory('Playback')
     this.state={
       sections: this.props.sections,
       sectionSelected: null,
     }
   }
+
+
 
   render() {
     const stateTemp = this.state
@@ -66,7 +84,9 @@ export default class App extends Component<Props, State> {
             <View key={sectionIndex}>
               <CardItem button onPress={()=>{
                 stateTemp.sectionSelected = stateTemp.sectionSelected == sectionIndex ? null : sectionIndex
-                this.setState(stateTemp)
+
+                // console.log(util.inspect(even.nativeEvent.locationX))
+                this.setState(stateTemp, ()=>{this.props.scrollToTop()})
               }}>
                 <H3>
                     Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
@@ -90,6 +110,85 @@ export default class App extends Component<Props, State> {
                         <View key={moduleIndex}>
                           <CardItem header>
                             <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
+                            <Right>
+                              {
+                                stateTemp.sections&&stateTemp.sections.filter((sectionValue)=>(
+                                  sectionValue.modules.filter((moduleValue)=>(
+                                    moduleValue.moduleSound.status===1
+                                  )).length
+                                )).length?(
+                                  moduleValue.moduleSound.status?(
+                                    moduleValue.moduleSound.status===1?(
+                                      <Icon
+                                        name='ios-headset'
+                                        style={{ color: '#000' }}
+                                      />
+                                    ):(
+                                      <Icon
+                                        name='ios-headset-outline'
+                                      />
+                                    )
+                                  ):undefined
+                                ):(
+                                  moduleValue.moduleSound.status?(
+                                    moduleValue.moduleSound.status===1?(
+                                      <Icon
+                                        name='ios-headset'
+                                        style={{ color: '#000' }}
+                                      />
+                                    ):(
+                                      <Button small transparent dark onPress={()=>{
+                                        moduleValue.moduleSound.status = 1
+                                        this.setState(stateTemp)
+                                        const callback = (error, sound) => {
+                                          if (error) {
+                                            alert(error.message);
+                                            // setTestState(testInfo, component, 'fail');
+                                            return;
+                                          }
+                                          // setTestState(testInfo, component, 'playing');
+                                          // Run optional pre-play callback
+                                          // testInfo.onPrepared && testInfo.onPrepared(sound, component);
+                                          sound.play(() => {
+                                            // Success counts as getting to the end
+                                            // setTestState(testInfo, component, 'win');
+                                            // Release when it's done so we're not using up resources
+                                            sound.release()
+                                            moduleValue.moduleSound.status = 0
+                                            this.setState(stateTemp)
+
+                                          });
+                                        }
+
+
+                                        let sound = new Sound(
+                                          moduleValue.moduleSound.url,
+                                          undefined,
+                                          error=>callback(error, sound)
+                                        )
+
+                                        // sound.play(
+                                        //   (success) => {
+                                        //     if (success) {
+                                        //       console.log('successfully finished playing');
+                                        //     } else {
+                                        //       console.log('playback failed due to audio decoding errors');
+                                        //       // reset the player to its uninitialized state (android only)
+                                        //       // this is the only option to recover after an error occured and use the player again
+                                        //       sound.release();
+                                        //     }
+                                        //   }
+                                        // )
+                                      }}>
+                                        <Icon
+                                          name='ios-headset-outline'
+                                        />
+                                      </Button>
+                                    )
+                                  ):undefined
+                                )
+                              }
+                            </Right>
                           </CardItem>
                           <CardItem header>
                             <Text>{moduleValue.moduleTitle}</Text>
@@ -126,9 +225,16 @@ export default class App extends Component<Props, State> {
                                       this.setState(stateTemp)
                                     }}>
                                       <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
-                                      <Right>
-                                        <Radio selected={optionIndex===questionValue.optionSelected} />
-                                      </Right>
+                                      {
+                                        optionIndex===questionValue.optionSelected?(
+                                          <Right>
+                                            <Icon
+                                              name='radio-button-on'
+                                              style={{color:'#000'}}
+                                            />
+                                          </Right>
+                                        ):null
+                                      }
                                     </CardItem>
                                   ))
                                 }
