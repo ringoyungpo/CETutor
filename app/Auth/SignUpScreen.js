@@ -37,18 +37,20 @@ import {
   Card,
   Label
 } from 'native-base';
-import SignInInputStore from './SignInInputStore'
+import SignUpInputStore from './SignUpInputStore'
 import {
   API_BASE
 } from '../../config/keys'
 import {
   observer
 } from 'mobx-react'
-import isEmpty from 'lodash'
+import {
+  isEmpty
+} from 'lodash'
 import setAuthToken from '../utils/setAuthToken'
 
 @observer
-class SignInScreen extends Component < {
+class SignUpScreen extends Component < {
   navigation: Function
 }, {} > {
   static navigationOptions = {
@@ -56,22 +58,35 @@ class SignInScreen extends Component < {
   }
 
   render() {
+
+
+    // this.props.navigation.navigate('App')
     const {
+      nickname,
       email,
       password,
+      passwordComfirmed,
       errors,
       submitting,
       onInputChange,
-      signInAsync
-    } = SignInInputStore
+      signUpAsync
+    } = SignUpInputStore
     return (<Container>
       <Content>
         <Form>
-          <Row style={{ height: 32 }}/>
+          <Row style={{ height: 50 }}/>
           <Body><H1>CETutor</H1>
-          <Row style={{ height: 16 }}/>
+          <Row style={{ height: 25 }}/>
           <Text>A Better Way To Prepare For CET</Text></Body>
-          <Row style={{ height: 32 }}/>
+          <Row style={{ height: 50 }}/>
+
+
+          <Item stackedLabel>
+              <Label>Nickname</Label>
+            <Input value={nickname} onChangeText={value => onInputChange('nickname', value)}/>
+          </Item>
+          {errors.nickname?(<Body><Text style={{ color: 'red' }}>{errors.nickname}</Text></Body>):null}
+
 
           <Item stackedLabel>
               <Label>E-mail</Label>
@@ -79,29 +94,33 @@ class SignInScreen extends Component < {
           </Item>
           {errors.email?(<Body><Text style={{ color: 'red' }}>{errors.email}</Text></Body>):null}
 
-          <Item stackedLabel last="last">
+
+          <Item stackedLabel>
                 <Label>Password</Label>
             <Input secureTextEntry={true} value={password} onChangeText={value => onInputChange('password', value)}/>
           </Item>
           {errors.password?(<Body><Text style={{ color: 'red' }}>{errors.password}</Text></Body>):null}
 
+          <Item stackedLabel last="last">
+                <Label>PasswordComfirmed</Label>
+            <Input secureTextEntry={true} value={passwordComfirmed} onChangeText={value => onInputChange('passwordComfirmed', value)}/>
+          </Item>
+          {errors.passwordComfirmed?(<Body><Text style={{ color: 'red' }}>{errors.passwordComfirmed}</Text></Body>):null}
+
             <Row style={{ height: 100 }}/>
           <Button full info={!submitting} disabled={submitting} onPress={async()=>{
-            const token = await signInAsync({email,password})
-            if(token){console.log('success'+token)
-            await AsyncStorage.setItem('jwtToken', token)
-            setAuthToken(token)
-            this.props.navigation.navigate('App')}
+            const errors = await signUpAsync({nickname, email,password,passwordComfirmed})
+            if(isEmpty(errors)){
+              console.log('success sign up')
+              this.props.navigation.navigate('SignIn')
+            }
           }}>
-            <Text>Sign In</Text>
+            <Text>Sign Up</Text>
           </Button>
-          <Row style={{ height: 8 }}/>
-
-          <Button full info onPress={()=>this.props.navigation.navigate('SignUp')}><Text>Sign Up</Text></Button>
         </Form>
       </Content>
     </Container>)
   }
 }
 
-export default SignInScreen
+export default SignUpScreen

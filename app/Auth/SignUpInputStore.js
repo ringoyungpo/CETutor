@@ -22,47 +22,52 @@ configure({
   enforceActions: true
 })
 
-class SignInInputStore {
+class SignUpInputStore {
+  @observable nickname
   @observable email
   @observable password
+  @observable passwordComfirmed
   @observable errors
   @observable submitting
-  @observable token
 
   constructor() {
+    this.nickname = 'ringoyungpo'
     this.email = 'ringoyungpo@163.com'
     this.password = 'woods'
+    this.passwordComfirmed = 'woodss'
     this.errors = {}
     this.submitting = false
-    this.token = ''
   }
 
   @action.bound
   onInputChange(key, value) {
+    if (this.errors[key])
+      delete this.errors[key]
+
     this[key] = value
   }
 
   @action.bound
-  signInAsync = flow(function*({
+  signUpAsync = flow(function*({
+    nickname,
     email,
-    password
+    password,
+    passwordComfirmed
   }) {
     const userData = {
+      nickname: nickname,
       email: email,
-      password: password
+      password: password,
+      passwordComfirmed: passwordComfirmed
     }
-    // console.log(JSON.stringify(userData))
+
     this.submitting = true
 
     try {
       const {
         data
-      } = yield axios.post(API_BASE + 'api/users/token', userData)
+      } = yield axios.post(API_BASE + 'api/users', userData)
 
-      const {
-        token
-      } = data
-      this.token = token
       // console.log(token)
     } catch (e) {
       this.errors = e.response.data
@@ -70,10 +75,10 @@ class SignInInputStore {
     } finally {
       this.submitting = false
       // console.log('finally')
-      return this.token
+      return this.errors
     }
   })
 
 }
 
-export default new SignInInputStore
+export default new SignUpInputStore
