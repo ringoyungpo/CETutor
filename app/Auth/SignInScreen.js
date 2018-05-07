@@ -89,10 +89,11 @@ class SignInScreen extends Component < {
           {errors.password?(<Body><Text style={{ color: 'red' }}>{errors.password}</Text></Body>):null}
             <Row style={{ height: 100 }}/>
           <Button full info={!submitting} disabled={submitting} onPress={async()=>{
-            // const token = await 
-            signInAsync(email,password)
-            // console.log('success'+token)
-            // console.log(await setAuthToken(token))
+            const token = await signInAsync(email,password)
+            if(token){console.log('success'+token)
+            await AsyncStorage.setItem('jwtToken', token)
+            setAuthToken(token)
+            this.props.navigation.navigate('App')}
           }}>
             <Text>Sign In</Text>
           </Button>

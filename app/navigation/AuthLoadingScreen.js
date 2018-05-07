@@ -4,8 +4,13 @@
  * @flow
  */
 
-import React, {Component} from 'react'
-import {StackNavigator, SwitchNavigator} from 'react-navigation' // Version can be specified in package.json
+import React, {
+  Component
+} from 'react'
+import {
+  StackNavigator,
+  SwitchNavigator
+} from 'react-navigation' // Version can be specified in package.json
 import {
   ActivityIndicator,
   AsyncStorage,
@@ -15,7 +20,9 @@ import {
   View
 } from 'react-native'
 
-class AuthLoadingScreen extends Component<{navigation: Function}, {}> {
+class AuthLoadingScreen extends Component < {
+  navigation: Function
+}, {} > {
   constructor() {
     super()
     this._bootstrapAsync()
@@ -23,7 +30,7 @@ class AuthLoadingScreen extends Component<{navigation: Function}, {}> {
 
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('userToken')
+    const userToken = await AsyncStorage.getItem('jwtToken')
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.

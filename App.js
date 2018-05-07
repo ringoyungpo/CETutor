@@ -3,7 +3,9 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-import React, {Component} from 'react'
+import React, {
+  Component
+} from 'react'
 
 import Menu from './app/Menu'
 import Paper from './app/Paper'
@@ -19,15 +21,15 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-import {StackNavigator, SwitchNavigator} from 'react-navigation' // Version can be specified in package.json
+import {
+  StackNavigator,
+  SwitchNavigator
+} from 'react-navigation' // Version can be specified in package.json
 
-export default SwitchNavigator(
-  {
-    AuthLoading: AuthLoadingScreen,
-    App: AppStack,
-    Auth: AuthStack
-  },
-  {
-    initialRouteName: 'Auth'
-  }
-)
+export default SwitchNavigator({
+  AuthLoading: AuthLoadingScreen,
+  App: AppStack,
+  Auth: AuthStack
+}, {
+  initialRouteName: 'AuthLoading'
+})
