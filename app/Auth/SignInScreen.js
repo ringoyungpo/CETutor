@@ -56,11 +56,15 @@ class SignInScreen extends Component < {
   }
 
   render() {
+
+
+    // this.props.navigation.navigate('App')
     const {
       email,
       password,
       errors,
-      onInputChange
+      onInputChange,
+      signInAsync
     } = SignInInputStore
     return (<Container>
       <Content>
@@ -83,39 +87,13 @@ class SignInScreen extends Component < {
           </Item>
           {errors.password?(<Body><Text style={{ color: 'red' }}>{errors.password}</Text></Body>):null}
             <Row style={{ height: 100 }}/>
-          <Button full info onPress={()=>this._signInAsync(email,
+          <Button full info onPress={()=>signInAsync(email,
           password)}>
             <Text>Sign In</Text>
           </Button>
         </Form>
       </Content>
     </Container>)
-  }
-  _signInAsync = async (email, password) => {
-    const userData = {
-      email: email,
-      password: password
-    }
-    console.log(JSON.stringify(userData))
-
-    try {
-      const {
-        data
-      } = await axios.post(API_BASE + 'api/users/token', userData)
-
-      console.log(JSON.stringify(data))
-      const {
-        token
-      } = data
-      await AsyncStorage.setItem('jwtToken', token)
-      this.props.navigation.navigate('App')
-      console.log('1')
-    } catch (e) {
-      const {
-        onInputChange
-      } = SignInInputStore
-      onInputChange('errors', e.response.data)
-    }
   }
 }
 
