@@ -67,6 +67,7 @@ class SignInScreen extends Component < {
           <Row style={{ height: 25 }}/>
           <Text>A Better Way To Prepare For CET</Text></Body>
           <Row style={{ height: 50 }}/>
+          <Text>{JSON.stringify(SignInInputStore.errors)}</Text>
 
 
           <Item stackedLabel>
@@ -109,8 +110,10 @@ class SignInScreen extends Component < {
       } = res.data
       await AsyncStorage.setItem('jwtToken', token)
     } catch (e) {
-      console.log('fail')
-      console.log(JSON.stringify(e.response.data))
+      const {
+        onInputChange
+      } = SignInInputStore
+      onInputChange('errors', e.response.data)
     }
 
 
