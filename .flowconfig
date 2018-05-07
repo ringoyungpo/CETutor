@@ -27,6 +27,8 @@ node_modules/react-native/flow/
 node_modules/react-native/flow-github/
 
 [options]
+esproposal.decorators=true
+
 emoji=true
 
 module.system=haste
@@ -49,6 +51,7 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(si
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
+
 
 [version]
 ^0.69.0

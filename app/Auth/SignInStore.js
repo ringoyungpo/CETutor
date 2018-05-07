@@ -1,4 +1,6 @@
-import {types} from 'mobx-state-tree'
+import {
+  types
+} from 'mobx-state-tree'
 
 const SignInInput = types
   .model('SignInInput', {
@@ -11,8 +13,8 @@ const SignInInput = types
     }
   }))
   .create({
-    nickname: 'nickname',
-    password: 'password'
+    nickname: '',
+    password: ''
   })
 
 export default SignInInput
