@@ -3,24 +3,31 @@
  * https://github.com/facebook/react-native
  * @flow
  */
-
 import React, {Component} from 'react'
-import {Text, View} from 'react-native'
+
 import Menu from './app/Menu'
 import Paper from './app/Paper'
-import {StackNavigator} from 'react-navigation'
+import AuthStack from './app/Auth/AuthStack'
+import AppStack from './app/navigation/AppStack'
+import AuthLoadingScreen from './app/navigation/AuthLoadingScreen'
 
-export default StackNavigator({
-  Paper: {
-    screen: Paper,
-    navigationOptions: {
-      header: null
-    }
+import {
+  ActivityIndicator,
+  AsyncStorage,
+  Button,
+  StatusBar,
+  StyleSheet,
+  View
+} from 'react-native'
+import {StackNavigator, SwitchNavigator} from 'react-navigation' // Version can be specified in package.json
+
+export default SwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack
   },
-  Menu: {
-    screen: Menu,
-    navigationOptions: {
-      header: null
-    }
-  },
-})
+  {
+    initialRouteName: 'Auth'
+  }
+)
