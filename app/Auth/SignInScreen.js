@@ -63,6 +63,7 @@ class SignInScreen extends Component < {
       email,
       password,
       errors,
+      submitting,
       onInputChange,
       signInAsync
     } = SignInInputStore
@@ -87,8 +88,12 @@ class SignInScreen extends Component < {
           </Item>
           {errors.password?(<Body><Text style={{ color: 'red' }}>{errors.password}</Text></Body>):null}
             <Row style={{ height: 100 }}/>
-          <Button full info onPress={()=>signInAsync(email,
-          password)}>
+          <Button full info={!submitting} disabled={submitting} onPress={async()=>{
+            // const token = await 
+            signInAsync(email,password)
+            // console.log('success'+token)
+            // console.log(await setAuthToken(token))
+          }}>
             <Text>Sign In</Text>
           </Button>
         </Form>

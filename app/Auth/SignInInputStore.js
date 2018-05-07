@@ -5,9 +5,6 @@ import {
 import {
   API_BASE
 } from '../../config/keys'
-import {
-  AsyncStorage
-} from 'react-native'
 
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
@@ -29,11 +26,15 @@ class SignInInputStore {
   @observable email
   @observable password
   @observable errors
+  @observable submitting
+  @observable token
 
   constructor() {
     this.email = 'ringoyungpo@163.com'
     this.password = 'woods'
     this.errors = {}
+    this.submitting = false
+    this.token = ''
   }
 
   @action.bound
@@ -47,7 +48,8 @@ class SignInInputStore {
       email: email,
       password: password
     }
-    console.log(JSON.stringify(userData))
+    // console.log(JSON.stringify(userData))
+    this.submitting = true
 
     try {
       const {
@@ -57,10 +59,15 @@ class SignInInputStore {
       const {
         token
       } = data
-      yield AsyncStorage.setItem('jwtToken', token)
-      setAuthToken(token)
+      this.token = token
+      // console.log(token)
     } catch (e) {
       this.errors = e.response.data
+      // console.log(JSON.stringify(e.response.data))
+    } finally {
+      this.submitting = false
+      // console.log('finally')
+      return this.token
     }
   })
 
