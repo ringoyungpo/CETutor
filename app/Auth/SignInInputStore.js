@@ -14,8 +14,8 @@ class SignInInputStore {
   @observable errors
 
   constructor() {
-    this.email = ''
-    this.password = ''
+    this.email = 'ringoyungpo@163.com'
+    this.password = 'woods'
     this.errors = {}
   }
 

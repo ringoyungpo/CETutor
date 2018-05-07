@@ -44,6 +44,8 @@ import {
 import {
   observer
 } from 'mobx-react'
+import isEmpty from 'lodash'
+import setAuthToken from '../utils/setAuthToken'
 
 @observer
 class SignInScreen extends Component < {
@@ -57,6 +59,7 @@ class SignInScreen extends Component < {
     const {
       email,
       password,
+      errors,
       onInputChange
     } = SignInInputStore
     return (<Container>
@@ -67,17 +70,18 @@ class SignInScreen extends Component < {
           <Row style={{ height: 25 }}/>
           <Text>A Better Way To Prepare For CET</Text></Body>
           <Row style={{ height: 50 }}/>
-          <Text>{JSON.stringify(SignInInputStore.errors)}</Text>
 
 
           <Item stackedLabel>
               <Label>E-mail</Label>
             <Input value={email} onChangeText={value => onInputChange('email', value)}/>
           </Item>
-          <Item stackedLabel last="last" >
+          {errors.email?(<Body><Text style={{ color: 'red' }}>{errors.email}</Text></Body>):null}
+          <Item stackedLabel last="last">
                 <Label>Password</Label>
             <Input secureTextEntry={true} value={password} onChangeText={value => onInputChange('password', value)}/>
           </Item>
+          {errors.password?(<Body><Text style={{ color: 'red' }}>{errors.password}</Text></Body>):null}
             <Row style={{ height: 100 }}/>
           <Button full info onPress={()=>this._signInAsync(email,
           password)}>
@@ -96,54 +100,22 @@ class SignInScreen extends Component < {
 
     try {
       const {
-        response
-      } = await axios.post(API_BASE + 'api/users/token', userData)
-      console.log('success')
-      const {
         data
-      } = response
+      } = await axios.post(API_BASE + 'api/users/token', userData)
 
       console.log(JSON.stringify(data))
-
       const {
         token
-      } = res.data
+      } = data
       await AsyncStorage.setItem('jwtToken', token)
+      this.props.navigation.navigate('App')
+      console.log('1')
     } catch (e) {
       const {
         onInputChange
       } = SignInInputStore
       onInputChange('errors', e.response.data)
     }
-
-
-
-
-    // .then(res => {
-
-
-    // setAuthToken(token)
-    // const decode = jwt_decode(token)
-    // dispatch(setSubmitted())
-    // dispatch(setCurrentUser(decode))
-    // dispatch({
-    //   type: CLEAR_LOGIN_INPUT
-    // })
-    // })
-    // .catch(err => {
-    //   console.log(JSON.stringify(err))
-    // dispatch(setSubmitted())
-    // dispatch({
-    //   type: GET_ERRORS,
-    //   payload: err.response.data
-    // })
-    // })
-    // console.log(JSON.stringify({
-    //   email,
-    //   password
-    // }))
-    // await AsyncStorage.setItem('userToken', 'abc')
-    // this.props.navigation.navigate('App')
   }
 }
 

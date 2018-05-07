@@ -27,7 +27,7 @@ node_modules/react-native/flow/
 node_modules/react-native/flow-github/
 
 [options]
-esproposal.decorators=true
+esproposal.decorators=ignore
 
 emoji=true
 
