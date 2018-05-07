@@ -23,6 +23,7 @@ import {
 } from 'react-native-easy-grid';
 
 import {
+  H1,
   Container,
   Header,
   Content,
@@ -50,33 +51,43 @@ class SignInScreen extends Component < {
 
   render() {
     const {
-      nickname,
+      email,
       password,
       onInputChange
     } = SignInInput
     return (<Container>
       <Content>
         <Form>
-          <Row style={{ height: 100 }}/>
+          <Row style={{ height: 50 }}/>
+          <Body><H1>CETutor</H1>
+          <Row style={{ height: 25 }}/>
+
+          <Text>A Better Way To Prepare For CET</Text></Body>
+          <Row style={{ height: 50 }}/>
+
+
           <Item stackedLabel>
-              <Label>Nickname</Label>
-            <Input value={nickname} onChangeText={value => onInputChange('nickname', value)}/>
+              <Label>E-mail</Label>
+            <Input value={email} onChangeText={value => onInputChange('email', value)}/>
           </Item>
           <Item stackedLabel last="last" >
                 <Label>Password</Label>
-            <Input value={password} onChangeText={value => onInputChange('password', value)}/>
+            <Input secureTextEntry={true} value={password} onChangeText={value => onInputChange('password', value)}/>
           </Item>
             <Row style={{ height: 100 }}/>
-          <Body><Button full light onPress={()=>this._signInAsync(nickname,
+          <Button full info onPress={()=>this._signInAsync(email,
           password)}>
             <Text>Sign In</Text>
-          </Button></Body>
+          </Button>
         </Form>
-      </Content>      
+      </Content>
     </Container>)
   }
-  _signInAsync = async (nickname, password) => {
-
+  _signInAsync = async (email, password) => {
+    // console.log(JSON.stringify({
+    //   email,
+    //   password
+    // }))
     await AsyncStorage.setItem('userToken', 'abc')
     this.props.navigation.navigate('App')
   }

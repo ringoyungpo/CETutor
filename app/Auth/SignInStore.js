@@ -4,7 +4,7 @@ import {
 
 const SignInInput = types
   .model('SignInInput', {
-    nickname: types.string,
+    email: types.string,
     password: types.string
   })
   .actions(self => ({
@@ -13,7 +13,7 @@ const SignInInput = types
     }
   }))
   .create({
-    nickname: '',
+    email: '',
     password: ''
   })
 
