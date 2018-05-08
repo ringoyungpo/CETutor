@@ -26,6 +26,10 @@ import Writing from './Writing'
 import Listening from './Listening'
 import Reading from './Reading'
 import Translation from './Translation'
+import PaperStore from './PaperStore'
+import {
+  isEmpty
+} from 'lodash';
 
 type Props = {
   navigation: Function
@@ -61,11 +65,17 @@ type State = {
     }
   }
 }
+import {
+  observer
+} from 'mobx-react'
+
+@observer
 class Paper extends Component < Props, State > {
   scroll: any
 
   constructor(props: any) {
     super(props)
+    PaperStore.InitAsync(this.props.navigation.getParam('_id'))
     this.state = {
       partSelected: null,
       paperData: {
@@ -362,11 +372,16 @@ class Paper extends Component < Props, State > {
       navigate,
       getParam
     } = this.props.navigation
+    const {
+      paper,
+      downloading
+    } = PaperStore
     return (
       <Container>
         {/* <Header/> */}
         <Content innerRef={ref => {this.scroll = ref}}>
-          <Text>{JSON.stringify({_id:getParam('_id',undefined), mode:getParam('mode',undefined)})}</Text>
+          {downloading?(<Text>Downloading</Text>):(<Text>{JSON.stringify(paper)}</Text>)}
+
           {
             paperDataTemp?(
               <View>

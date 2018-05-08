@@ -66,7 +66,7 @@ class PaperListItem extends Component < Props > {
 
         <Right>
           <Moment element={Text} fromNow ago>{date}</Moment>
-          <Button info onPress={()=>console.log('Button')}>
+          <Button info onPress={()=>this.props._showPaper(_id, TEST)}>
             <Icon name="arrow-forward" />
           </Button>
         </Right>

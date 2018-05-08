@@ -36,6 +36,8 @@ class PaperStore {
         data
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
+      console.log(data)
+
       this.paper = data
     } catch (e) {
       console.log(e)
