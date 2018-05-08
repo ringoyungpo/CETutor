@@ -20,7 +20,7 @@ import {
   //   View,
 } from 'react-native'
 import CurrentUserStore from '../navigation/CurrentUserStore'
-import PaperList from '../paper/PaperList'
+import PaperList from './PaperList'
 import {
   Container,
   Header,
