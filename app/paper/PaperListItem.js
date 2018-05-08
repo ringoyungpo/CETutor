@@ -8,6 +8,8 @@ import React, {
   Component
 } from 'react';
 
+import Moment from 'react-moment'
+
 import {
   Container,
   Header,
@@ -17,21 +19,53 @@ import {
   Text,
   Icon,
   Left,
+  Button,
   Right
 } from 'native-base';
+import {
+  CET_4,
+  CET_6
+} from '../../constant/paperConst'
 
 type Props = {
-  title: string
+  paper: {
+    _id: string,
+    title: string,
+    level: string,
+    date: Date
+  }
 }
 
 class PaperListItem extends Component < Props > {
+
   render() {
+    const {
+      _id,
+      title,
+      level,
+      date
+    } = this.props.paper
     return (
-      <CardItem>
-        {/* <Icon active name="logo-googleplus" /> */}
-        <Left><Text>{this.props.title}</Text></Left>
+      <CardItem button onPress={()=>console.log('CardItem')}>
+
+        <Left>
+
+          {
+            level===CET_4
+              ?(<Icon type="MaterialCommunityIcons" active name="numeric-4-box-outline" />)
+              :(level===CET_6
+                ?(<Icon type="MaterialCommunityIcons" active name="numeric-6-box-outline" />)
+                :null
+              )
+          }
+          <Text>{title}</Text>
+        </Left>
+
         <Right>
-          <Icon name="arrow-forward" />
+          <Moment element={Text} fromNow ago>{date}</Moment>
+          <Button info onPress={()=>console.log('Button')}>
+            <Icon name="arrow-forward" />
+          </Button>
         </Right>
       </CardItem>
     );

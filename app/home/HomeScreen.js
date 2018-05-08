@@ -29,7 +29,8 @@ import {
   CardItem,
   Text,
   Icon,
-  Right
+  Right,
+  StyleProvider
 } from 'native-base';
 import PaperListStore from './PaperListStore'
 import isEmpty from 'lodash'
@@ -54,7 +55,6 @@ class HomeScreen extends Component < {
     if (isEmpty(paperList) && downloading === false) {
       InitAsync()
     }
-
   }
 
   render() {
@@ -63,10 +63,6 @@ class HomeScreen extends Component < {
       downloading,
       InitAsync
     } = PaperListStore
-    console.log({
-      downloading,
-      paperList
-    })
     return (
       // <View style={styles.container}>
       <Container>
@@ -76,7 +72,7 @@ class HomeScreen extends Component < {
             paperList
           })}</Text> */}
 
-            {downloading?(<Text>Downloading</Text>):(<PaperList paperList={paperList.map(paperValue=>paperValue.title)}/>)}
+            {downloading?(<Text>Downloading</Text>):(<PaperList paperList={paperList}/>)}
 
         {/* <Text>{JSON.stringify(CurrentUserStore)}</Text>
         <Text>app here</Text>

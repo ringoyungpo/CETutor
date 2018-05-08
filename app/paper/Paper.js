@@ -4,7 +4,9 @@
  * @flow
  */
 
-import React, {Component} from 'react'
+import React, {
+  Component
+} from 'react'
 import {
   Header,
   Container,
@@ -17,260 +19,245 @@ import {
   H3,
   View,
 } from 'native-base'
-import {TabNavigator} from 'react-navigation'
-import Writing from './paper/Writing'
-import Listening from './paper/Listening'
-import Reading from './paper/Reading'
-import Translation from './paper/Translation'
+import {
+  TabNavigator
+} from 'react-navigation'
+import Writing from './Writing'
+import Listening from './Listening'
+import Reading from './Reading'
+import Translation from './Translation'
 
 type Props = {}
 type State = {
-  partSelected: ?string,
-  paperData: ?{
+  partSelected: ? string,
+  paperData: ? {
     writing: {
       directions: string,
-      essay : ?string
+      essay: ? string
     },
     listening: {
-      sections: Array<{
+      sections: Array < {
         sectionTitle: string,
         directions: string,
-        modules: Array<{
+        modules: Array < {
           moduleTitle: string,
           moduleSound: {
             url: string,
             status: number,
           },
-          questions: Array<{
-            optionSelected: ?number,
-            options: Array<string>
-          }>,
-        }>
-      }>
+          questions: Array < {
+            optionSelected: ? number,
+            options: Array < string >
+          } > ,
+        } >
+      } >
     },
     translation: {
       directions: string,
       passage: string,
-      answer: ?string,
+      answer: ? string,
     }
   }
 }
-export default class Paper extends Component<Props, State>{
+export default class Paper extends Component < Props, State > {
   scroll: any
 
-  constructor(props: any){
+  constructor(props: any) {
     super(props)
     this.state = {
       partSelected: null,
       paperData: {
         writing: {
-          directions:'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
+          directions: 'Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
           essay: null
         },
         listening: {
-          sections:[
-            {
+          sections: [{
               directions: '1Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
               sectionTitle: 'News Report',
-              modules: [
-                {
-                  moduleTitle: '1Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '1The news report mainly about A?',
-                        '1The news report mainly about B?',
-                        '1The news report mainly about C?',
-                        '1The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '1The news report mainly about A?',
-                        '1The news report mainly about B?',
-                        '1The news report mainly about C?',
-                        '1The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '1The news report mainly about A?',
-                        '1The news report mainly about B?',
-                        '1The news report mainly about C?',
-                        '1The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '1The news report mainly about A?',
-                        '1The news report mainly about B?',
-                        '1The news report mainly about C?',
-                        '1The news report mainly about D?',
-                      ]
-                    },
-                  ]
+              modules: [{
+                moduleTitle: '1Questions are based on what you have heard?',
+                moduleSound: {
+                  url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                  status: 2,
                 },
-              ]
+                questions: [{
+                  optionSelected: null,
+                  options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                }, {
+                  optionSelected: null,
+                  options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                }, {
+                  optionSelected: null,
+                  options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                }, {
+                  optionSelected: null,
+                  options: [
+                    '1The news report mainly about A?',
+                    '1The news report mainly about B?',
+                    '1The news report mainly about C?',
+                    '1The news report mainly about D?',
+                  ]
+                }, ]
+              }, ]
             },
             {
               directions: '2Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
               sectionTitle: 'Conversation',
-              modules: [
-                {
+              modules: [{
                   moduleTitle: '2Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },
-                  ]
+                  moduleSound: {
+                    url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                    status: 2,
+                  },
+                  questions: [{
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, ]
                 },
                 {
                   moduleTitle: '2Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '2The news report mainly about A?',
-                        '2The news report mainly about B?',
-                        '2The news report mainly about C?',
-                        '2The news report mainly about D?',
-                      ]
-                    },
-                  ]
+                  moduleSound: {
+                    url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                    status: 2,
+                  },
+                  questions: [{
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '2The news report mainly about A?',
+                      '2The news report mainly about B?',
+                      '2The news report mainly about C?',
+                      '2The news report mainly about D?',
+                    ]
+                  }, ]
                 }
               ]
             },
             {
               directions: '3Forf this part,you are allowed 30 minutes to write a short essay on e-learning.Try to imagine what will happen when more and more people study online instead of attending school. You are required to write at least 150 words but no more than 200 words.',
               sectionTitle: 'Passange',
-              modules: [
-                {
+              modules: [{
                   moduleTitle: '3Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },
-                  ]
+                  moduleSound: {
+                    url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                    status: 2,
+                  },
+                  questions: [{
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, ]
                 },
                 {
                   moduleTitle: '3Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },
-                  ]
-                },{
+                  moduleSound: {
+                    url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                    status: 2,
+                  },
+                  questions: [{
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, ]
+                }, {
                   moduleTitle: '3Questions are based on what you have heard?',
-                  moduleSound:{
-										url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-										status: 2,
-									},
-									questions: [
-                    {
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },{
-                      optionSelected: null,
-    									options: [
-                        '3The news report mainly about A?',
-                        '3The news report mainly about B?',
-                        '3The news report mainly about C?',
-                        '3The news report mainly about D?',
-                      ]
-                    },
-                  ]
+                  moduleSound: {
+                    url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+                    status: 2,
+                  },
+                  questions: [{
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, {
+                    optionSelected: null,
+                    options: [
+                      '3The news report mainly about A?',
+                      '3The news report mainly about B?',
+                      '3The news report mainly about C?',
+                      '3The news report mainly about D?',
+                    ]
+                  }, ]
                 },
               ]
             },
@@ -281,13 +268,13 @@ export default class Paper extends Component<Props, State>{
             //     {
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
-						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 2,
-						// 			},
-						// 			questions: [
+            // 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+            // 				status: 2,
+            // 			},
+            // 			questions: [
             //         {
             //           optionSelected: null,
-    				// 					options: [
+            // 					options: [
             //             '4The news report mainly about A?',
             //             '4The news report mainly about B?',
             //             '4The news report mainly about C?',
@@ -298,13 +285,13 @@ export default class Paper extends Component<Props, State>{
             //     },{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
-						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 2,
-						// 			},
-						// 			questions: [
+            // 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+            // 				status: 2,
+            // 			},
+            // 			questions: [
             //         {
             //           optionSelected: null,
-    				// 					options: [
+            // 					options: [
             //             '4The news report mainly about A?',
             //             '4The news report mainly about B?',
             //             '4The news report mainly about C?',
@@ -315,13 +302,13 @@ export default class Paper extends Component<Props, State>{
             //     },{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
-						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 2,
-						// 			},
-						// 			questions: [
+            // 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+            // 				status: 2,
+            // 			},
+            // 			questions: [
             //         {
             //           optionSelected: null,
-    				// 					options: [
+            // 					options: [
             //             '4The news report mainly about A?',
             //             '4The news report mainly about B?',
             //             '4The news report mainly about C?',
@@ -332,13 +319,13 @@ export default class Paper extends Component<Props, State>{
             //     },{
             //       moduleTitle: '4Questions are based on what you have heard?',
             //       moduleSound:{
-						// 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
-						// 				status: 2,
-						// 			},
-						// 			questions: [
+            // 				url: 'https://raw.githubusercontent.com/zmxv/react-native-sound-demo/master/advertising.mp3',
+            // 				status: 2,
+            // 			},
+            // 			questions: [
             //         {
             //           optionSelected: null,
-    				// 					options: [
+            // 					options: [
             //             '4The news report mainly about A?',
             //             '4The news report mainly about B?',
             //             '4The news report mainly about C?',
@@ -353,7 +340,7 @@ export default class Paper extends Component<Props, State>{
         },
         translation: {
           directions: 'For this part, you are allowed 30 minted to translate a passage from Chinese into English. You should write your answer on Answer Sheet 2.',
-          passage:'乌镇是浙江的一座古老水镇，坐落在京杭大运河河畔。这是一处迷人的地方，有许多古桥、中式旅店和餐馆。在过去一千年里，乌镇的水系和生活方式并未经历多少变化，是一座展现古文明的博物馆。乌镇所有房屋都用石木建筑。数百年来，当地沿着河边建起了住宅和集市。无数宽敞美丽的庭院藏身于屋舍之间，游客们每到一处都会有惊喜的发现。',
+          passage: '乌镇是浙江的一座古老水镇，坐落在京杭大运河河畔。这是一处迷人的地方，有许多古桥、中式旅店和餐馆。在过去一千年里，乌镇的水系和生活方式并未经历多少变化，是一座展现古文明的博物馆。乌镇所有房屋都用石木建筑。数百年来，当地沿着河边建起了住宅和集市。无数宽敞美丽的庭院藏身于屋舍之间，游客们每到一处都会有惊喜的发现。',
           answer: null
         },
       }
@@ -361,11 +348,13 @@ export default class Paper extends Component<Props, State>{
   }
 
   _partSelect = (part) => () => {
-    this.setState({partSelected: this.state.partSelected===part?null:part})
+    this.setState({
+      partSelected: this.state.partSelected === part ? null : part
+    })
     // console.log(part);
   }
 
-  render(){
+  render() {
     const paperDataTemp = this.state.paperData
     return (
       <Container>

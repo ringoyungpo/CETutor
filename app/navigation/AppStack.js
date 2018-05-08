@@ -23,6 +23,7 @@ import {
 import CurrentUserStore from './CurrentUserStore'
 
 import HomeScreen from '../home/HomeScreen'
+import Paper from '../paper/Paper'
 
 class OtherScreen extends Component < {
   navigation: Function
@@ -56,6 +57,7 @@ const styles = StyleSheet.create({
 
 const AppStack = StackNavigator({
   Home: HomeScreen,
+  PAPER: Paper,
   Other: OtherScreen
 })
 export default AppStack

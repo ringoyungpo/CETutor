@@ -7,8 +7,6 @@ import React, {
   Component
 } from 'react'
 
-import Menu from './app/Menu'
-import Paper from './app/Paper'
 import AuthStack from './app/auth/AuthStack'
 import AppStack from './app/navigation/AppStack'
 import AuthLoadingScreen from './app/navigation/AuthLoadingScreen'

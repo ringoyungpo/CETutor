@@ -22,7 +22,12 @@ import PaperListItem from './PaperListItem'
 
 
 type Props = {
-  paperList: Array < string >
+  paperList: Array < {
+    _id: string,
+    title: string,
+    level: string,
+    date: Date
+  } >
 }
 
 class PaperList extends Component < Props > {
@@ -30,7 +35,7 @@ class PaperList extends Component < Props > {
     return (
       <Card>
         {this.props.paperList.map((paperValue, paperIndex)=>{
-          return(<PaperListItem key={paperIndex} title={paperValue}/>)
+          return(<PaperListItem key={paperIndex} paper={paperValue}/>)
         })}
       </Card>
     );

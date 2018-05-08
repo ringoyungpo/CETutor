@@ -37,7 +37,6 @@ class PaperList {
       } = yield axios.get(API_BASE + 'api/papers')
 
       this.paperList = data
-      console.log(JSON.stringify(data))
     } catch (e) {
       this.errors = e.response.data
       // console.log(JSON.stringify(e.response.data))
