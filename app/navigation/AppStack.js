@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 
 const AppStack = StackNavigator({
   Home: HomeScreen,
-  PAPER: Paper,
+  Paper: Paper,
   Other: OtherScreen
 })
 export default AppStack

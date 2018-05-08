@@ -24,10 +24,13 @@ import {
 } from 'native-base';
 import {
   CET_4,
-  CET_6
+  CET_6,
+  PRACTICE,
+  TEST
 } from '../../constant/paperConst'
 
 type Props = {
+  _showPaper: Function,
   paper: {
     _id: string,
     title: string,
@@ -46,7 +49,7 @@ class PaperListItem extends Component < Props > {
       date
     } = this.props.paper
     return (
-      <CardItem button onPress={()=>console.log('CardItem')}>
+      <CardItem button onPress={()=>this.props._showPaper(_id, PRACTICE)}>
 
         <Left>
 

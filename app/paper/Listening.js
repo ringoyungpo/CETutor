@@ -4,7 +4,9 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React, {
+  Component
+} from 'react'
 
 import {
   Text,
@@ -25,48 +27,48 @@ import Sound from 'react-native-sound'
 type Props = {
   onSubmit: Function,
   scrollToTop: Function,
-  sections: ?Array<{
+  sections: ? Array < {
     sectionTitle: string,
     directions: string,
-    modules: Array<{
+    modules: Array < {
       moduleTitle: string,
       moduleSound: {
         url: string,
         status: number,
       },
-      questions: Array<{
-        optionSelected: ?number,
-        options: Array<string>
-      }>,
-    }>
-  }>
+      questions: Array < {
+        optionSelected: ? number,
+        options: Array < string >
+      } > ,
+    } >
+  } >
 }
 
 type State = {
-  sections: ?Array<{
+  sections: ? Array < {
     sectionTitle: string,
     directions: string,
-    modules: Array<{
+    modules: Array < {
       moduleTitle: string,
       moduleSound: {
         url: string,
         status: number,
       },
-      questions: Array<{
-        optionSelected: ?number,
-        options: Array<string>
-      }>,
-    }>
-  }>,
-  sectionSelected: ?number
+      questions: Array < {
+        optionSelected: ? number,
+        options: Array < string >
+      } > ,
+    } >
+  } > ,
+  sectionSelected: ? number
 }
 
 
-export default class App extends Component<Props, State> {
-  constructor(props: Props){
+export default class App extends Component < Props, State > {
+  constructor(props: Props) {
     super(props)
     Sound.setCategory('Playback')
-    this.state={
+    this.state = {
       sections: this.props.sections,
       sectionSelected: null,
     }
@@ -77,7 +79,7 @@ export default class App extends Component<Props, State> {
   render() {
     const stateTemp = this.state
     let optionSelected
-    return stateTemp.sections?(
+    return stateTemp.sections ? (
       <View>
         {
           stateTemp.sections.map((sectionValue,sectionIndex)=>(
@@ -137,7 +139,7 @@ export default class App extends Component<Props, State> {
                                         style={{ color: '#000' }}
                                       />
                                     ):(
-                                      <Button small transparent dark onPress={()=>{
+                                      <Button transparent dark onPress={()=>{
                                         moduleValue.moduleSound.status = 1
                                         this.setState(stateTemp)
                                         const callback = (error, sound) => {
@@ -251,6 +253,6 @@ export default class App extends Component<Props, State> {
           ))
         }
       </View>
-    ):null
+    ) : null
   }
 }

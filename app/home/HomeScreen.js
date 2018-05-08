@@ -72,7 +72,7 @@ class HomeScreen extends Component < {
             paperList
           })}</Text> */}
 
-            {downloading?(<Text>Downloading</Text>):(<PaperList paperList={paperList}/>)}
+            {downloading?(<Text>Downloading</Text>):(<PaperList _showPaper={this._showPaper} paperList={paperList}/>)}
 
         {/* <Text>{JSON.stringify(CurrentUserStore)}</Text>
         <Text>app here</Text>
@@ -83,6 +83,13 @@ class HomeScreen extends Component < {
       </Container>
 
     )
+  }
+
+  _showPaper = (_id, mode) => {
+    this.props.navigation.navigate('Paper', {
+      _id: _id,
+      mode: mode
+    })
   }
 
   _showMoreApp = () => {

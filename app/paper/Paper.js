@@ -59,7 +59,7 @@ type State = {
     }
   }
 }
-export default class Paper extends Component < Props, State > {
+class Paper extends Component < Props, State > {
   scroll: any
 
   constructor(props: any) {
@@ -358,7 +358,7 @@ export default class Paper extends Component < Props, State > {
     const paperDataTemp = this.state.paperData
     return (
       <Container>
-        <Header/>
+        {/* <Header/> */}
         <Content innerRef={ref => {this.scroll = ref}}>
           {
             paperDataTemp?(
@@ -549,3 +549,5 @@ export default class Paper extends Component < Props, State > {
     )
   }
 }
+
+export default Paper
