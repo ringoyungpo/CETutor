@@ -53,6 +53,7 @@ import isEmpty from 'lodash'
 import setAuthToken from '../utils/setAuthToken'
 import CurrentUserStore from '../navigation/CurrentUserStore'
 import PaperHeader from './PaperHeader'
+import Writing from './Writing'
 type Props = {
   navigation: Function
 }
@@ -84,7 +85,14 @@ class PaperScreen extends Component < Props > {
 
     const PaperContent = (
       <Card>
-        <PaperHeader date={date} title={title} level={level} partSelect={partSelect} partSelected={partSelected}/>
+        <PaperHeader
+          date={date} title={title} level={level}
+          partSelect={partSelect} partSelected={partSelected}
+        />
+
+        <Writing
+          partSelect={partSelect} partSelected={partSelected}
+        />
       </Card>
     )
 

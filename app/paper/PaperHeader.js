@@ -81,14 +81,15 @@ const PaperHeader = ({
 }) => (
   <View>
   {
-    partSelected !== PAPER_HEADER
-      ? (<PaperHeaderBar partSelect={partSelect} />)
-      : (
+    partSelected === PAPER_HEADER
+      ? (
         <PaperHeaderContent
           partSelect={partSelect}
           title={title}
           date={date}
           level={level} />)
+      : (<PaperHeaderBar partSelect={partSelect} />)
+
   }
   </View>
 )

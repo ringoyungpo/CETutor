@@ -40,9 +40,11 @@ class PaperStore {
 
   @action.bound
   partSelect(part) {
-    this.partSelected = this.partSelected === part ?
-      '' :
-      part
+    console.log(part)
+    if (this.partSelected === part)
+      this.partSelected = ''
+    else
+      this.partSelected = part
   }
 
   @action.bound
