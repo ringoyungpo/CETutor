@@ -33,7 +33,7 @@ class HomeScreen extends Component < {
     return (
       <View style={styles.container}>
         <Text>{JSON.stringify(CurrentUserStore)}</Text>
-        <Text>jkjddffkjdf</Text>
+        <Text>app here</Text>
         <Button title="Show me more of the app" onPress={this._showMoreApp} />
         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
       </View>
