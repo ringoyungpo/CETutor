@@ -1,8 +1,4 @@
 import {
-  types
-} from 'mobx-state-tree'
-
-import {
   API_BASE
 } from '../../config/keys'
 
