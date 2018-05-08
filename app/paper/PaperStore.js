@@ -13,18 +13,41 @@ import {
   configure
 } from 'mobx'
 
+import {
+  PAPER_HEADER,
+  WRITING,
+  LISTENING,
+  READING,
+  TRANSLATION
+} from '../../constant/paperConst'
+
 configure({
   enforceActions: true
 })
 
 class PaperStore {
   @observable paper
+  @observable answerSheet
   @observable downloading
+  @observable partSelected
 
   constructor() {
     this.paper = {}
+    this.answerSheet = {}
     this.downloading = false
+    this.partSelected = PAPER_HEADER
+  }
 
+  @action.bound
+  partSelect(part) {
+    this.partSelected = this.partSelected === part ?
+      '' :
+      part
+  }
+
+  @action.bound
+  onInputChange(key, value) {
+    this[key] = value
   }
 
   @action.bound
