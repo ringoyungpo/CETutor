@@ -27,10 +27,10 @@ class SignUpInputStore {
   @observable submitting
 
   constructor() {
-    this.nickname = 'ringoyungpo'
-    this.email = 'ringoyungpo@163.com'
-    this.password = 'woods'
-    this.passwordComfirmed = 'woodss'
+    this.nickname = ''
+    this.email = ''
+    this.password = ''
+    this.passwordComfirmed = ''
     this.errors = {}
     this.submitting = false
   }

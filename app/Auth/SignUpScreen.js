@@ -54,7 +54,7 @@ class SignUpScreen extends Component < {
   navigation: Function
 }, {} > {
   static navigationOptions = {
-    title: 'Please sign in'
+    title: 'Thank you for sign up'
   }
 
   render() {

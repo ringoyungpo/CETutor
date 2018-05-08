@@ -51,7 +51,6 @@ class SignInInputStore {
       email: email,
       password: password
     }
-    // console.log(JSON.stringify(userData))
     this.submitting = true
 
     try {

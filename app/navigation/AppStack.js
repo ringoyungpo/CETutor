@@ -4,18 +4,27 @@
  * @flow
  */
 
-import React, {Component} from 'react'
-import {StackNavigator, SwitchNavigator} from 'react-navigation' // Version can be specified in package.json
+import React, {
+  Component
+} from 'react'
+import {
+  StackNavigator,
+  SwitchNavigator
+} from 'react-navigation' // Version can be specified in package.json
 import {
   ActivityIndicator,
   AsyncStorage,
   Button,
   StatusBar,
   StyleSheet,
-  View
+  View,
+  Text
 } from 'react-native'
+import CurrentUserStore from './CurrentUserStore'
 
-class HomeScreen extends Component<{navigation: Function}, {}> {
+class HomeScreen extends Component < {
+  navigation: Function
+}, {} > {
   static navigationOptions = {
     title: 'Welcome to the app!'
   }
@@ -23,6 +32,8 @@ class HomeScreen extends Component<{navigation: Function}, {}> {
   render() {
     return (
       <View style={styles.container}>
+        <Text>{JSON.stringify(CurrentUserStore)}</Text>
+        <Text>jkjddffkjdf</Text>
         <Button title="Show me more of the app" onPress={this._showMoreApp} />
         <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
       </View>
@@ -39,9 +50,11 @@ class HomeScreen extends Component<{navigation: Function}, {}> {
   }
 }
 
-class OtherScreen extends Component<{navigation: Function}, {}> {
+class OtherScreen extends Component < {
+  navigation: Function
+}, {} > {
   static navigationOptions = {
-    title: 'Lots of features here'
+    title: 'Lots of features here:)'
   }
 
   render() {
@@ -67,5 +80,8 @@ const styles = StyleSheet.create({
   }
 })
 
-const AppStack = StackNavigator({Home: HomeScreen, Other: OtherScreen})
+const AppStack = StackNavigator({
+  Home: HomeScreen,
+  Other: OtherScreen
+})
 export default AppStack

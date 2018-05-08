@@ -19,8 +19,9 @@ import {
   StyleSheet,
   View
 } from 'react-native'
-
+import jwt_decode from 'jwt-decode'
 import setAuthToken from '../utils/setAuthToken'
+import CurrentUserStore from './CurrentUserStore'
 
 
 class AuthLoadingScreen extends Component < {
@@ -34,11 +35,28 @@ class AuthLoadingScreen extends Component < {
   // Fetch the token from storage then navigate to our appropriate place
   _bootstrapAsync = async () => {
     const userToken = await AsyncStorage.getItem('jwtToken')
-    setAuthToken()
+
 
     // This will switch to the App screen or Auth screen and this loading
     // screen will be unmounted and thrown away.
-    this.props.navigation.navigate(userToken ? 'App' : 'Auth')
+    console.log(userToken === null)
+
+    if (userToken === null) {
+      this.props.navigation.navigate('Auth')
+    } else {
+      const decoded = jwt_decode(userToken)
+      const currentTime = Date.now() / 1000
+      if (decoded.exp < currentTime) {
+        await AsyncStorage.clear()
+        setAuthToken()
+        this.props.navigation.navigate('Auth')
+      } else {
+        setAuthToken(userToken)
+        CurrentUserStore.init(decoded)
+        this.props.navigation.navigate('App')
+      }
+    }
+
   }
 
   // Render any loading content that you like here

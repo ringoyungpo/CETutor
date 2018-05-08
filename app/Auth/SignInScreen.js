@@ -41,11 +41,13 @@ import SignInInputStore from './SignInInputStore'
 import {
   API_BASE
 } from '../../config/keys'
+import jwt_decode from 'jwt-decode'
 import {
   observer
 } from 'mobx-react'
 import isEmpty from 'lodash'
 import setAuthToken from '../utils/setAuthToken'
+import CurrentUserStore from '../navigation/CurrentUserStore'
 
 @observer
 class SignInScreen extends Component < {
@@ -91,6 +93,8 @@ class SignInScreen extends Component < {
             if(token){console.log('success'+token)
             await AsyncStorage.setItem('jwtToken', token)
             setAuthToken(token)
+            const decoded = jwt_decode(token)
+            CurrentUserStore.init(decoded)
             this.props.navigation.navigate('App')}
           }}>
             <Text>Sign In</Text>
