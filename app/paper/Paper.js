@@ -27,7 +27,9 @@ import Listening from './Listening'
 import Reading from './Reading'
 import Translation from './Translation'
 
-type Props = {}
+type Props = {
+  navigation: Function
+}
 type State = {
   partSelected: ? string,
   paperData: ? {
@@ -356,10 +358,15 @@ class Paper extends Component < Props, State > {
 
   render() {
     const paperDataTemp = this.state.paperData
+    const {
+      navigate,
+      getParam
+    } = this.props.navigation
     return (
       <Container>
         {/* <Header/> */}
         <Content innerRef={ref => {this.scroll = ref}}>
+          <Text>{JSON.stringify({_id:getParam('_id',undefined), mode:getParam('mode',undefined)})}</Text>
           {
             paperDataTemp?(
               <View>

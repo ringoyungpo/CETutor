@@ -17,7 +17,7 @@ configure({
   enforceActions: true
 })
 
-class PaperList {
+class PaperListStore {
   @observable paperList
   @observable downloading
 
@@ -48,4 +48,4 @@ class PaperList {
   })
 }
 
-export default new PaperList
+export default new PaperListStore
