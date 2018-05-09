@@ -13,6 +13,7 @@ import {
   Textarea,
 } from 'native-base'
 import {
+  TEST,
   LISTENING
 } from '../../constant/paperConst'
 
@@ -28,7 +29,10 @@ const Listening = ({
   partSelect,
   partSelected,
   sectionSelect,
-  sectionSelected
+  sectionSelected,
+  audioPlaying,
+  playAudio,
+  mode
 }) => {
   const {
     sections
@@ -50,6 +54,9 @@ const Listening = ({
           sectionsSheet={sectionsSheet}
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
+          audioPlaying={audioPlaying}
+          playAudio={playAudio}
+          mode={mode}
           // title={title}
           // date={date}
           // level={level}
@@ -83,6 +90,9 @@ const ListeningContent = ({
   // answer,
   // question,
   partSelect,
+  audioPlaying,
+  playAudio,
+  mode
 }) => (
   <View>
     <ListeningBar partSelect={partSelect} />
@@ -99,6 +109,9 @@ const ListeningContent = ({
               sectionTitle={sectionTitle}
               sectionIndex={sectionIndex}
               sectionSelect={sectionSelect}
+              audioPlaying={audioPlaying}
+              playAudio={playAudio}
+              mode={mode}
             />
           ):(<SectionBar
             sectionTitle={sectionTitle}
@@ -151,11 +164,15 @@ const SectionBar = ({
   </CardItem>
 )
 
+
 const SectionContent = ({
   sectionTitle,
   sectionIndex,
   sectionSelect,
-  modules
+  modules,
+  audioPlaying,
+  playAudio,
+  mode
 }) => (
   <View>
     <SectionBar
@@ -167,17 +184,24 @@ const SectionContent = ({
       <Icon type="Entypo" active name="chevron-down" />
     </CardItem>
     {modules.map((moduleValue, moduleIndex)=>{
+      const {moduleSound}=moduleValue
+      const {url, played} =moduleSound
       return (
         <View key={moduleIndex}>
           <CardItem header >
             <Text>
               {sectionTitle+' '+(moduleIndex+1)}
             </Text>
-            <Right>
-              <Button dark disabled={false} onPress={()=>console.log('aha')}>
+            {!played&&(<Right>
+              <Button  disabled={audioPlaying===true} onPress={()=>{
+                playAudio(url)
+                // if(mode===TEST){
+                //   console.log('TODO audio played')
+                // }
+              }}>
                 <Icon type={'Entypo'} name="controller-play" />
               </Button>
-            </Right>
+            </Right>)}
           </CardItem>
           <CardItem header >
             <Text>

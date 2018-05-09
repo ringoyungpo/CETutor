@@ -71,15 +71,21 @@ class PaperScreen extends Component < Props > {
   }
 
   render() {
+    const mode = this.props.navigation.getParam('mode')
+    console.log({
+      mode
+    })
     const {
       paper,
       answerSheet,
       downloading,
       onInputChange,
       partSelect,
+      audioPlaying,
       partSelected,
       sectionSelect,
       sectionSelected,
+      playAudio
     } = PaperStore
 
     const {
@@ -116,10 +122,13 @@ class PaperScreen extends Component < Props > {
           listening={listening}
           listeningSheet={listeningSheet}
           onInputChange={onInputChange}
-          partSelect={partSelect} 
+          partSelect={partSelect}
           partSelected={partSelected}
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
+          audioPlaying={audioPlaying}
+          playAudio={playAudio}
+          mode={mode}
         />
 
         <Translation

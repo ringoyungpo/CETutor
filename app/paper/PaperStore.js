@@ -10,7 +10,8 @@ import {
   action,
   flow,
   observable,
-  configure
+  configure,
+  runInAction
 } from 'mobx'
 
 import {
@@ -21,6 +22,8 @@ import {
   TRANSLATION
 } from '../../constant/paperConst'
 // import Sound from 'react-native-sound'
+import Sound from 'react-native-sound'
+
 
 configure({
   enforceActions: true
@@ -43,6 +46,7 @@ class PaperStore {
     this.partSelected = PAPER_HEADER
     this.sectionSelected = null
     this.audioPlaying = false
+    Sound.setCategory('Playback')
   }
 
   @action.bound
@@ -59,6 +63,39 @@ class PaperStore {
       this.sectionSelected = null
     else
       this.sectionSelected = section
+  }
+
+  @action.bound
+  onAudioStatusChange(key, value) {
+
+  }
+
+  @action.bound
+  playAudio(url) {
+    runInAction(() => {
+      this.audioPlaying = true
+    })
+    const callback = (error, sound) => {
+      if (error) {
+        alert(error.message)
+        return
+      }
+
+      sound.play(() => {
+        sound.release()
+
+        runInAction(() => {
+          this.audioPlaying = false
+        })
+        sound = undefined
+      });
+    }
+
+    let sound = new Sound(
+      url,
+      undefined,
+      error => callback(error, sound)
+    )
   }
 
   @action.bound
