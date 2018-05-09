@@ -1,71 +1,106 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, { Component } from 'react';
+import React from 'react'
+import Moment from 'react-moment'
 import {
   Text,
-  View,
+  Card,
   CardItem,
+  H1,
   H2,
+  View,
   Textarea,
 } from 'native-base'
+import {
+  TRANSLATION
+} from '../../constant/paperConst'
 
-type Props = {
-  onSubmit: Function,
-  translation: {
-    directions: string,
-    passage: string,
-    answer: ?string
-  },
-}
-type State = {
-  directions: string,
-  passage: string,
-  answer : ?string
-}
+const TranslationBar = ({
+  partSelect
+}) => (
+  <CardItem button onPress={()=>partSelect(TRANSLATION)}>
+    <H1>
+      Part IV Translation
+    </H1>
+  </CardItem>
+)
 
-export default class App extends Component<Props, State> {
-  constructor(props: any){
-    super(props)
-    this.state={
-      directions: this.props.translation.directions,
-      passage:this.props.translation.passage,
-      answer: this.props.translation.answer
-    }
+const TranslationContent = ({
+  // title,
+  // level,
+  // date,s
+  onInputChange,
+  answer,
+  question,
+  partSelect,
+}) => (
+  <View>
+    <TranslationBar partSelect={partSelect} />
+
+    <CardItem header>
+      <Text>
+        Directions:
+      </Text>
+    </CardItem>
+
+    <CardItem>
+      <Text>
+        For this part, you are allowed 30 minted to translate a passage from Chinese into English. You should write your answer on Answer Sheet.
+      </Text>
+    </CardItem>
+
+    <CardItem>
+      <Text>
+        {question}
+      </Text>
+    </CardItem>
+
+    <Textarea
+      rowSpan={5}
+      value={answer}
+      placeholder="Write your answer here..."
+      onChangeText={(value) => onInputChange('translationSheet.answer',value)}
+    />
+
+
+    <TranslationBar partSelect={partSelect} />
+  </View>
+)
+
+
+const Translation = ({
+  // title,
+  // level,
+  // date,
+  translation,
+  translationSheet,
+  onInputChange,
+  partSelect,
+  partSelected
+}) => {
+  const {
+    question
+  } = translation
+
+  const {
+    answer
+  } = translationSheet || {}
+  return (
+    <View>
+  {
+    partSelected === TRANSLATION
+      ? (
+        <TranslationContent
+          partSelect={partSelect}
+          answer={answer}
+          onInputChange={onInputChange}
+          // title={title}
+          // date={date}
+          // level={level}
+          question={question}
+        />)
+      :(<TranslationBar partSelect={partSelect} />)
   }
-
-  render() {
-    return (
-      <View>
-        <CardItem header>
-          <Text>
-            Directions:
-          </Text>
-        </CardItem>
-
-        <CardItem>
-          <Text>
-            {this.state.directions}
-          </Text>
-        </CardItem>
-
-        <CardItem>
-          <Text>
-            {this.state.passage}
-          </Text>
-        </CardItem>
-
-        <Textarea
-          rowSpan={5}
-          value={this.state.answer}
-          placeholder="Write your answer here..."
-          onChangeText={(words) => {this.setState({answer: words});this.props.onSubmit(words)}}
-        />
-
-      </View>
-    );
-  }
+  </View>
+  )
 }
+
+export default Translation
