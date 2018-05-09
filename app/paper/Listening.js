@@ -200,10 +200,15 @@ const SectionContent = ({
       const {url, playing, played} =moduleSound
       return (
         <View key={moduleIndex}>
+          <CardItem header>
+            <Text>
+              {sectionTitle+' '+(moduleIndex+1)}
+            </Text>
+          </CardItem>
           <CardItem header >
             <Left>
               <Text>
-                {sectionTitle+' '+(moduleIndex+1)}
+                {`Questions 1 to ${questions.length} are based on the conversation you have just heard.`}
               </Text>
             </Left>
             {!played&&(<Right>
@@ -221,11 +226,6 @@ const SectionContent = ({
                 </Button>
               )}
             </Right>)}
-          </CardItem>
-          <CardItem header>
-            <Text>
-              {`Questions 1 to ${questions.length} are based on the conversation you have just heard.`}
-            </Text>
           </CardItem>
           {questions.map((questionValue,questionIndex)=>{
             const {options, questionSound} = questionValue
