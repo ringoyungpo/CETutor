@@ -184,7 +184,7 @@ const SectionContent = ({
       <Icon type="Entypo" active name="chevron-down" />
     </CardItem>
     {modules.map((moduleValue, moduleIndex)=>{
-      const {moduleSound}=moduleValue
+      const {moduleSound,questions}=moduleValue
       const {url, playing, played} =moduleSound
       return (
         <View key={moduleIndex}>
@@ -216,6 +216,11 @@ const SectionContent = ({
           <CardItem>
             <Text>
               {`In this section, you will hear ${modules.length} ${sectionTitle.toLowerCase()}. At the end of each ${sectionTitle.toLowerCase()}, you will hear several questions. Both the ${sectionTitle.toLowerCase()} and the questions will be spoken only once. After you hear a question, you must choose the best answer from the four choices marked A), B), C) and D). Then mark the corresponding letter on Answer Sheet with a single line through the centre.`}
+            </Text>
+          </CardItem>
+          <CardItem header>
+            <Text>
+              {`Questions 1 to ${questions.length} are based on the conversation you have just heard.`}
             </Text>
           </CardItem>
         </View>

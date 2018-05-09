@@ -72,6 +72,7 @@ class PaperScreen extends Component < Props > {
 
   componentWillUnmount() {
     PaperStore.sound && PaperStore.sound.stop()
+    PaperStore.clearAudioPlaying()
   }
 
   render() {

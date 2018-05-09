@@ -53,6 +53,11 @@ class PaperStore {
   }
 
   @action.bound
+  clearAudioPlaying() {
+    this.audioPlaying = false
+  }
+
+  @action.bound
   partSelect(part) {
     if (this.partSelected === part)
       this.partSelected = null
