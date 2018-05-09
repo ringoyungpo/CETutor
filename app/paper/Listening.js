@@ -6,8 +6,10 @@ import {
   CardItem,
   H1,
   H2,
+  H3,
   View,
   Icon,
+  Left,
   Right,
   Button,
   Textarea,
@@ -158,9 +160,9 @@ const SectionBar = ({
   sectionSelect
 }) => (
   <CardItem header button onPress={()=>sectionSelect(sectionIndex)}>
-    <H2>
+    <H3>
       Sections {String.fromCharCode(sectionIndex+65)} {_.startCase(sectionTitle.replace('_', ' ').toLowerCase())}
-    </H2>
+    </H3>
   </CardItem>
 )
 
@@ -199,9 +201,11 @@ const SectionContent = ({
       return (
         <View key={moduleIndex}>
           <CardItem header >
-            <Text>
-              {sectionTitle+' '+(moduleIndex+1)}
-            </Text>
+            <Left>
+              <Text>
+                {sectionTitle+' '+(moduleIndex+1)}
+              </Text>
+            </Left>
             {!played&&(<Right>
               {!playing
                 ?(<Button  disabled={audioPlaying===true} onPress={()=>{
@@ -229,9 +233,11 @@ const SectionContent = ({
             return (
               <View key={questionIndex}>
                 <CardItem header>
-                  <Text>
-                    {questionIndex+1}.
-                  </Text>
+                  <Left>
+                    <Text>
+                      {questionIndex+1}.
+                    </Text>
+                  </Left>
                   {!played&&(<Right>
                     {!playing
                       ?(<Button  disabled={audioPlaying===true} onPress={()=>{
