@@ -60,7 +60,7 @@ const TranslationContent = ({
       rowSpan={5}
       value={answer}
       placeholder="Write your answer here..."
-      onChangeText={(value) => onInputChange('translationSheet.answer',value)}
+      onChangeText={(value) => onInputChange('translation.answer',value)}
     />
 
     <Icon type="Entypo" active name="chevron-thin-up" />
@@ -75,18 +75,14 @@ const Translation = ({
   // level,
   // date,
   translation,
-  translationSheet,
   onInputChange,
   partSelect,
   partSelected
 }) => {
   const {
-    question
-  } = translation
-
-  const {
+    question,
     answer
-  } = translationSheet || {}
+  } = translation
   return (
     <View>
   {

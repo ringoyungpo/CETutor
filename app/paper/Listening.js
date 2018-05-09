@@ -26,7 +26,6 @@ const Listening = ({
   // level,
   // date,
   listening,
-  listeningSheet,
   onInputChange,
   partSelect,
   partSelected,
@@ -40,9 +39,6 @@ const Listening = ({
     sections
   } = listening
 
-  const {
-    sectionsSheet
-  } = listeningSheet || {}
   return (
     <View>
   {
@@ -53,7 +49,6 @@ const Listening = ({
           // answer={answer}
           onInputChange={onInputChange}
           sections={sections}
-          sectionsSheet={sectionsSheet}
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
           audioPlaying={audioPlaying}
@@ -85,7 +80,6 @@ const ListeningContent = ({
   // level,
   // date,s
   sections,
-  sectionsSheet,
   onInputChange,
   sectionSelect,
   sectionSelected,
@@ -114,6 +108,7 @@ const ListeningContent = ({
               audioPlaying={audioPlaying}
               playAudio={playAudio}
               mode={mode}
+              onInputChange={onInputChange}
             />
           ):(<SectionBar
             sectionTitle={sectionTitle}
@@ -141,13 +136,6 @@ const ListeningContent = ({
       </Text>
     </CardItem> */}
 
-    {/* <Textarea
-      rowSpan={5}
-      value={answer}
-      placeholder="Write your answer here..."
-      onChangeText={(value) => onInputChange('listeningSheet.answer',value)}
-    /> */}
-
     <Icon type="Entypo" active name="chevron-thin-up" />
 
     <ListeningBar partSelect={partSelect} />
@@ -174,7 +162,8 @@ const SectionContent = ({
   modules,
   audioPlaying,
   playAudio,
-  mode
+  mode,
+  onInputChange
 }) => (
   <View>
     <SectionBar
@@ -228,7 +217,8 @@ const SectionContent = ({
             </Right>)}
           </CardItem>
           {questions.map((questionValue,questionIndex)=>{
-            const {options, questionSound} = questionValue
+            const {options, questionSound, optionSelected, rightAnswer} = questionValue
+            // console.log({questionValue})
             const {url, playing, played}=questionSound
             return (
               <View key={questionIndex}>
@@ -254,10 +244,17 @@ const SectionContent = ({
                 {options.map((optionValue, optionIndex)=>{
                   return (
                     <View key={optionIndex}>
-                      <CardItem>
-                        <Text>
-                          {String.fromCharCode(optionIndex+65)}. {optionValue}
-                        </Text>
+                      <CardItem button onPress={()=>{
+                        onInputChange(`listening.sections.${sectionIndex}.modules.${moduleIndex}.questions.${questionIndex}.optionSelected`, optionIndex)
+                      }}>
+                        <Left>
+                          <Text>
+                            {String.fromCharCode(optionIndex+65)}. {optionValue}
+                          </Text>
+                        </Left>
+                        {optionSelected===optionIndex?(
+                          <Icon name='radio-button-on' style={{color:'#000'}}/>
+                        ):null}
                       </CardItem>
                     </View>
                   )

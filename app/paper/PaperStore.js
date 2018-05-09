@@ -24,6 +24,7 @@ import {
 } from '../../constant/paperConst'
 // import Sound from 'react-native-sound'
 import Sound from 'react-native-sound'
+import _ from 'lodash'
 
 
 configure({
@@ -32,7 +33,6 @@ configure({
 
 class PaperStore {
   @observable paper
-  @observable answerSheet
   @observable downloading
   @observable partSelected
   @observable sectionSelected
@@ -43,7 +43,6 @@ class PaperStore {
 
   constructor() {
     this.paper = {}
-    this.answerSheet = {}
     this.downloading = false
     this.partSelected = PAPER_HEADER
     this.sectionSelected = null
@@ -55,7 +54,6 @@ class PaperStore {
   @action.bound
   UnmountPaperScreen() {
     this.paper = {}
-    this.answerSheet = {}
     this.downloading = false
     this.partSelected = PAPER_HEADER
     this.sectionSelected = null
@@ -125,13 +123,20 @@ class PaperStore {
 
   @action.bound
   onInputChange(key, value) {
-    const [part, words] = key.split('.')
-    if (words) {
-      this.answerSheet[part] = this[part] || {}
-      this.answerSheet[part][words] = value
-    } else {
-      this.answerSheet[part] = value
+    const [part, eassyOrSections, sectionIndex, modules, moduleIndex, questions, questionIndex, optionSelected] = key.split('.')
+
+    if (optionSelected) {
+      let temp = this.paper[part][eassyOrSections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected]
+      temp = temp === value ? null : value
+      this.paper[part][eassyOrSections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected] = temp
+      this.paper = { ...this.paper
+      }
+    } else if (eassyOrSections) {
+      this.paper[part][eassyOrSections] = value
     }
+    //  else {
+    //   this.paper[part] = value
+    // }
   }
 
   @action.bound
@@ -144,8 +149,7 @@ class PaperStore {
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
       this.paper = data
-      console.log(data)
-      this.answerSheet = {}
+      // console.log(data)
     } catch (e) {
       console.log(e)
       // this.errors = e.response.data

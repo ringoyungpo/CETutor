@@ -49,6 +49,10 @@ import jwt_decode from 'jwt-decode'
 import {
   observer
 } from 'mobx-react'
+import {
+  TEST,
+  PRACTICE
+} from '../../constant/paperConst'
 import isEmpty from 'lodash'
 import setAuthToken from '../utils/setAuthToken'
 import CurrentUserStore from '../navigation/CurrentUserStore'
@@ -63,7 +67,8 @@ type Props = {
 @observer
 class PaperScreen extends Component < Props > {
   static navigationOptions = {
-    title: 'This is a paper'
+    title: 'Paper Page'
+    // title: this.props.navigation.getParam('mode') === TEST ? ('Testing Mode') : ('Practice Mode')
   }
   constructor(props: any) {
     super(props)
@@ -77,12 +82,8 @@ class PaperScreen extends Component < Props > {
 
   render() {
     const mode = this.props.navigation.getParam('mode')
-    console.log({
-      mode
-    })
     const {
       paper,
-      answerSheet,
       downloading,
       onInputChange,
       partSelect,
@@ -102,12 +103,6 @@ class PaperScreen extends Component < Props > {
       translation,
     } = paper
 
-    const {
-      writingSheet,
-      listeningSheet,
-      translationSheet
-    } = answerSheet
-
 
     const PaperContent = (
       <Card>
@@ -118,14 +113,12 @@ class PaperScreen extends Component < Props > {
 
         <Writing
           writing={writing}
-          writingSheet={writingSheet}
           onInputChange={onInputChange}
           partSelect={partSelect} partSelected={partSelected}
         />
 
         <Listening
           listening={listening}
-          listeningSheet={listeningSheet}
           onInputChange={onInputChange}
           partSelect={partSelect}
           partSelected={partSelected}
@@ -138,7 +131,6 @@ class PaperScreen extends Component < Props > {
 
         <Translation
           translation={translation}
-          translationSheet={translationSheet}
           onInputChange={onInputChange}
           partSelect={partSelect} partSelected={partSelected}
         />

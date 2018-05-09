@@ -54,7 +54,7 @@ const WritingContent = ({
       rowSpan={5}
       value={essay}
       placeholder="Write your answer here..."
-      onChangeText={(value) => onInputChange('writingSheet.essay',value)}
+      onChangeText={(value) => onInputChange('writing.essay',value)}
     />
 
 
@@ -69,18 +69,15 @@ const Writing = ({
   // level,
   // date,
   writing,
-  writingSheet,
   onInputChange,
   partSelect,
   partSelected
 }) => {
   const {
-    directions
+    directions,
+    essay
   } = writing
 
-  const {
-    essay
-  } = writingSheet || {}
   return (
     <View>
   {
