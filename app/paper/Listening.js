@@ -1,258 +1,106 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
-import React, {
-  Component
-} from 'react'
-
+import React from 'react'
+import Moment from 'react-moment'
 import {
   Text,
-  View,
+  Card,
   CardItem,
-  H3,
+  H1,
+  H2,
+  View,
   Textarea,
-  Right,
-  Radio,
-  Icon,
-  Item,
-  Button,
 } from 'native-base'
+import {
+  LISTENING
+} from '../../constant/paperConst'
 
-import util from 'util'
-import Sound from 'react-native-sound'
+const ListeningBar = ({
+  partSelect
+}) => (
+  <CardItem button onPress={()=>partSelect(LISTENING)}>
+    <H1>
+      Part III Listening
+    </H1>
+  </CardItem>
+)
 
-type Props = {
-  onSubmit: Function,
-  scrollToTop: Function,
-  sections: ? Array < {
-    sectionTitle: string,
-    directions: string,
-    modules: Array < {
-      moduleTitle: string,
-      moduleSound: {
-        url: string,
-        status: number,
-      },
-      questions: Array < {
-        optionSelected: ? number,
-        options: Array < string >
-      } > ,
-    } >
-  } >
-}
+const ListeningContent = ({
+  // title,
+  // level,
+  // date,s
+  onInputChange,
+  // answer,
+  // question,
+  partSelect,
+}) => (
+  <View>
+    <ListeningBar partSelect={partSelect} />
 
-type State = {
-  sections: ? Array < {
-    sectionTitle: string,
-    directions: string,
-    modules: Array < {
-      moduleTitle: string,
-      moduleSound: {
-        url: string,
-        status: number,
-      },
-      questions: Array < {
-        optionSelected: ? number,
-        options: Array < string >
-      } > ,
-    } >
-  } > ,
-  sectionSelected: ? number
-}
+    <CardItem header>
+      <Text>
+        Directions:
+      </Text>
+    </CardItem>
+
+    <CardItem>
+      <Text>
+        For this part, you are allowed 30 minted to translate a passage from Chinese into English. You should write your answer on Answer Sheet.
+      </Text>
+    </CardItem>
+
+    {/* <CardItem>
+      <Text>
+        {question}
+      </Text>
+    </CardItem> */}
+
+    {/* <Textarea
+      rowSpan={5}
+      value={answer}
+      placeholder="Write your answer here..."
+      onChangeText={(value) => onInputChange('listeningSheet.answer',value)}
+    /> */}
 
 
-export default class App extends Component < Props, State > {
-  constructor(props: Props) {
-    super(props)
-    Sound.setCategory('Playback')
-    this.state = {
-      sections: this.props.sections,
-      sectionSelected: null,
-    }
+    <ListeningBar partSelect={partSelect} />
+  </View>
+)
+
+
+const Listening = ({
+  // title,
+  // level,
+  // date,
+  listening,
+  listeningSheet,
+  onInputChange,
+  partSelect,
+  partSelected
+}) => {
+  // const {
+  //   question
+  // } = listening
+
+  // const {
+  //   answer
+  // } = listeningSheet || {}
+  return (
+    <View>
+  {
+    partSelected === LISTENING
+      ? (
+        <ListeningContent
+          partSelect={partSelect}
+          // answer={answer}
+          onInputChange={onInputChange}
+          // title={title}
+          // date={date}
+          // level={level}
+          // question={question}
+        />)
+      :(<ListeningBar partSelect={partSelect} />)
   }
-
-
-
-  render() {
-    const stateTemp = this.state
-    let optionSelected
-    return stateTemp.sections ? (
-      <View>
-        {
-          stateTemp.sections.map((sectionValue,sectionIndex)=>(
-            <View key={sectionIndex}>
-              <CardItem button onPress={()=>{
-                stateTemp.sectionSelected = stateTemp.sectionSelected == sectionIndex ? null : sectionIndex
-
-                // console.log(util.inspect(even.nativeEvent.locationX))
-                this.setState(stateTemp, ()=>{this.props.scrollToTop()})
-              }}>
-                <H3>
-                    Section {String.fromCharCode(sectionIndex+65)} {sectionValue.sectionTitle}
-                </H3>
-              </CardItem>
-              {
-                this.state.sectionSelected === sectionIndex?(
-                  <View>
-                    <CardItem header>
-                      <Text>
-                        Directions:
-                      </Text>
-                    </CardItem>
-                    <CardItem>
-                      <Text>
-                        {sectionValue.directions}
-                      </Text>
-                    </CardItem>
-                    {
-                      sectionValue.modules.map((moduleValue,moduleIndex)=>(
-                        <View key={moduleIndex}>
-                          <CardItem header>
-                            <Text>{sectionValue.sectionTitle} {moduleIndex + 1}</Text>
-                            <Right>
-                              {
-                                stateTemp.sections&&stateTemp.sections.filter((sectionValue)=>(
-                                  sectionValue.modules.filter((moduleValue)=>(
-                                    moduleValue.moduleSound.status===1
-                                  )).length
-                                )).length?(
-                                  moduleValue.moduleSound.status?(
-                                    moduleValue.moduleSound.status===1?(
-                                      <Icon
-                                        name='ios-headset'
-                                        style={{ color: '#000' }}
-                                      />
-                                    ):(
-                                      <Icon
-                                        name='ios-headset-outline'
-                                      />
-                                    )
-                                  ):undefined
-                                ):(
-                                  moduleValue.moduleSound.status?(
-                                    moduleValue.moduleSound.status===1?(
-                                      <Icon
-                                        name='ios-headset'
-                                        style={{ color: '#000' }}
-                                      />
-                                    ):(
-                                      <Button transparent dark onPress={()=>{
-                                        moduleValue.moduleSound.status = 1
-                                        this.setState(stateTemp)
-                                        const callback = (error, sound) => {
-                                          if (error) {
-                                            alert(error.message);
-                                            // setTestState(testInfo, component, 'fail');
-                                            return;
-                                          }
-                                          // setTestState(testInfo, component, 'playing');
-                                          // Run optional pre-play callback
-                                          // testInfo.onPrepared && testInfo.onPrepared(sound, component);
-                                          sound.play(() => {
-                                            // Success counts as getting to the end
-                                            // setTestState(testInfo, component, 'win');
-                                            // Release when it's done so we're not using up resources
-                                            sound.release()
-                                            moduleValue.moduleSound.status = 0
-                                            this.setState(stateTemp)
-
-                                          });
-                                        }
-
-
-                                        let sound = new Sound(
-                                          moduleValue.moduleSound.url,
-                                          undefined,
-                                          error=>callback(error, sound)
-                                        )
-
-                                        // sound.play(
-                                        //   (success) => {
-                                        //     if (success) {
-                                        //       console.log('successfully finished playing');
-                                        //     } else {
-                                        //       console.log('playback failed due to audio decoding errors');
-                                        //       // reset the player to its uninitialized state (android only)
-                                        //       // this is the only option to recover after an error occured and use the player again
-                                        //       sound.release();
-                                        //     }
-                                        //   }
-                                        // )
-                                      }}>
-                                        <Icon
-                                          name='ios-headset-outline'
-                                        />
-                                      </Button>
-                                    )
-                                  ):undefined
-                                )
-                              }
-                            </Right>
-                          </CardItem>
-                          <CardItem header>
-                            <Text>{moduleValue.moduleTitle}</Text>
-                          </CardItem>
-                          {
-                            moduleValue.questions.map((questionValue, questionIndex)=>(
-                              <View key={questionIndex}>
-                                <CardItem header>
-                                  <Text>
-                                    {questionIndex + 1}.
-                                  </Text>
-                                </CardItem>
-                                {
-                                  questionValue.options.map((optionValue, optionIndex)=>(
-                                    <CardItem key={optionIndex} button onPress={()=>{
-                                      optionSelected = questionValue.optionSelected!==optionIndex?(
-                                        optionIndex
-                                      ):(
-                                        null
-                                      )
-
-                                      questionValue.optionSelected = optionSelected
-                                      // console.log(JSON.stringify({
-                                      //   sectionIndex: sectionIndex,
-                                      //   moduleIndex: moduleIndex,
-                                      //   questionIndex: questionIndex,
-                                      //   optionIndex: optionIndex,
-                                      // }))
-                                      // console.log(JSON.stringify(
-                                      //   stateTemp.sections[sectionIndex].modules[moduleIndex].questions[questionIndex].optionSelected
-                                      // ))
-                                      this.props.onSubmit(sectionIndex, moduleIndex, questionIndex, optionSelected)
-
-                                      this.setState(stateTemp)
-                                    }}>
-                                      <Text>{String.fromCharCode(optionIndex+65)}: {optionValue}</Text>
-                                      {
-                                        optionIndex===questionValue.optionSelected?(
-                                          <Right>
-                                            <Icon
-                                              name='radio-button-on'
-                                              style={{color:'#000'}}
-                                            />
-                                          </Right>
-                                        ):null
-                                      }
-                                    </CardItem>
-                                  ))
-                                }
-                              </View>
-                            ))
-                          }
-                        </View>
-                      ))
-                    }
-                  </View>
-                ):null
-              }
-            </View>
-          ))
-        }
-      </View>
-    ) : null
-  }
+  </View>
+  )
 }
+
+export default Listening

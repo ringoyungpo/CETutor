@@ -54,6 +54,7 @@ import setAuthToken from '../utils/setAuthToken'
 import CurrentUserStore from '../navigation/CurrentUserStore'
 import PaperHeader from './PaperHeader'
 import Writing from './Writing'
+import Listening from './Listening'
 import Translation from './Translation'
 type Props = {
   navigation: Function
@@ -79,18 +80,18 @@ class PaperScreen extends Component < Props > {
       partSelected
     } = PaperStore
 
-
-
     const {
       title,
       level,
       date,
       writing,
+      listening,
       translation,
     } = paper
 
     const {
       writingSheet,
+      listeningSheet,
       translationSheet
     } = answerSheet
 
@@ -105,6 +106,13 @@ class PaperScreen extends Component < Props > {
         <Writing
           writing={writing}
           writingSheet={writingSheet}
+          onInputChange={onInputChange}
+          partSelect={partSelect} partSelected={partSelected}
+        />
+
+        <Listening
+          listening={listening}
+          listeningSheet={listeningSheet}
           onInputChange={onInputChange}
           partSelect={partSelect} partSelected={partSelected}
         />

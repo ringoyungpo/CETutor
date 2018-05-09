@@ -50,9 +50,7 @@ class PaperListItem extends Component < Props > {
     } = this.props.paper
     return (
       <CardItem button onPress={()=>this.props._showPaper(_id, PRACTICE)}>
-
         <Left>
-
           {
             level===CET_4
               ?(<Icon type="MaterialCommunityIcons" active name="numeric-4-box-outline" />)
