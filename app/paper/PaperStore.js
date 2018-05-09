@@ -101,8 +101,6 @@ class PaperStore {
             this.sound = undefined
           }
         })
-
-
       })
     }
 
@@ -115,10 +113,7 @@ class PaperStore {
       this.audioPlaying = true
       if (questionSound) this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions][questionIndex][questionSound].playing = true
       else this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions].playing = true
-
     })
-
-
   }
 
   @action.bound
@@ -149,7 +144,7 @@ class PaperStore {
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
       this.paper = data
-      // console.log(data)
+      console.log(data)
     } catch (e) {
       console.log(e)
       // this.errors = e.response.data

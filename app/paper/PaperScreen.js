@@ -59,6 +59,7 @@ import CurrentUserStore from '../navigation/CurrentUserStore'
 import PaperHeader from './PaperHeader'
 import Writing from './Writing'
 import Listening from './Listening'
+import Reading from './Reading'
 import Translation from './Translation'
 type Props = {
   navigation: Function
@@ -99,6 +100,7 @@ class PaperScreen extends Component < Props > {
       level,
       date,
       writing,
+      reading,
       listening,
       translation,
     } = paper
@@ -128,6 +130,14 @@ class PaperScreen extends Component < Props > {
           playAudio={playAudio}
           mode={mode}
         />
+
+        <Reading
+          reading={reading}
+          onInputChange={onInputChange}
+          partSelect={partSelect}
+          partSelected={partSelected}
+        />
+
 
         <Translation
           translation={translation}
