@@ -48,13 +48,19 @@ class PaperStore {
     this.partSelected = PAPER_HEADER
     this.sectionSelected = null
     this.audioPlaying = false
-    this.sound = false
+    this.sound = null
     Sound.setCategory('Playback')
   }
 
   @action.bound
-  clearAudioPlaying() {
+  UnmountPaperScreen() {
+    this.paper = {}
+    this.answerSheet = {}
+    this.downloading = false
+    this.partSelected = PAPER_HEADER
+    this.sectionSelected = null
     this.audioPlaying = false
+    this.sound = null
   }
 
   @action.bound
