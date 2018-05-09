@@ -20,12 +20,12 @@ import {
   READING,
   TRANSLATION
 } from '../../constant/paperConst'
-import Sound from 'react-native-sound'
+// import Sound from 'react-native-sound'
 
 configure({
   enforceActions: true
 })
-s
+
 class PaperStore {
   @observable paper
   @observable answerSheet
