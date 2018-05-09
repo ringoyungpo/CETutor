@@ -18,9 +18,9 @@ const TranslationBar = ({
   partSelect
 }) => (
   <CardItem button onPress={()=>partSelect(TRANSLATION)}>
-    <H1>
+    <H2>
       Part IV Translation
-    </H1>
+    </H2>
   </CardItem>
 )
 

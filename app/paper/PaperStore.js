@@ -81,7 +81,7 @@ class PaperStore {
 
   @action.bound
   playAudio(url, mode, key) {
-    const [listening, sections, sectionIndex, modules, moduleIndex, moduleSound] = key.split('.')
+    const [listening, sections, sectionIndex, modules, moduleIndex, moduleSoundOrQuestions, questionIndex, questionSound] = key.split('.')
 
     const callback = (error) => {
       if (error) {
@@ -94,9 +94,12 @@ class PaperStore {
 
         runInAction(() => {
           this.audioPlaying = false
-          this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].playing = false
+          if (questionSound) this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions][questionIndex][questionSound].playing = false
+          else this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions].playing = false
           if (mode === TEST) {
-            this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].played = true
+            if (questionSound) this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions][questionIndex][questionSound].played = true
+            else this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions].played = true
+
             this.sound = undefined
           }
         })
@@ -112,7 +115,8 @@ class PaperStore {
         error => callback(error)
       )
       this.audioPlaying = true
-      this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].playing = true
+      if (questionSound) this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions][questionIndex][questionSound].playing = true
+      else this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSoundOrQuestions].playing = true
 
     })
 

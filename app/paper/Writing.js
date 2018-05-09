@@ -18,9 +18,9 @@ const WritingBar = ({
   partSelect
 }) => (
   <CardItem button onPress={()=>partSelect(WRITING)}>
-    <H1>
+    <H2>
       Part I Writing
-    </H1>
+    </H2>
   </CardItem>
 )
 

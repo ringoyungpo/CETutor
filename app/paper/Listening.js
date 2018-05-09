@@ -72,9 +72,9 @@ const ListeningBar = ({
   partSelect
 }) => (
   <CardItem button onPress={()=>partSelect(LISTENING)}>
-    <H1>
-      Part II Listening
-    </H1>
+    <H2>
+      Part II Listening Comprehension
+    </H2>
   </CardItem>
 )
 
@@ -183,6 +183,16 @@ const SectionContent = ({
     <CardItem header >
       <Icon type="Entypo" active name="chevron-down" />
     </CardItem>
+    <CardItem header >
+      <Text>
+        Directions:
+      </Text>
+    </CardItem>
+    <CardItem>
+      <Text>
+        {`In this section, you will hear ${modules.length} ${sectionTitle.toLowerCase()}. At the end of each ${sectionTitle.toLowerCase()}, you will hear several questions. Both the ${sectionTitle.toLowerCase()} and the questions will be spoken only once. After you hear a question, you must choose the best answer from the four choices marked A), B), C) and D). Then mark the corresponding letter on Answer Sheet with a single line through the centre.`}
+      </Text>
+    </CardItem>
     {modules.map((moduleValue, moduleIndex)=>{
       const {moduleSound,questions}=moduleValue
       const {url, playing, played} =moduleSound
@@ -208,21 +218,47 @@ const SectionContent = ({
               )}
             </Right>)}
           </CardItem>
-          <CardItem header >
-            <Text>
-              Directions:
-            </Text>
-          </CardItem>
-          <CardItem>
-            <Text>
-              {`In this section, you will hear ${modules.length} ${sectionTitle.toLowerCase()}. At the end of each ${sectionTitle.toLowerCase()}, you will hear several questions. Both the ${sectionTitle.toLowerCase()} and the questions will be spoken only once. After you hear a question, you must choose the best answer from the four choices marked A), B), C) and D). Then mark the corresponding letter on Answer Sheet with a single line through the centre.`}
-            </Text>
-          </CardItem>
           <CardItem header>
             <Text>
               {`Questions 1 to ${questions.length} are based on the conversation you have just heard.`}
             </Text>
           </CardItem>
+          {questions.map((questionValue,questionIndex)=>{
+            const {options, questionSound} = questionValue
+            const {url, playing, played}=questionSound
+            return (
+              <View key={questionIndex}>
+                <CardItem header>
+                  <Text>
+                    {questionIndex+1}.
+                  </Text>
+                  {!played&&(<Right>
+                    {!playing
+                      ?(<Button  disabled={audioPlaying===true} onPress={()=>{
+                      playAudio(url, mode,`listening.sections.${sectionIndex}.modules.${moduleIndex}.questions.${questionIndex}.questionSound`)
+                    }}>
+                      <Icon type={'Entypo'} name="controller-play" />
+                    </Button>):(
+                      <Button>
+                        <Icon type={'MaterialCommunityIcons'} name="headset"/>
+                      </Button>
+                    )}
+                  </Right>)}
+                </CardItem>
+                {options.map((optionValue, optionIndex)=>{
+                  return (
+                    <View key={optionIndex}>
+                      <CardItem>
+                        <Text>
+                          {String.fromCharCode(optionIndex+65)}. {optionValue}
+                        </Text>
+                      </CardItem>
+                    </View>
+                  )
+                })}
+              </View>
+            )
+          })}
         </View>
       )
     })}
