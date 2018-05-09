@@ -70,6 +70,10 @@ class PaperScreen extends Component < Props > {
     PaperStore.InitAsync(this.props.navigation.getParam('_id'))
   }
 
+  componentWillUnmount() {
+    PaperStore.sound && PaperStore.sound.stop()
+  }
+
   render() {
     const mode = this.props.navigation.getParam('mode')
     console.log({

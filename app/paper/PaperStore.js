@@ -19,7 +19,8 @@ import {
   WRITING,
   LISTENING,
   READING,
-  TRANSLATION
+  TRANSLATION,
+  TEST
 } from '../../constant/paperConst'
 // import Sound from 'react-native-sound'
 import Sound from 'react-native-sound'
@@ -36,6 +37,7 @@ class PaperStore {
   @observable partSelected
   @observable sectionSelected
   @observable audioPlaying
+  @observable sound
 
 
 
@@ -46,6 +48,7 @@ class PaperStore {
     this.partSelected = PAPER_HEADER
     this.sectionSelected = null
     this.audioPlaying = false
+    this.sound = false
     Sound.setCategory('Playback')
   }
 
@@ -66,36 +69,43 @@ class PaperStore {
   }
 
   @action.bound
-  onAudioStatusChange(key, value) {
+  playAudio(url, mode, key) {
+    const [listening, sections, sectionIndex, modules, moduleIndex, moduleSound] = key.split('.')
 
-  }
-
-  @action.bound
-  playAudio(url) {
-    runInAction(() => {
-      this.audioPlaying = true
-    })
-    const callback = (error, sound) => {
+    const callback = (error) => {
       if (error) {
         alert(error.message)
         return
       }
 
-      sound.play(() => {
-        sound.release()
+      this.sound.play(() => {
+        this.sound.release()
 
         runInAction(() => {
           this.audioPlaying = false
+          this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].playing = false
+          if (mode === TEST) {
+            this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].played = true
+            this.sound = undefined
+          }
         })
-        sound = undefined
-      });
+
+
+      })
     }
 
-    let sound = new Sound(
-      url,
-      undefined,
-      error => callback(error, sound)
-    )
+    runInAction(() => {
+      this.sound = new Sound(
+        url,
+        undefined,
+        error => callback(error)
+      )
+      this.audioPlaying = true
+      this.paper[listening][sections][sectionIndex][modules][moduleIndex][moduleSound].playing = true
+
+    })
+
+
   }
 
   @action.bound

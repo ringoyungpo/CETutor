@@ -185,7 +185,7 @@ const SectionContent = ({
     </CardItem>
     {modules.map((moduleValue, moduleIndex)=>{
       const {moduleSound}=moduleValue
-      const {url, played} =moduleSound
+      const {url, playing, played} =moduleSound
       return (
         <View key={moduleIndex}>
           <CardItem header >
@@ -193,14 +193,19 @@ const SectionContent = ({
               {sectionTitle+' '+(moduleIndex+1)}
             </Text>
             {!played&&(<Right>
-              <Button  disabled={audioPlaying===true} onPress={()=>{
-                playAudio(url)
+              {!playing
+                ?(<Button  disabled={audioPlaying===true} onPress={()=>{
+                playAudio(url, mode,`listening.sections.${sectionIndex}.modules.${moduleIndex}.moduleSound`)
                 // if(mode===TEST){
                 //   console.log('TODO audio played')
                 // }
               }}>
                 <Icon type={'Entypo'} name="controller-play" />
-              </Button>
+              </Button>):(
+                <Button>
+                  <Icon type={'MaterialCommunityIcons'} name="headset"/>
+                </Button>
+              )}
             </Right>)}
           </CardItem>
           <CardItem header >
