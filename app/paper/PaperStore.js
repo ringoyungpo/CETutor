@@ -40,16 +40,21 @@ class PaperStore {
 
   @action.bound
   partSelect(part) {
-    console.log(part)
     if (this.partSelected === part)
-      this.partSelected = ''
+      this.partSelected = null
     else
       this.partSelected = part
   }
 
   @action.bound
   onInputChange(key, value) {
-    this[key] = value
+    const [part, words] = key.split('.')
+    if (words) {
+      this.answerSheet[part] = this[part] || {}
+      this.answerSheet[part][words] = value
+    } else {
+      this.answerSheet[part] = value
+    }
   }
 
   @action.bound
@@ -61,9 +66,8 @@ class PaperStore {
         data
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
-      console.log(data)
-
       this.paper = data
+      this.answerSheet = {}
     } catch (e) {
       console.log(e)
       // this.errors = e.response.data

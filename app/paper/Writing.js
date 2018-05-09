@@ -27,6 +27,9 @@ const WritingContent = ({
   // title,
   // level,
   // date,s
+  onInputChange,
+  essay,
+  directions,
   partSelect,
 }) => (
   <View>
@@ -34,9 +37,22 @@ const WritingContent = ({
 
     <CardItem header>
       <Text>
-        Title:
+        Directions:
       </Text>
     </CardItem>
+
+    <CardItem>
+      <Text>
+        {directions}
+      </Text>
+    </CardItem>
+
+    <Textarea
+      rowSpan={5}
+      value={essay}
+      placeholder="Write your answer here..."
+      onChangeText={(value) => onInputChange('writingSheet.essay',value)}
+    />
 
 
     <WritingBar partSelect={partSelect} />
@@ -48,22 +64,37 @@ const Writing = ({
   // title,
   // level,
   // date,
+  writing,
+  writingSheet,
+  onInputChange,
   partSelect,
   partSelected
-}) => (
-  <View>
+}) => {
+  const {
+    directions
+  } = writing
+
+  const {
+    essay
+  } = writingSheet || {}
+  return (
+    <View>
   {
     partSelected === WRITING
       ? (
         <WritingContent
           partSelect={partSelect}
+          essay={essay}
+          onInputChange={onInputChange}
           // title={title}
           // date={date}
           // level={level}
+          directions={directions}
         />)
       :(<WritingBar partSelect={partSelect} />)
   }
   </View>
-)
+  )
+}
 
 export default Writing

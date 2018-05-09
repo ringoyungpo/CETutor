@@ -71,6 +71,7 @@ class PaperScreen extends Component < Props > {
   render() {
     const {
       paper,
+      answerSheet,
       downloading,
       onInputChange,
       partSelect,
@@ -78,10 +79,16 @@ class PaperScreen extends Component < Props > {
     } = PaperStore
 
     const {
+      writingSheet
+    } = answerSheet
+
+    const {
       title,
       level,
       date,
+      writing,
     } = paper
+
 
     const PaperContent = (
       <Card>
@@ -91,6 +98,9 @@ class PaperScreen extends Component < Props > {
         />
 
         <Writing
+          writing={writing}
+          writingSheet={writingSheet}
+          onInputChange={onInputChange}
           partSelect={partSelect} partSelected={partSelected}
         />
       </Card>

@@ -4,7 +4,9 @@
  * @flow
  */
 
-import React, { Component } from 'react'
+import React, {
+  Component
+} from 'react'
 import {
   Text,
   Card,
@@ -18,17 +20,17 @@ type Props = {
   onSubmit: Function,
   writing: {
     directions: string,
-    essay : ?string
+    essay: ? string
   }
 }
 type State = {
   directions: string,
-  essay : ?string
+  essay: ? string
 }
-export default class App extends Component<Props, State> {
-  constructor(props: any){
+export default class App extends Component < Props, State > {
+  constructor(props: any) {
     super(props)
-    this.state={
+    this.state = {
       directions: this.props.writing.directions,
       essay: this.props.writing.essay
     }
