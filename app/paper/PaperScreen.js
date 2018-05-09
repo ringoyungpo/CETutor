@@ -136,13 +136,17 @@ class PaperScreen extends Component < Props > {
           onInputChange={onInputChange}
           partSelect={partSelect}
           partSelected={partSelected}
+          sectionSelect={sectionSelect}
+          sectionSelected={sectionSelected}
+
         />
 
 
         <Translation
           translation={translation}
           onInputChange={onInputChange}
-          partSelect={partSelect} partSelected={partSelected}
+          partSelect={partSelect}
+          partSelected={partSelected}
         />
       </Card>
     )

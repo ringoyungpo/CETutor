@@ -6,6 +6,7 @@ import {
   CardItem,
   H1,
   H2,
+  H3,
   View,
   Icon,
   Textarea,
@@ -22,7 +23,9 @@ const Reading = ({
   reading,
   onInputChange,
   partSelect,
-  partSelected
+  partSelected,
+  sectionSelect,
+  sectionSelected
 }) => {
   const {
     sections
@@ -37,6 +40,8 @@ const Reading = ({
           sections={sections}
           onInputChange={onInputChange}
           partSelect={partSelect}
+          sectionSelect={sectionSelect}
+          sectionSelected={sectionSelected}
           // title={title}
           // date={date}
           // level={level}
@@ -52,7 +57,7 @@ const ReadingBar = ({
 }) => (
   <CardItem button onPress={()=>partSelect(READING)}>
     <H2>
-      Part III Reading
+      Part III Reading Comprehension
     </H2>
   </CardItem>
 )
@@ -64,29 +69,99 @@ const ReadingContent = ({
   // date,s
   onInputChange,
   sections,
+  sectionSelect,
+  sectionSelected,
   partSelect,
-}) => (
-  <View>
+}) => {
+  const {
+    bankedCloze,
+    locating,
+    selection
+  } = sections
+  console.log(sections)
+  return (
+    <View>
     <ReadingBar partSelect={partSelect} />
     <Icon type="Entypo" active name="chevron-thin-down" />
 
-
-    <CardItem header>
+    {
+      ['bankedCloze',
+      'locating',
+      'selection'].map((sectionValue, sectionIndex)=>{
+        return (
+          <View key={sectionIndex}>
+            <CardItem header button onPress={()=>sectionSelect(sectionIndex)}>
+              <H3>
+                Sections {String.fromCharCode(sectionIndex+65)} {_.startCase(sectionValue.replace('_', ' ').toLowerCase())}
+              </H3>
+            </CardItem>
+            {
+              sectionSelected===sectionIndex?(
+                <View>
+                  {
+                    sectionValue==='bankedCloze'&&(<BankedCloze/>)
+                  }
+                  {
+                    sectionValue==='locating'&&(<Locating/>)
+                  }
+                  {
+                    sectionValue==='selection'&&(<Selection/>)
+                  }
+                </View>
+              ):null
+            }
+          </View>
+        )
+      })
+    }
+    {/* <CardItem header>
       <Text>
-        Directions:
+        DirecASDFASDFtions:
       </Text>
-    </CardItem>
+    </CardItem> */}
 
-    <CardItem>
+
+
+    {/* <CardItem>
       <Text>
         {JSON.stringify(sections)}
       </Text>
-    </CardItem>
+    </CardItem> */}
 
 
     <Icon type="Entypo" active name="chevron-thin-up" />
     <ReadingBar partSelect={partSelect} />
   </View>
-)
+  )
+}
+
+const BankedCloze = () => {
+  return (
+    <View>
+      <Text>
+        BankedCloze
+      </Text>
+    </View>
+  )
+}
+
+const Locating = () => {
+  return (
+    <View>
+      <Text>
+        Locating
+      </Text>
+    </View>
+  )
+}
+const Selection = () => {
+  return (
+    <View>
+      <Text>
+        selection
+      </Text>
+    </View>
+  )
+}
 
 export default Reading

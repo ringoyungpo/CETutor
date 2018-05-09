@@ -67,6 +67,8 @@ class PaperStore {
       this.partSelected = null
     else
       this.partSelected = part
+
+    this.sectionSelected = null
   }
 
   @action.bound
