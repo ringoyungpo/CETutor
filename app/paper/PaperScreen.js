@@ -77,7 +77,9 @@ class PaperScreen extends Component < Props > {
       downloading,
       onInputChange,
       partSelect,
-      partSelected
+      partSelected,
+      sectionSelect,
+      sectionSelected,
     } = PaperStore
 
     const {
@@ -114,7 +116,10 @@ class PaperScreen extends Component < Props > {
           listening={listening}
           listeningSheet={listeningSheet}
           onInputChange={onInputChange}
-          partSelect={partSelect} partSelected={partSelected}
+          partSelect={partSelect} 
+          partSelected={partSelected}
+          sectionSelect={sectionSelect}
+          sectionSelected={sectionSelected}
         />
 
         <Translation

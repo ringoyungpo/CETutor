@@ -7,6 +7,7 @@ import {
   H1,
   H2,
   View,
+  Icon,
   Textarea,
 } from 'native-base'
 import {
@@ -34,6 +35,8 @@ const WritingContent = ({
 }) => (
   <View>
     <WritingBar partSelect={partSelect} />
+    <Icon type="Entypo" active name="chevron-thin-down" />
+
 
     <CardItem header>
       <Text>
@@ -55,6 +58,7 @@ const WritingContent = ({
     />
 
 
+    <Icon type="Entypo" active name="chevron-thin-up" />
     <WritingBar partSelect={partSelect} />
   </View>
 )

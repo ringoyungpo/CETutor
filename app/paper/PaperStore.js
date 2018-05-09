@@ -20,22 +20,29 @@ import {
   READING,
   TRANSLATION
 } from '../../constant/paperConst'
+import Sound from 'react-native-sound'
 
 configure({
   enforceActions: true
 })
-
+s
 class PaperStore {
   @observable paper
   @observable answerSheet
   @observable downloading
   @observable partSelected
+  @observable sectionSelected
+  @observable audioPlaying
+
+
 
   constructor() {
     this.paper = {}
     this.answerSheet = {}
     this.downloading = false
     this.partSelected = PAPER_HEADER
+    this.sectionSelected = null
+    this.audioPlaying = false
   }
 
   @action.bound
@@ -44,6 +51,14 @@ class PaperStore {
       this.partSelected = null
     else
       this.partSelected = part
+  }
+
+  @action.bound
+  sectionSelect(section) {
+    if (this.sectionSelected === section)
+      this.sectionSelected = null
+    else
+      this.sectionSelected = section
   }
 
   @action.bound
@@ -67,7 +82,7 @@ class PaperStore {
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
       this.paper = data
-      // console.log(data)
+      console.log(data)
       this.answerSheet = {}
     } catch (e) {
       console.log(e)

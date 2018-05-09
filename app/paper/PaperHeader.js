@@ -7,6 +7,7 @@ import {
   H1,
   H2,
   View,
+  Icon,
   Textarea,
 } from 'native-base'
 import {
@@ -31,6 +32,7 @@ const PaperHeaderContent = ({
 }) => (
   <View>
     <PaperHeaderBar partSelect={partSelect} />
+    <Icon type="Entypo" active name="chevron-thin-down" />
 
     <CardItem header>
       <Text>
@@ -66,7 +68,7 @@ const PaperHeaderContent = ({
       <Moment element={Text} format={'LLL'}>{date}</Moment>
     </CardItem>
 
-
+    <Icon type="Entypo" active name="chevron-thin-up" />
     <PaperHeaderBar partSelect={partSelect} />
   </View>
 )

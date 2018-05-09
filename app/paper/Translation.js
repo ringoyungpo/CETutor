@@ -7,6 +7,7 @@ import {
   H1,
   H2,
   View,
+  Icon,
   Textarea,
 } from 'native-base'
 import {
@@ -34,6 +35,8 @@ const TranslationContent = ({
 }) => (
   <View>
     <TranslationBar partSelect={partSelect} />
+    <Icon type="Entypo" active name="chevron-thin-down" />
+
 
     <CardItem header>
       <Text>
@@ -60,6 +63,7 @@ const TranslationContent = ({
       onChangeText={(value) => onInputChange('translationSheet.answer',value)}
     />
 
+    <Icon type="Entypo" active name="chevron-thin-up" />
 
     <TranslationBar partSelect={partSelect} />
   </View>
