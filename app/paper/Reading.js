@@ -69,6 +69,20 @@ const ReadingBar = ({
 )
 
 
+const SectionBar = ({
+  sectionValue,
+  sectionIndex,
+  sectionSelect
+}) => {
+  return (
+    <CardItem header button onPress={()=>sectionSelect(sectionIndex)}>
+      <H3>
+        Sections {String.fromCharCode(sectionIndex+65)} {_.startCase(sectionValue.replace('_', ' ').toLowerCase())}
+      </H3>
+    </CardItem>
+  )
+}
+
 const ReadingContent = ({
   // title,
   // level,
@@ -100,14 +114,16 @@ const ReadingContent = ({
       'selection'].map((sectionValue, sectionIndex)=>{
         return (
           <View key={sectionIndex}>
-            <CardItem header button onPress={()=>sectionSelect(sectionIndex)}>
-              <H3>
-                Sections {String.fromCharCode(sectionIndex+65)} {_.startCase(sectionValue.replace('_', ' ').toLowerCase())}
-              </H3>
-            </CardItem>
+
             {
               sectionSelected===sectionIndex?(
+
                 <View>
+                  <SectionBar sectionValue={sectionValue} sectionIndex={sectionIndex} sectionSelect={sectionSelect}/>
+                  <CardItem>
+                    <Icon type="Entypo" active name="chevron-thin-down" />                    
+                  </CardItem>
+
                   {
                     sectionValue==='bankedCloze'&&(
                       <BankedCloze
@@ -121,8 +137,17 @@ const ReadingContent = ({
                   {
                     sectionValue==='selection'&&(<Selection/>)
                   }
+                  <CardItem>
+                    <Icon type="Entypo" active name="chevron-thin-up" />
+                  </CardItem>
+
+                  <SectionBar sectionValue={sectionValue} sectionIndex={sectionIndex} sectionSelect={sectionSelect}/>
+
                 </View>
-              ):null
+
+              ):(
+                <SectionBar sectionValue={sectionValue} sectionIndex={sectionIndex} sectionSelect={sectionSelect}/>
+              )
             }
           </View>
         )
@@ -186,8 +211,9 @@ const BankedCloze = ({
                 style={{ height: 50, width: 100 }}
                 // onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
                 >
+                  <Picker.Item label="JavaScript" value="js" />
+
                 <Picker.Item label="Java" value="java" />
-                <Picker.Item label="JavaScript" value="js" />
               </Picker>
             </View>
           )
