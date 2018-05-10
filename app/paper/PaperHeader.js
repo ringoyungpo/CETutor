@@ -13,6 +13,7 @@ import {
 import {
   PAPER_HEADER
 } from '../../constant/paperConst'
+import _ from 'lodash'
 
 const PaperHeaderBar = ({
   partSelect
@@ -29,6 +30,7 @@ const PaperHeaderContent = ({
   level,
   date,
   partSelect,
+  mode
 }) => (
   <View>
     <PaperHeaderBar partSelect={partSelect} />
@@ -68,6 +70,18 @@ const PaperHeaderContent = ({
       <Moment element={Text} format={'LLL'}>{date}</Moment>
     </CardItem>
 
+    <CardItem header>
+      <Text>
+        Mode:
+      </Text>
+    </CardItem>
+
+    <CardItem>
+      <Text>
+        {_.startCase(mode.toLowerCase())}
+      </Text>
+    </CardItem>
+
     <Icon type="Entypo" active name="chevron-thin-up" />
     <PaperHeaderBar partSelect={partSelect} />
   </View>
@@ -79,7 +93,8 @@ const PaperHeader = ({
   level,
   date,
   partSelect,
-  partSelected
+  partSelected,
+  mode
 }) => (
   <View>
   {
@@ -89,6 +104,7 @@ const PaperHeader = ({
           partSelect={partSelect}
           title={title}
           date={date}
+          mode={mode}
           level={level} />)
       : (<PaperHeaderBar partSelect={partSelect} />)
 

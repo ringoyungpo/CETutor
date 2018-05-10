@@ -116,7 +116,7 @@ class PaperScreen extends Component < Props > {
     const PaperContent = (
       <Card>
         <PaperHeader
-          date={date} title={title} level={level}
+          date={date} title={title} level={level} mode={mode}
           partSelect={partSelect} partSelected={partSelected}
         />
 

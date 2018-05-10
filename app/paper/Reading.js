@@ -101,9 +101,9 @@ const ReadingContent = ({
     locating,
     selection
   } = sections
-  console.log({
-    mode
-  })
+  // console.log({
+  //   mode
+  // })
   return (
     <View>
     <ReadingBar partSelect={partSelect} />

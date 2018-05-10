@@ -44,7 +44,7 @@ class PaperStore {
   constructor() {
     this.paper = {}
     this.downloading = false
-    this.partSelected = PAPER_HEADER
+    this.partSelected = null
     this.sectionSelected = null
     this.audioPlaying = false
     this.sound = null
@@ -55,7 +55,7 @@ class PaperStore {
   UnmountPaperScreen() {
     this.paper = {}
     this.downloading = false
-    this.partSelected = PAPER_HEADER
+    this.partSelected = null
     this.sectionSelected = null
     this.audioPlaying = false
     this.sound = null
@@ -214,7 +214,7 @@ class PaperStore {
       // data.writing.eassy = ''
       // data.translation.answer = ''
       data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
-      console.log(data)
+      // console.log(data)
 
       this.paper = data
     } catch (e) {
