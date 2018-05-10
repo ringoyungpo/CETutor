@@ -90,7 +90,8 @@ class SignInScreen extends Component < {
             <Row style={{ height: 100 }}/>
           <Button full info={!submitting} disabled={submitting} onPress={async()=>{
             const token = await signInAsync({email,password})
-            if(token){console.log('success'+token)
+            if(token){
+              // console.log('success'+token)
             await AsyncStorage.setItem('jwtToken', token)
             setAuthToken(token)
             const decoded = jwt_decode(token)

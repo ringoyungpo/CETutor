@@ -133,8 +133,8 @@ class PaperStore {
           const [listening, sections, sectionIndex, modules, moduleIndex, questions, questionIndex, optionSelected] = [partField, ...partChild]
           const oldValue = this.paper[listening][sections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected]
           this.paper[listening][sections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected] = oldValue === value ? (null) : (value)
-          this.paper[listening] = { ...this.paper[listening]
-          }
+          // this.paper[listening] = { ...this.paper[listening]
+          // }
         }
         break;
       case 'reading':
@@ -183,8 +183,8 @@ class PaperStore {
             default:
 
           }
-          this.paper[reading] = { ...this.paper[reading]
-          }
+          // this.paper[reading] = { ...this.paper[reading]
+          // }
         }
         break
       case 'translation':
@@ -196,8 +196,8 @@ class PaperStore {
       default:
 
     }
-    // this.paper = { ...this.paper
-    // }
+    this.paper = { ...this.paper
+    }
 
   }
 

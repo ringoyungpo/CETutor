@@ -61,6 +61,7 @@ import Writing from './Writing'
 import Listening from './Listening'
 import Reading from './Reading'
 import Translation from './Translation'
+import AnswerSheet from './AnswerSheet'
 type Props = {
   navigation: Function
 }
@@ -114,49 +115,58 @@ class PaperScreen extends Component < Props > {
 
 
     const PaperContent = (
-      <Card>
-        <PaperHeader
-          date={date} title={title} level={level} mode={mode}
-          partSelect={partSelect} partSelected={partSelected}
-        />
+      <View>
+        <Card>
+          <PaperHeader
+            date={date} title={title} level={level} mode={mode}
+            partSelect={partSelect} partSelected={partSelected}
+          />
 
-        <Writing
+          <Writing
+            writing={writing}
+            onInputChange={onInputChange}
+            partSelect={partSelect} partSelected={partSelected}
+          />
+
+          <Listening
+            listening={listening}
+            onInputChange={onInputChange}
+            partSelect={partSelect}
+            partSelected={partSelected}
+            sectionSelect={sectionSelect}
+            sectionSelected={sectionSelected}
+            audioPlaying={audioPlaying}
+            playAudio={playAudio}
+            mode={mode}
+          />
+
+          <Reading
+            reading={reading}
+            onInputChange={onInputChange}
+            partSelect={partSelect}
+            partSelected={partSelected}
+            sectionSelect={sectionSelect}
+            sectionSelected={sectionSelected}
+            mode={mode}
+
+          />
+
+
+          <Translation
+            translation={translation}
+            onInputChange={onInputChange}
+            partSelect={partSelect}
+            partSelected={partSelected}
+          />
+        </Card>
+
+        <AnswerSheet
           writing={writing}
-          onInputChange={onInputChange}
-          partSelect={partSelect} partSelected={partSelected}
-        />
-
-        <Listening
-          listening={listening}
-          onInputChange={onInputChange}
-          partSelect={partSelect}
-          partSelected={partSelected}
-          sectionSelect={sectionSelect}
-          sectionSelected={sectionSelected}
-          audioPlaying={audioPlaying}
-          playAudio={playAudio}
-          mode={mode}
-        />
-
-        <Reading
           reading={reading}
-          onInputChange={onInputChange}
-          partSelect={partSelect}
-          partSelected={partSelected}
-          sectionSelect={sectionSelect}
-          sectionSelected={sectionSelected}
-          mode={mode}
-
-        />
-
-
-        <Translation
+          listening={listening}
           translation={translation}
-          onInputChange={onInputChange}
-          partSelect={partSelect}
-          partSelected={partSelected}
         />
-      </Card>
+      </View>
     )
 
     const downloadingContent = (
