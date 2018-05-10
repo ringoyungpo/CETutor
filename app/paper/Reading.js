@@ -127,12 +127,13 @@ const ReadingContent = ({
                       <BankedCloze
                         bankedCloze={bankedCloze}
                         onInputChange={onInputChange}
+                        mode={mode}
                       />
                     )
                   }
                   {
                     sectionValue==='locating'&&(
-                      <Locating locating={locating} onInputChange={onInputChange}/>
+                      <Locating locating={locating} onInputChange={onInputChange} mode={mode}/>
                     )
                   }
                   {
@@ -162,13 +163,16 @@ const ReadingContent = ({
 
 const BankedCloze = ({
   bankedCloze,
-  onInputChange
+  onInputChange,
+  mode
 }) => {
   let {
     passage,
     options,
     orderSelected,
-    bankedClozing
+    bankedClozing,
+    rightOrder
+
   } = bankedCloze
   passage = passage.split('__')
   return (
@@ -213,7 +217,18 @@ const BankedCloze = ({
                   ):(
                     <Text style={{textDecorationLine:'underline',fontWeight: 'bold'}}
                       onPress={()=>onInputChange('reading.sections.bankedCloze.bankedClozing', passageIndex)}>
-                      {'  '}{orderSelected[passageIndex-1]!==null?(options[orderSelected[passageIndex-1]]):(passageIndex)}{'  '}
+                      {'  '}{orderSelected[passageIndex-1]!==null?(
+                        mode===TEST?(
+                          <Text>{options[orderSelected[passageIndex-1]]}</Text>
+                        ):(
+                          orderSelected[passageIndex-1]===rightOrder[passageIndex-1]?(
+                            <Text style={{color: 'green'}}>{options[orderSelected[passageIndex-1]]}</Text>
+                          ):(
+                            <Text style={{color: 'red'}}>{options[orderSelected[passageIndex-1]]}</Text>
+                          )
+                        )
+
+                      ):(passageIndex)}{'  '}
                     </Text>
                   )
                     )}

@@ -255,9 +255,9 @@ const SectionContent = ({
                         {optionSelected===optionIndex?(
                           mode===TEST?(<Icon name='radio-button-on' style={{color:'#000'}}/>):(
                             optionSelected===rightAnswer?(
-                              <Icon type='Entypo' name='check' style={{color:'#0F0'}}/>
+                              <Icon type='Entypo' name='check' style={{color:'green'}}/>
                             ):(
-                              <Icon type='Entypo' name='cross' style={{color:'#F00'}}/>                              
+                              <Icon type='Entypo' name='cross' style={{color:'red'}}/>
                             )
                           )
 
