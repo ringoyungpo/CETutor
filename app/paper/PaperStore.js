@@ -166,19 +166,16 @@ class PaperStore {
             case 'locating':
               {
                 const [locating, questions, questionIndex, optionSelected] = [sectionField, ...sectionChild]
-                console.log({
-                  locating,
-                  questions,
-                  questionIndex,
-                  optionSelected
-                })
                 this.paper[reading][sections][locating][questions][questionIndex][optionSelected] = value
 
               }
               break;
             case 'selection':
               {
-
+                // reading.sections.selection.passages.passageIndex.questions.questionIndex.optionSelected
+                const [selection, passages, passageIndex, questions, questionIndex, optionSelected] = [sectionField, ...sectionChild]
+                const oldValue = this.paper[reading][sections][selection][passages][passageIndex][questions][questionIndex][optionSelected]
+                this.paper[reading][sections][selection][passages][passageIndex][questions][questionIndex][optionSelected] = oldValue === value ? null : value
               }
               break;
             default:

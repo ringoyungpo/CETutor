@@ -132,7 +132,7 @@ const ReadingContent = ({
                     )
                   }
                   {
-                    sectionValue==='selection'&&(<Selection selection={selection}/>)
+                    sectionValue==='selection'&&(<Selection selection={selection} onInputChange={onInputChange}/>)
                   }
                   <CardItem>
                     <Icon type="Entypo" active name="chevron-thin-up" />
@@ -293,7 +293,8 @@ const Locating = ({
   )
 }
 const Selection = ({
-  selection
+  selection,
+  onInputChange
 }) => {
   const {
     passages
@@ -330,7 +331,7 @@ const Selection = ({
               </Text>
             </CardItem>
             {questions.map((questionValue,questionIndex)=>{
-              const {questionContent,options} = questionValue
+              const {questionContent,options,optionSelected} = questionValue
               return(
                 <View key={questionIndex}>
                   <CardItem header>
@@ -341,11 +342,17 @@ const Selection = ({
                   {options.map((optionValue, optionIndex)=>{
                     return(
                       <View key={optionIndex}>
-                        <CardItem>
-                          <Text>
-                            {String.fromCharCode(optionIndex+65)}. {optionValue}
-                          </Text>
+                        <CardItem button onPress={()=>onInputChange(`reading.sections.selection.passages.${passageIndex}.questions.${questionIndex}.optionSelected`,optionIndex)}>
+                          <Left>
+                            <Text>
+                              {String.fromCharCode(optionIndex+65)}. {optionValue}
+                            </Text>
+                          </Left>                          
+                          {optionSelected===optionIndex?(
+                            <Icon name='radio-button-on' style={{color:'#000'}}/>
+                          ):null}
                         </CardItem>
+
                       </View>
                     )
                   })}
