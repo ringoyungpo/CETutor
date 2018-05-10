@@ -101,6 +101,9 @@ const ReadingContent = ({
     locating,
     selection
   } = sections
+  console.log({
+    mode
+  })
   return (
     <View>
     <ReadingBar partSelect={partSelect} />
@@ -137,7 +140,7 @@ const ReadingContent = ({
                     )
                   }
                   {
-                    sectionValue==='selection'&&(<Selection selection={selection} mode={mode} onInputChange={onInputChange}/>)
+                    sectionValue==='selection'&&(<Selection selection={selection}  onInputChange={onInputChange} mode={mode}/>)
                   }
                   <CardItem>
                     <Icon type="Entypo" active name="chevron-thin-up" />
@@ -172,7 +175,6 @@ const BankedCloze = ({
     orderSelected,
     bankedClozing,
     rightOrder
-
   } = bankedCloze
   passage = passage.split('__')
   return (
@@ -244,14 +246,17 @@ const BankedCloze = ({
 
 const Locating = ({
   locating,
-  onInputChange
+  onInputChange,
+  mode
 }) => {
   const {
     title,
     paragraphs,
     questions,
-    mode
   } = locating
+  console.log({
+    mode
+  })
   return (
     <View>
       <CardItem header>
@@ -286,6 +291,7 @@ const Locating = ({
 
       {questions.map((questionValue,questionIndex)=>{
         const {questionContent,optionSelected,rightAnswer}=questionValue
+        console.log({mode})
         return(
           <View key={questionIndex}>
             <CardItem>
@@ -323,6 +329,9 @@ const Selection = ({
   const {
     passages
   } = selection
+  console.log({
+    mode
+  })
   return (
     <View>
       <CardItem header>
