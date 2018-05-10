@@ -121,7 +121,7 @@ const ReadingContent = ({
                 <View>
                   <SectionBar sectionValue={sectionValue} sectionIndex={sectionIndex} sectionSelect={sectionSelect}/>
                   <CardItem>
-                    <Icon type="Entypo" active name="chevron-thin-down" />                    
+                    <Icon type="Entypo" active name="chevron-thin-down" />
                   </CardItem>
 
                   {
@@ -207,6 +207,7 @@ const BankedCloze = ({
           return (
             <View key={optionIndex}>
               <Picker
+                mode="dropdown"
                 // selectedValue={this.state.language}
                 style={{ height: 50, width: 100 }}
                 // onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
