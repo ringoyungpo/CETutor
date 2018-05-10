@@ -73,7 +73,12 @@ const WritingSheet = ({
   )
 }
 
-const ListeningSheet = () => {
+const ListeningSheet = ({
+  listening
+}) => {
+  const {
+    sections
+  } = listening
   return (
     <View>
       <CardItem>
@@ -81,6 +86,75 @@ const ListeningSheet = () => {
           Part II Listening Comprehension
         </H2>
       </CardItem>
+      {
+        sections.filter((sectionValue)=>{
+          const {modules}=sectionValue
+          return(
+            modules.filter((moduleValue)=>{
+              const {questions}=moduleValue
+              return(
+                questions.filter((questionValue)=>{
+                  const {optionSelected}=questionValue
+                  return(
+                    optionSelected!==null&&optionSelected!==undefined
+                  )
+                }).length
+              )
+            }).length)
+        }).length?(
+          <View>
+            {
+              sections.map((sectionValue, sectionIndex)=>{
+                const {modules,sectionTitle}=sectionValue
+                return(
+                  modules.filter((moduleValue)=>{
+                    const {questions}=moduleValue
+                    return(
+                      questions.filter((questionValue)=>{
+                        const {optionSelected} = questionValue
+                        return(
+                          optionSelected!==null&&optionSelected!==undefined
+                        )
+                      }).length
+                    )
+                  }).length?(
+                    <View key={sectionIndex}>
+                      <CardItem>
+                        <H3>
+                          Section {String.fromCharCode(sectionIndex+65)} {sectionTitle}
+                        </H3>
+                      </CardItem>
+                        {
+                          modules.map((moduleValue, moduleIndex)=>{
+                            const {questions}=moduleValue
+                            return(
+                            <View key={moduleIndex}>
+                              <CardItem header>
+                                <Text>{sectionTitle} {moduleIndex + 1}</Text>
+                              </CardItem>
+                              <CardItem>
+                                <Text>
+                                  {
+                                    questions.map((questionValue, questionIndex)=>{
+                                      const {optionSelected}=questionValue
+                                      return(
+                                        `${questionIndex + 1}. ${optionSelected===null?'  ':String.fromCharCode(optionSelected + 65)}  `
+                                      )}).reduce((accumulator, currentValue)=>(
+                                        accumulator + currentValue
+                                      ))
+                                    }
+                                  </Text>
+                                </CardItem>
+                              </View>
+                            )})
+                        }
+                    </View>
+                  ):null
+                )
+              })
+            }
+          </View>
+        ):null}
     </View>
   )
 }
