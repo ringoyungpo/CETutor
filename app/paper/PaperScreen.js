@@ -71,9 +71,16 @@ class PaperScreen extends Component < Props > {
     title: 'Paper Page'
     // title: this.props.navigation.getParam('mode') === TEST ? ('Testing Mode') : ('Practice Mode')
   }
+  async init() {
+    const paper = await PaperStore.InitAsync(this.props.navigation.getParam('_id'))
+    if (isEmpty(paper)) {
+      this.props.navigation.navigate('App')
+    }
+  }
   constructor(props: any) {
     super(props)
-    PaperStore.InitAsync(this.props.navigation.getParam('_id'))
+    this.init()
+
   }
 
   componentWillUnmount() {

@@ -14,6 +14,39 @@ import {
   TRANSLATION
 } from '../../constant/paperConst'
 
+const Translation = ({
+  // title,
+  // level,
+  // date,
+  translation,
+  onInputChange,
+  partSelect,
+  partSelected
+}) => {
+  const {
+    question,
+    answer
+  } = translation
+  return (
+    <View>
+  {
+    partSelected === TRANSLATION
+      ? (
+        <TranslationContent
+          partSelect={partSelect}
+          answer={answer}
+          onInputChange={onInputChange}
+          // title={title}
+          // date={date}
+          // level={level}
+          question={question}
+        />)
+      :(<TranslationBar partSelect={partSelect} />)
+  }
+  </View>
+  )
+}
+
 const TranslationBar = ({
   partSelect
 }) => (
@@ -68,39 +101,5 @@ const TranslationContent = ({
     <TranslationBar partSelect={partSelect} />
   </View>
 )
-
-
-const Translation = ({
-  // title,
-  // level,
-  // date,
-  translation,
-  onInputChange,
-  partSelect,
-  partSelected
-}) => {
-  const {
-    question,
-    answer
-  } = translation
-  return (
-    <View>
-  {
-    partSelected === TRANSLATION
-      ? (
-        <TranslationContent
-          partSelect={partSelect}
-          answer={answer}
-          onInputChange={onInputChange}
-          // title={title}
-          // date={date}
-          // level={level}
-          question={question}
-        />)
-      :(<TranslationBar partSelect={partSelect} />)
-  }
-  </View>
-  )
-}
 
 export default Translation

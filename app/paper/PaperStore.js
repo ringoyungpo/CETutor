@@ -120,16 +120,25 @@ class PaperStore {
 
   @action.bound
   onInputChange(key, value) {
-    const [part, eassyOrSections, sectionIndex, modules, moduleIndex, questions, questionIndex, optionSelected] = key.split('.')
-
-    if (optionSelected) {
-      let temp = this.paper[part][eassyOrSections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected]
+    const [part, eassyOrSections, sectionIndexOrName, modulesOrbankedClozing, moduleIndex, questions, questionIndex, optionSelected] = key.split('.')
+    if (part === 'listening' && optionSelected) {
+      let temp = this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex][questions][questionIndex][optionSelected]
       temp = temp === value ? null : value
-      this.paper[part][eassyOrSections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected] = temp
+      this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex][questions][questionIndex][optionSelected] = temp
       this.paper = { ...this.paper
       }
-    } else if (eassyOrSections) {
+    } else if (eassyOrSections && (part === 'writing' || part === 'translation')) {
       this.paper[part][eassyOrSections] = value
+    } else if (part === 'reading') {
+      if (modulesOrbankedClozing === 'orderSelected') {
+        this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex] = value
+        this.paper[part][eassyOrSections][sectionIndexOrName].bankedClozing = null
+        // console.log(this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing])
+      } else {
+        this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing] = value
+      }
+      this.paper = { ...this.paper
+      }
     }
     //  else {
     //   this.paper[part] = value
@@ -141,12 +150,13 @@ class PaperStore {
     this.downloading = true
 
     try {
-      const {
+      let {
         data
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
-      this.paper = data
       console.log(data)
+      data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
+      this.paper = data
     } catch (e) {
       console.log(e)
       // this.errors = e.response.data

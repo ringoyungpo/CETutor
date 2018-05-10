@@ -12,6 +12,7 @@ import {
   Spinner,
   Icon,
   Left,
+  Body,
   Right,
   Picker,
   Textarea,
@@ -48,6 +49,7 @@ const Reading = ({
           partSelect={partSelect}
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
+          onInputChange={onInputChange}
           // title={title}
           // date={date}
           // level={level}
@@ -128,6 +130,7 @@ const ReadingContent = ({
                     sectionValue==='bankedCloze'&&(
                       <BankedCloze
                         bankedCloze={bankedCloze}
+                        onInputChange={onInputChange}
                       />
                     )
                   }
@@ -175,11 +178,14 @@ const ReadingContent = ({
 }
 
 const BankedCloze = ({
-  bankedCloze
+  bankedCloze,
+  onInputChange
 }) => {
   let {
     passage,
-    options
+    options,
+    orderSelected,
+    bankedClozing
   } = bankedCloze
   passage = passage.split('__')
   return (
@@ -190,36 +196,40 @@ const BankedCloze = ({
           {passage.map((passageValue,passageIndex)=>{
             return (
                 <Text key={passageIndex}>
-                  {passageIndex>0&&(<Text style={{textDecorationLine:'underline'}}>
-                    {'  '+(passageIndex)+'  '}
-                  </Text>)}
+                  {passageIndex>0&&(bankedClozing===passageIndex?(
+                    <Text style={{
+                      fontWeight: 'bold',
+                    }}>
+                      [
+                        {options.map((optionValue, optionIndex)=>{
+                          return (
+                            <Text key={optionIndex}>
+                              {optionIndex>0?(
+                                <Text>
+                                  ,
+                                </Text>
+                              ):null}
+                              <Text
+                                onPress={()=>onInputChange(`reading.sections.bankedCloze.orderSelected.${passageIndex-1}`, optionIndex)}>
+                                {optionValue}
+                              </Text>
+                            </Text>
+                          )
+                        })}
+                      ]
+                    </Text>
+                  ):(
+                    <Text style={{textDecorationLine:'underline',fontWeight: 'bold'}}
+                      onPress={()=>onInputChange('reading.sections.bankedCloze.bankedClozing', passageIndex)}>
+                      {'  '+(passageIndex)+'  '}{orderSelected[passageIndex-1]!==null&&options[orderSelected[passageIndex-1]]}
+                    </Text>
+                  )
+                    )}
                   {passageValue}
                 </Text>
             )
           })}
         </Text>
-
-      </CardItem>
-      <CardItem>
-        <Form>
-
-        {options.map((optionValue, optionIndex)=>{
-          return (
-            <View key={optionIndex}>
-              <Picker
-                mode="dropdown"
-                // selectedValue={this.state.language}
-                style={{ height: 50, width: 100 }}
-                // onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
-                >
-                  <Picker.Item label="JavaScript" value="js" />
-
-                <Picker.Item label="Java" value="java" />
-              </Picker>
-            </View>
-          )
-        })}
-      </Form>
       </CardItem>
     </View>
   )
