@@ -187,8 +187,17 @@ const BankedCloze = ({
   passage = passage.split('__')
   return (
     <View>
+      <CardItem header>
+        <Text>
+          Directions:
+        </Text>
+      </CardItem>
       <CardItem>
-
+        <Text>
+          In this section, there is a passage with ten blanks. You are required to select one word for each blank from a list of choices given in a word bank following the passage. Read the passage through carefully before making your choices. Each choice in the bank is identified by a letter. Please mark the corresponding letter for each item on Answer Sheet with a single line through the centre. You may not use any of the words in the bank more than once.
+        </Text>
+      </CardItem>
+      <CardItem>
         <Text>
           {passage.map((passageValue,passageIndex)=>{
             return (
@@ -232,12 +241,68 @@ const BankedCloze = ({
   )
 }
 
-const Locating = (locating) => {
+const Locating = ({
+  locating
+}) => {
+  const {
+    title,
+    paragraphs,
+    questions
+  } = locating
   return (
     <View>
-      <Text>
-        {JSON.stringify(locating)}
-      </Text>
+      <CardItem header>
+        <Text>
+          Directions:
+        </Text>
+      </CardItem>
+      <CardItem>
+        <Text>
+          In this section, you are going to read a passage with ten statements attached to it. Each statement contains information given in one of the paragraphs. Identify the paragraph from which the information is derived. You may choose a paragraph more than once. Each paragraph is marked with a letter. Answer the questions by marking the corresponding letter on Answer Sheet.
+        </Text>
+      </CardItem>
+      <CardItem header>
+        <Text>
+          {title}
+        </Text>
+      </CardItem>
+      {paragraphs.map((paragraphValue, paragraphIndex)=>{
+        return(
+          <View key={paragraphIndex}>
+            <CardItem>
+              <Text>
+                <Text style={{fontWeight: 'bold'}}>
+                  [{String.fromCharCode(paragraphIndex+65)}]
+                </Text>
+                {paragraphValue}
+              </Text>
+            </CardItem>
+          </View>
+        )
+      })}
+
+      {questions.map((questionValue,questionIndex)=>{
+        return(
+          <View key={questionIndex}>
+            <CardItem>
+              <Text>
+                {questionIndex+1}. {questionValue.questionContent}
+              </Text>
+            </CardItem>
+            <Picker
+              mode="dropdown"
+              // selectedValue={this.state.selected1}
+              // onValueChange={this.onValueChange.bind(this)}
+            >
+              {paragraphs.map((paragraphValue, paragraphIndex)=>{
+                return(
+                  <Picker.Item key={paragraphIndex} label={`[${String.fromCharCode(paragraphIndex+65)}]${paragraphValue}`} value={paragraphIndex} />
+                )
+              })}
+            </Picker>
+          </View>
+        )
+      })}
     </View>
   )
 }
