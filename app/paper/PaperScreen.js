@@ -145,6 +145,7 @@ class PaperScreen extends Component < Props > {
           partSelected={partSelected}
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
+          mode={mode}
 
         />
 

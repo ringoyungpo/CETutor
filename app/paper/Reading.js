@@ -18,7 +18,8 @@ import {
   Textarea,
 } from 'native-base'
 import {
-  READING
+  READING,
+  TEST
 } from '../../constant/paperConst'
 
 
@@ -32,7 +33,8 @@ const Reading = ({
   partSelect,
   partSelected,
   sectionSelect,
-  sectionSelected
+  sectionSelected,
+  mode
 }) => {
   const {
     sections
@@ -50,6 +52,7 @@ const Reading = ({
           sectionSelect={sectionSelect}
           sectionSelected={sectionSelected}
           onInputChange={onInputChange}
+          mode={mode}
           // title={title}
           // date={date}
           // level={level}
@@ -91,6 +94,7 @@ const ReadingContent = ({
   sectionSelect,
   sectionSelected,
   partSelect,
+  mode,
 }) => {
   const {
     bankedCloze,
@@ -132,7 +136,7 @@ const ReadingContent = ({
                     )
                   }
                   {
-                    sectionValue==='selection'&&(<Selection selection={selection} onInputChange={onInputChange}/>)
+                    sectionValue==='selection'&&(<Selection selection={selection} mode={mode} onInputChange={onInputChange}/>)
                   }
                   <CardItem>
                     <Icon type="Entypo" active name="chevron-thin-up" />
@@ -294,7 +298,8 @@ const Locating = ({
 }
 const Selection = ({
   selection,
-  onInputChange
+  onInputChange,
+  mode
 }) => {
   const {
     passages
@@ -331,7 +336,7 @@ const Selection = ({
               </Text>
             </CardItem>
             {questions.map((questionValue,questionIndex)=>{
-              const {questionContent,options,optionSelected} = questionValue
+              const {questionContent,options,optionSelected,rightAnswer} = questionValue
               return(
                 <View key={questionIndex}>
                   <CardItem header>
@@ -347,9 +352,16 @@ const Selection = ({
                             <Text>
                               {String.fromCharCode(optionIndex+65)}. {optionValue}
                             </Text>
-                          </Left>                          
+                          </Left>
                           {optionSelected===optionIndex?(
-                            <Icon name='radio-button-on' style={{color:'#000'}}/>
+                            mode===TEST?(<Icon name='radio-button-on' style={{color:'#000'}}/>):(
+                              optionSelected===rightAnswer?(
+                                <Icon type='Entypo' name='check' style={{color:'#0F0'}}/>
+                              ):(
+                                <Icon type='Entypo' name='cross' style={{color:'#F00'}}/>
+                              )
+                            )
+
                           ):null}
                         </CardItem>
 

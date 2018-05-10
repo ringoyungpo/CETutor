@@ -253,7 +253,14 @@ const SectionContent = ({
                           </Text>
                         </Left>
                         {optionSelected===optionIndex?(
-                          <Icon name='radio-button-on' style={{color:'#000'}}/>
+                          mode===TEST?(<Icon name='radio-button-on' style={{color:'#000'}}/>):(
+                            optionSelected===rightAnswer?(
+                              <Icon type='Entypo' name='check' style={{color:'#0F0'}}/>
+                            ):(
+                              <Icon type='Entypo' name='cross' style={{color:'#F00'}}/>                              
+                            )
+                          )
+
                         ):null}
                       </CardItem>
                     </View>
