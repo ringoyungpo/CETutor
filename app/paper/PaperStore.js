@@ -172,8 +172,6 @@ class PaperStore {
                   questionIndex,
                   optionSelected
                 })
-
-
                 this.paper[reading][sections][locating][questions][questionIndex][optionSelected] = value
 
               }

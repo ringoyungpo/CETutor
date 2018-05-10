@@ -86,9 +86,6 @@ const SectionBar = ({
 }
 
 const ReadingContent = ({
-  // title,
-  // level,
-  // date,s
   onInputChange,
   sections,
   sectionSelect,
@@ -135,7 +132,7 @@ const ReadingContent = ({
                     )
                   }
                   {
-                    sectionValue==='selection'&&(<Selection/>)
+                    sectionValue==='selection'&&(<Selection selection={selection}/>)
                   }
                   <CardItem>
                     <Icon type="Entypo" active name="chevron-thin-up" />
@@ -153,21 +150,6 @@ const ReadingContent = ({
         )
       })
     }
-    {/* <CardItem header>
-      <Text>
-        DirecASDFASDFtions:
-      </Text>
-    </CardItem> */}
-
-
-
-    {/* <CardItem>
-      <Text>
-        {JSON.stringify(sections)}
-      </Text>
-    </CardItem> */}
-
-
     <Icon type="Entypo" active name="chevron-thin-up" />
     <ReadingBar partSelect={partSelect} />
   </View>
@@ -310,12 +292,70 @@ const Locating = ({
     </View>
   )
 }
-const Selection = () => {
+const Selection = ({
+  selection
+}) => {
+  const {
+    passages
+  } = selection
   return (
     <View>
-      <Text>
-        selection
-      </Text>
+      <CardItem header>
+        <Text>
+          Directions:
+        </Text>
+      </CardItem>
+      <CardItem>
+        <Text>
+          There are {passages.length} passages in this section. Each passage is followed by some questions or unfinished statements. For each of them there are four choices marked A),B),C) and D).You should decide on the best choice and mark the corresponding letter on Answer Sheet with a single line through the centre.
+        </Text>
+      </CardItem>
+      {passages.map((passageValue, passageIndex)=>{
+        const {questions,passageContent} = passageValue
+        return(
+          <View key={passageIndex}>
+            <CardItem header>
+              <Text>
+                Passage {passageIndex+1}
+              </Text>
+            </CardItem>
+            <CardItem header>
+              <Text>
+                Questions 1 to {questions.length} are based on the following passage.
+              </Text>
+            </CardItem>
+            <CardItem>
+              <Text>
+                {passageContent}
+              </Text>
+            </CardItem>
+            {questions.map((questionValue,questionIndex)=>{
+              const {questionContent,options} = questionValue
+              return(
+                <View key={questionIndex}>
+                  <CardItem header>
+                    <Text>
+                      {questionIndex+1}. {questionContent}
+                    </Text>
+                  </CardItem>
+                  {options.map((optionValue, optionIndex)=>{
+                    return(
+                      <View key={optionIndex}>
+                        <CardItem>
+                          <Text>
+                            {String.fromCharCode(optionIndex+65)}. {optionValue}
+                          </Text>
+                        </CardItem>
+                      </View>
+                    )
+                  })}
+
+                </View>
+              )
+            })}
+          </View>
+        )
+      })}
     </View>
   )
 }
