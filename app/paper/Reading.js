@@ -100,11 +100,6 @@ const ReadingContent = ({
     locating,
     selection
   } = sections
-  console.log({
-    bankedCloze,
-    locating,
-    selection
-  })
   return (
     <View>
     <ReadingBar partSelect={partSelect} />
@@ -135,7 +130,9 @@ const ReadingContent = ({
                     )
                   }
                   {
-                    sectionValue==='locating'&&(<Locating/>)
+                    sectionValue==='locating'&&(
+                      <Locating locating={locating}/>
+                    )
                   }
                   {
                     sectionValue==='selection'&&(<Selection/>)
@@ -221,7 +218,7 @@ const BankedCloze = ({
                   ):(
                     <Text style={{textDecorationLine:'underline',fontWeight: 'bold'}}
                       onPress={()=>onInputChange('reading.sections.bankedCloze.bankedClozing', passageIndex)}>
-                      {'  '+(passageIndex)+'  '}{orderSelected[passageIndex-1]!==null&&options[orderSelected[passageIndex-1]]}
+                      {'  '}{orderSelected[passageIndex-1]!==null?(options[orderSelected[passageIndex-1]]):(passageIndex)}{'  '}
                     </Text>
                   )
                     )}
@@ -235,11 +232,11 @@ const BankedCloze = ({
   )
 }
 
-const Locating = () => {
+const Locating = (locating) => {
   return (
     <View>
       <Text>
-        Locating
+        {JSON.stringify(locating)}
       </Text>
     </View>
   )
