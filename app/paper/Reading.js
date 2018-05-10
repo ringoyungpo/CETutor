@@ -249,7 +249,8 @@ const Locating = ({
   const {
     title,
     paragraphs,
-    questions
+    questions,
+    mode
   } = locating
   return (
     <View>
@@ -284,7 +285,7 @@ const Locating = ({
       })}
 
       {questions.map((questionValue,questionIndex)=>{
-        const {questionContent,optionSelected}=questionValue
+        const {questionContent,optionSelected,rightAnswer}=questionValue
         return(
           <View key={questionIndex}>
             <CardItem>
@@ -295,6 +296,9 @@ const Locating = ({
             <Picker
               mode="dropdown"
               selectedValue={optionSelected}
+              style={{
+                color: mode===TEST?('black'):(optionSelected===rightAnswer?('green'):('red'))
+              }}
               onValueChange={(value)=>onInputChange(`reading.sections.locating.questions.${questionIndex}.optionSelected`,value) }
             >
               <Picker.Item label={''} value={null} />
