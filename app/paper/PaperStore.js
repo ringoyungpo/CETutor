@@ -120,29 +120,76 @@ class PaperStore {
 
   @action.bound
   onInputChange(key, value) {
-    const [part, eassyOrSections, sectionIndexOrName, modulesOrbankedClozing, moduleIndex, questions, questionIndex, optionSelected] = key.split('.')
-    if (part === 'listening' && optionSelected) {
-      let temp = this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex][questions][questionIndex][optionSelected]
-      temp = temp === value ? null : value
-      this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex][questions][questionIndex][optionSelected] = temp
-      this.paper = { ...this.paper
-      }
-    } else if (eassyOrSections && (part === 'writing' || part === 'translation')) {
-      this.paper[part][eassyOrSections] = value
-    } else if (part === 'reading') {
-      if (modulesOrbankedClozing === 'orderSelected') {
-        this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing][moduleIndex] = value
-        this.paper[part][eassyOrSections][sectionIndexOrName].bankedClozing = null
-        // console.log(this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing])
-      } else {
-        this.paper[part][eassyOrSections][sectionIndexOrName][modulesOrbankedClozing] = value
-      }
-      this.paper = { ...this.paper
-      }
+    const [partField, ...partChild] = key.split('.')
+    switch (partField) {
+      case 'writing':
+        {
+          const [writing, eassy] = [partField, ...partChild]
+          this.paper[writing][eassy] = value
+        }
+        break
+      case 'listening':
+        {
+          const [listening, sections, sectionIndex, modules, moduleIndex, questions, questionIndex, optionSelected] = [partField, ...partChild]
+          const oldValue = this.paper[listening][sections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected]
+          this.paper[listening][sections][sectionIndex][modules][moduleIndex][questions][questionIndex][optionSelected] = oldValue === value ? (null) : (value)
+        }
+        break;
+      case 'reading':
+        {
+          const [reading, sections, sectionField, ...sectionChild] = [partField, ...partChild]
+          switch (sectionField) {
+            case 'bankedCloze':
+              {
+                const [bankedCloze, bankedClozeField, ...bankedClozeChild] = [sectionField, ...sectionChild]
+                switch (bankedClozeField) {
+                  case 'orderSelected':
+                    {
+                      const [orderSelected, orderSelectedIndex] = [bankedClozeField, ...bankedClozeChild]
+                      const oldValue = this.paper[reading][sections][bankedCloze][orderSelected][orderSelectedIndex]
+                      this.paper[reading][sections][bankedCloze][orderSelected][orderSelectedIndex] = oldValue === value ? (null) : (value)
+                      this.paper[reading][sections][bankedCloze].bankedClozing = null
+                    }
+                    break;
+                  case 'bankedClozing':
+                    {
+                      const [bankedClozing] = [bankedClozeField]
+                      this.paper[reading][sections][bankedCloze][bankedClozing] = value
+                    }
+                    break;
+                  default:
+
+                }
+
+              }
+              break;
+            case 'locating':
+              {
+
+              }
+              break;
+            case 'selection':
+              {
+
+              }
+              break;
+            default:
+
+          }
+        }
+        break
+      case 'translation':
+        {
+          const [translation, answer] = [partField, ...partChild]
+          this.paper[translation][answer] = value
+        }
+        break
+      default:
+
     }
-    //  else {
-    //   this.paper[part] = value
-    // }
+    this.paper = { ...this.paper
+    }
+
   }
 
   @action.bound
@@ -154,7 +201,9 @@ class PaperStore {
         data
       } = yield axios.get(API_BASE + 'api/papers/' + _id)
 
-      console.log(data)
+      // console.log(data)
+      // data.writing.eassy = ''
+      // data.translation.answer = ''
       data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
       this.paper = data
     } catch (e) {
