@@ -131,7 +131,7 @@ const ReadingContent = ({
                   }
                   {
                     sectionValue==='locating'&&(
-                      <Locating locating={locating}/>
+                      <Locating locating={locating} onInputChange={onInputChange}/>
                     )
                   }
                   {
@@ -242,7 +242,8 @@ const BankedCloze = ({
 }
 
 const Locating = ({
-  locating
+  locating,
+  onInputChange
 }) => {
   const {
     title,
@@ -282,18 +283,21 @@ const Locating = ({
       })}
 
       {questions.map((questionValue,questionIndex)=>{
+        const {questionContent,optionSelected}=questionValue
         return(
           <View key={questionIndex}>
             <CardItem>
               <Text>
-                {questionIndex+1}. {questionValue.questionContent}
+                {questionIndex+1}. {questionContent}
               </Text>
             </CardItem>
             <Picker
               mode="dropdown"
-              // selectedValue={this.state.selected1}
-              // onValueChange={this.onValueChange.bind(this)}
+              selectedValue={optionSelected}
+              onValueChange={(value)=>onInputChange(`reading.sections.locating.questions.${questionIndex}.optionSelected`,value) }
             >
+              <Picker.Item label={''} value={null} />
+
               {paragraphs.map((paragraphValue, paragraphIndex)=>{
                 return(
                   <Picker.Item key={paragraphIndex} label={`[${String.fromCharCode(paragraphIndex+65)}]${paragraphValue}`} value={paragraphIndex} />

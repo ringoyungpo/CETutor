@@ -165,6 +165,16 @@ class PaperStore {
               break;
             case 'locating':
               {
+                const [locating, questions, questionIndex, optionSelected] = [sectionField, ...sectionChild]
+                console.log({
+                  locating,
+                  questions,
+                  questionIndex,
+                  optionSelected
+                })
+
+
+                this.paper[reading][sections][locating][questions][questionIndex][optionSelected] = value
 
               }
               break;
