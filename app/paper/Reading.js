@@ -2,13 +2,16 @@ import React from 'react'
 import Moment from 'react-moment'
 import {
   Text,
+  View,
   Card,
   CardItem,
   H1,
   H2,
   H3,
-  View,
+  Form,
+  Spinner,
   Icon,
+  Picker,
   Textarea,
 } from 'native-base'
 import {
@@ -78,7 +81,11 @@ const ReadingContent = ({
     locating,
     selection
   } = sections
-  console.log(sections)
+  console.log({
+    bankedCloze,
+    locating,
+    selection
+  })
   return (
     <View>
     <ReadingBar partSelect={partSelect} />
@@ -99,7 +106,11 @@ const ReadingContent = ({
               sectionSelected===sectionIndex?(
                 <View>
                   {
-                    sectionValue==='bankedCloze'&&(<BankedCloze/>)
+                    sectionValue==='bankedCloze'&&(
+                      <BankedCloze
+                        bankedCloze={bankedCloze}
+                      />
+                    )
                   }
                   {
                     sectionValue==='locating'&&(<Locating/>)
@@ -135,12 +146,34 @@ const ReadingContent = ({
   )
 }
 
-const BankedCloze = () => {
+const BankedCloze = ({
+  bankedCloze
+}) => {
+  let {
+    passage
+  } = bankedCloze
+  passage = passage.split('__')
+  const last = passage.pop()
   return (
     <View>
-      <Text>
-        BankedCloze
-      </Text>
+      <CardItem>
+        <Text>
+        {/* <Text> */}
+          {passage.map((passageValue,passageIndex)=>{
+            return (
+                <Text key={passageIndex}>
+                  {passageValue}
+                  <Text style={{textDecorationLine:'underline'}}>
+                    {'  '+(passageIndex + 1)+'  '}
+                  </Text>
+                </Text>
+
+            )
+          })}
+            {last}
+          </Text>
+        {/* </Text> */}
+      </CardItem>
     </View>
   )
 }
