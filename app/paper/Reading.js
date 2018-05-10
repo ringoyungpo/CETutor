@@ -11,12 +11,15 @@ import {
   Form,
   Spinner,
   Icon,
+  Left,
+  Right,
   Picker,
   Textarea,
 } from 'native-base'
 import {
   READING
 } from '../../constant/paperConst'
+
 
 
 const Reading = ({
@@ -150,29 +153,46 @@ const BankedCloze = ({
   bankedCloze
 }) => {
   let {
-    passage
+    passage,
+    options
   } = bankedCloze
   passage = passage.split('__')
-  const last = passage.pop()
   return (
     <View>
       <CardItem>
+
         <Text>
-        {/* <Text> */}
           {passage.map((passageValue,passageIndex)=>{
             return (
                 <Text key={passageIndex}>
+                  {passageIndex>0&&(<Text style={{textDecorationLine:'underline'}}>
+                    {'  '+(passageIndex)+'  '}
+                  </Text>)}
                   {passageValue}
-                  <Text style={{textDecorationLine:'underline'}}>
-                    {'  '+(passageIndex + 1)+'  '}
-                  </Text>
                 </Text>
-
             )
           })}
-            {last}
-          </Text>
-        {/* </Text> */}
+        </Text>
+
+      </CardItem>
+      <CardItem>
+        <Form>
+
+        {options.map((optionValue, optionIndex)=>{
+          return (
+            <View key={optionIndex}>
+              <Picker
+                // selectedValue={this.state.language}
+                style={{ height: 50, width: 100 }}
+                // onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})}
+                >
+                <Picker.Item label="Java" value="java" />
+                <Picker.Item label="JavaScript" value="js" />
+              </Picker>
+            </View>
+          )
+        })}
+      </Form>
       </CardItem>
     </View>
   )
