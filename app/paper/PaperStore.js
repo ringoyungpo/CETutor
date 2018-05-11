@@ -41,10 +41,7 @@ class PaperStore {
   @observable sound
   @observable mode
   @observable showAnswerSheet
-
-
-
-
+  @observable submitting
 
 
   constructor() {
@@ -56,6 +53,7 @@ class PaperStore {
     this.sound = null
     this.mode = null
     this.showAnswerSheet = false
+    this.submitting = false
     Sound.setCategory('Playback')
   }
 
@@ -76,6 +74,7 @@ class PaperStore {
     this.audioPlaying = false
     this.sound = null
     this.showAnswerSheet = false
+    this.submitting = false
   }
 
   @action.bound
@@ -236,7 +235,7 @@ class PaperStore {
       // data.writing.eassy = ''
       // data.translation.answer = ''
       data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
-      console.log(data)
+      // console.log(data)
 
       this.paper = data
     } catch (e) {
@@ -247,6 +246,21 @@ class PaperStore {
       this.downloading = false
       // console.log('finally')
       return this.paper
+    }
+  })
+
+
+  @action.bound
+  submitAsync = flow(function*() {
+    this.submitting = true
+
+    try {
+      // let response = yield axios.post(API_BASE + 'api/answers/', this.paper)
+      console.log(this.paper)
+    } catch (e) {
+      console.log(e)
+    } finally {
+      this.submitting = false
     }
   })
 }

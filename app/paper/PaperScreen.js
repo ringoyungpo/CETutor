@@ -107,7 +107,9 @@ class PaperScreen extends Component < Props > {
       playAudio,
       setMode,
       showAnswerSheet,
-      toggleAnswerSheet
+      toggleAnswerSheet,
+      submitAsync,
+      submitting
     } = PaperStore
 
     let {
@@ -208,7 +210,7 @@ class PaperScreen extends Component < Props > {
         {
           mode === SUBMITTING&&(
             <Card>
-              <Button block button onPress={()=>{setMode(SUBMITTING)}}>
+              <Button block button disabled={submitting} onPress={()=>{submitAsync()}}>
                 <Text>Submit</Text>
               </Button>
             </Card>

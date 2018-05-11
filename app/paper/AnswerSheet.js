@@ -34,7 +34,7 @@ const AnswerSheet = ({
   toggleAnswerSheet,
   showAnswerSheet
 }) => {
-  const writtingPoints = Number(710 * 15 * writing.level ? writing.level : 0 / 100).toFixed(1)
+  const writtingPoints = 710 * 15 * writing.level ? writing.level : 0 / 100
 
   const {
     sections
@@ -112,7 +112,7 @@ const AnswerSheet = ({
       return (currentSectionValue + sectionAccumulator)
     })
 
-  const listeningPoints = Number(710 * 35 * listeningRightAnswersCount / listeningQuestionsCount / 100).toFixed(1)
+  const listeningPoints = 710 * 35 * listeningRightAnswersCount / listeningQuestionsCount / 100
 
   const {
     selection,
@@ -133,7 +133,7 @@ const AnswerSheet = ({
 
   const readingBankedClozeQuestionsCount = orderSelected.length
 
-  const readingBankedClozePoints = Number(710 * 5 * readingBankedClozeRightAnswersCount / readingBankedClozeQuestionsCount / 100).toFixed(1)
+  const readingBankedClozePoints = 710 * 5 * readingBankedClozeRightAnswersCount / readingBankedClozeQuestionsCount / 100
 
 
   const {
@@ -158,7 +158,7 @@ const AnswerSheet = ({
 
   const readingLocatingQuestionsCount = questions.length
 
-  const readingLocatingPoints = Number(710 * 10 * readingLocatingRightAnswersCount / readingLocatingQuestionsCount / 100).toFixed(1)
+  const readingLocatingPoints = 710 * 10 * readingLocatingRightAnswersCount / readingLocatingQuestionsCount / 100
 
   const readingSelectionRightAnswersCount = passages.map((passageValue, passageIndex) => {
       const {
@@ -212,11 +212,11 @@ const AnswerSheet = ({
       )
     })
 
-  const readingSelectionPoints = Number(710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100).toFixed(1)
+  const readingSelectionPoints = 710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100
 
-  const translationPoints = Number(710 * 15 * translation.level ? translation.level : 0 / 100).toFixed(1)
+  const translationPoints = 710 * 15 * translation.level ? translation.level : 0 / 100
 
-
+  const paperPoints = writtingPoints + listeningPoints + readingBankedClozePoints + readingLocatingPoints + readingSelectionPoints + translationPoints
 
   return (
     <View>
@@ -226,10 +226,16 @@ const AnswerSheet = ({
             Answer Sheet
           </H1>
         </CardItem>
-
         {
           showAnswerSheet&&(
             <View>
+              {mode!==TEST&&(
+                <CardItem >
+                  <H3>
+                    {Math.round(writtingPoints)} + {Math.round(listeningPoints)} + ( {Math.round(readingBankedClozePoints)} + {Math.round(readingLocatingPoints)} + {Math.round(readingSelectionPoints)} ) + {Math.round(translationPoints)} = {Math.round(paperPoints)}
+                  </H3>
+                </CardItem>
+              )}
               <WritingSheet
                 writing={writing}
                 mode={mode}
@@ -292,8 +298,8 @@ const WritingSheet = ({
               {mode!==TEST&&(
                 <CardItem >
                   <H3>
-                    {Number(level?level:0)} * 15% * 710 = {
-                      writtingPoints
+                    {level?level:0} * 15% * 710 = {
+                      Math.round(writtingPoints)
                     }
                   </H3>
                 </CardItem>
@@ -349,7 +355,7 @@ const ListeningSheet = ({
                 <CardItem>
                   <H3>
                     {listeningRightAnswersCount} / {listeningQuestionsCount} * 35% * 710 = {
-                      listeningPoints
+                      Math.round(listeningPoints)
                     }
                   </H3>
                 </CardItem>
@@ -479,7 +485,7 @@ const ReadingSheet = ({
               <CardItem >
                 <H3>
                   {readingBankedClozeRightAnswersCount} / {readingBankedClozeQuestionsCount} * 5% * 710 = {
-                    readingBankedClozePoints
+                    Math.round(readingBankedClozePoints)
                   }
                 </H3>
               </CardItem>
@@ -526,7 +532,7 @@ const ReadingSheet = ({
               <CardItem >
                 <H3>
                   {readingLocatingRightAnswersCount} / {readingLocatingQuestionsCount} * 10% * 710 = {
-                    readingLocatingPoints
+                    Math.round(readingLocatingPoints)
                   }
                 </H3>
               </CardItem>
@@ -581,7 +587,7 @@ const ReadingSheet = ({
                 <CardItem>
                   <H3>
                     {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710 = {
-                      readingSelectionPoints
+                      Math.round(readingSelectionPoints)
                     }
                   </H3>
                 </CardItem>
@@ -649,8 +655,8 @@ const TranslationSheet = ({
             {mode!==TEST&&(
               <CardItem >
                 <H3>
-                  {Number(level?level:0)} * 15% * 710 = {
-                    translationPoints
+                  {level?level:0} * 15% * 710 = {
+                    Math.round(translationPoints)
                   }
                 </H3>
               </CardItem>
