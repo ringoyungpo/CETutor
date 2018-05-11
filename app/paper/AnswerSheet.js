@@ -34,7 +34,8 @@ const AnswerSheet = ({
   toggleAnswerSheet,
   showAnswerSheet
 }) => {
-  const writtingPoints = 710 * 15 * writing.level ? writing.level : 0 / 100
+  writing.level = (writing.level) || 0
+  const writtingPoints = 710 * writing.level / 100
 
   const {
     sections
@@ -213,8 +214,8 @@ const AnswerSheet = ({
     })
 
   const readingSelectionPoints = 710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100
-
-  const translationPoints = 710 * 15 * translation.level ? translation.level : 0 / 100
+  translation.level = translation.level || 0
+  const translationPoints = 710 * translation.level / 100
 
   const paperPoints = writtingPoints + listeningPoints + readingBankedClozePoints + readingLocatingPoints + readingSelectionPoints + translationPoints
 
@@ -298,7 +299,7 @@ const WritingSheet = ({
               {mode!==TEST&&(
                 <CardItem >
                   <H3>
-                    {level?level:0} * 15% * 710 = {
+                    {level?level:0}% * 710 = {
                       Math.round(writtingPoints)
                     }
                   </H3>
@@ -655,7 +656,7 @@ const TranslationSheet = ({
             {mode!==TEST&&(
               <CardItem >
                 <H3>
-                  {level?level:0} * 15% * 710 = {
+                  {level?level:0}% * 710 = {
                     Math.round(translationPoints)
                   }
                 </H3>

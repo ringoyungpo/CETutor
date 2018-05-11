@@ -22,6 +22,7 @@ import {
   Container,
   Header,
   Content,
+  Body,
   Card,
   CardItem,
   Text,
@@ -87,7 +88,22 @@ class HistoryScreen extends Component < {
             paperList
           })}</Text> */}
 
-            {downloading?(<Spinner/>):(<PaperList historyMode={true} _showPaper={this._showPaper} paperList={historyList}/>)}
+            {downloading?(<Spinner/>):(
+              isEmpty(historyList)?(
+                <Card>
+                  <CardItem>
+                    <Body>
+                      <Text>
+                        You didn't have any test history
+                      </Text>
+                    </Body>
+                  </CardItem>
+                </Card>
+              ):(
+                <PaperList historyMode={true} _showPaper={this._showPaper} paperList={historyList}/>
+              )
+            )}
+
 
         {/* <Text>{JSON.stringify(CurrentUserStore)}</Text>
         <Text>app here</Text>
