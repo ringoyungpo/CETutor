@@ -51,6 +51,7 @@ import {
 } from 'mobx-react'
 import {
   TEST,
+  SUBMITTING,
   PRACTICE
 } from '../../constant/paperConst'
 import isEmpty from 'lodash'
@@ -68,6 +69,7 @@ type Props = {
 
 @observer
 class PaperScreen extends Component < Props > {
+  mode: string
   static navigationOptions = {
     title: 'Paper Page'
     // title: this.props.navigation.getParam('mode') === TEST ? ('Testing Mode') : ('Practice Mode')
@@ -78,10 +80,11 @@ class PaperScreen extends Component < Props > {
       this.props.navigation.navigate('App')
     }
   }
+
   constructor(props: any) {
     super(props)
     this.init()
-
+    this.mode = this.props.navigation.getParam('mode')
   }
 
   componentWillUnmount() {
@@ -90,7 +93,6 @@ class PaperScreen extends Component < Props > {
   }
 
   render() {
-    const mode = this.props.navigation.getParam('mode')
     const {
       paper,
       downloading,
@@ -118,7 +120,7 @@ class PaperScreen extends Component < Props > {
       <View>
         <Card>
           <PaperHeader
-            date={date} title={title} level={level} mode={mode}
+            date={date} title={title} level={level} mode={this.mode}
             partSelect={partSelect} partSelected={partSelected}
           />
 
@@ -137,7 +139,7 @@ class PaperScreen extends Component < Props > {
             sectionSelected={sectionSelected}
             audioPlaying={audioPlaying}
             playAudio={playAudio}
-            mode={mode}
+            mode={this.mode}
           />
 
           <Reading
@@ -147,7 +149,7 @@ class PaperScreen extends Component < Props > {
             partSelected={partSelected}
             sectionSelect={sectionSelect}
             sectionSelected={sectionSelected}
-            mode={mode}
+            mode={this.mode}
 
           />
 
@@ -159,25 +161,45 @@ class PaperScreen extends Component < Props > {
             partSelected={partSelected}
           />
         </Card>
-
-        <AnswerSheet
-          writing={writing}
-          reading={reading}
-          listening={listening}
-          translation={translation}
-        />
       </View>
     )
 
+    const answerSheetContent = (
+      <AnswerSheet
+        writing={writing}
+        reading={reading}
+        listening={listening}
+        translation={translation}
+        mode={this.mode}
+      />)
+
+
     const downloadingContent = (
       <Text>Downloading</Text>
+    )
+
+    const completeButton = (
+      <View>
+        <Card>
+          <Button block button onPress={()=>{this.mode=SUBMITTING}}>
+            <Text>Complete</Text>
+          </Button>
+        </Card>
+      </View>
+
     )
 
     return (
       <Container>
         <Content>
 
-            {downloading?(downloadingContent):(PaperContent)}
+            {downloading?(downloadingContent):(
+              <View>
+                {PaperContent}
+                {answerSheetContent}
+                {completeButton}
+              </View>
+            )}
 
         </Content>
       </Container>)

@@ -43,7 +43,7 @@ class HomeScreen extends Component < {
   navigation: Function
 }, {} > {
   static navigationOptions = {
-    title: 'Welcome to the app!'
+    title: 'Welcome to CETutor!'
   }
   constructor() {
     super()

@@ -21,11 +21,16 @@ import {
   View,
 } from 'native-base';
 
+import {
+  TEST
+} from '../../constant/paperConst'
+
 const AnswerSheet = ({
   writing,
   reading,
   listening,
   translation,
+  mode
 }) => {
   return (
     <View>
@@ -37,8 +42,8 @@ const AnswerSheet = ({
         </CardItem>
 
         <WritingSheet writing={writing}/>
-        <ListeningSheet listening={listening}/>
-        <ReadingSheet reading={reading}/>
+        <ListeningSheet listening={listening} mode={mode} />
+        <ReadingSheet reading={reading} mode={mode}/>
         <TranslationSheet translation={translation}/>
       </Card>
     </View>
@@ -74,7 +79,8 @@ const WritingSheet = ({
 }
 
 const ListeningSheet = ({
-  listening
+  listening,
+  mode
 }) => {
   const {
     sections
@@ -136,11 +142,21 @@ const ListeningSheet = ({
                                 <Text>
                                   {
                                     questions.map((questionValue, questionIndex)=>{
-                                      const {optionSelected}=questionValue
+                                      const {optionSelected,rightAnswer}=questionValue
                                       return(
-                                        `${questionIndex + 1}. ${optionSelected===null?'  ':String.fromCharCode(optionSelected + 65)}  `
+                                        <Text>
+                                          {questionIndex + 1}{'. '}
+                                            {optionSelected===null?('  '):(
+                                              <Text style={{color:mode===TEST?('black'):(optionSelected===rightAnswer?('green'):('red'))}}>
+                                                {String.fromCharCode(optionSelected + 65)}
+                                              </Text>
+                                            )}
+                                        </Text>
                                       )}).reduce((accumulator, currentValue)=>(
-                                        accumulator + currentValue
+                                        <Text>
+                                          {accumulator}{', '}
+                                          {currentValue}
+                                        </Text>
                                       ))
                                     }
                                   </Text>
@@ -160,7 +176,8 @@ const ListeningSheet = ({
 }
 
 const ReadingSheet = ({
-  reading
+  reading,
+  mode
 }) => {
   const {
     sections

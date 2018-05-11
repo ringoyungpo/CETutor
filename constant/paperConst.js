@@ -9,6 +9,7 @@ export const RECORD = 'RECORD'
 //VIEW PAPER mode``
 export const PRACTICE = 'PRACTICE'
 export const TEST = 'TEST'
+export const SUBMITTING = 'SUBMITTING'
 //PART SELECTED
 export const PAPER_HEADER = 'PAPER_HEADER'
 export const WRITING = 'WRITING'
