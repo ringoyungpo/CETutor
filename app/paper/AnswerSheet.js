@@ -112,6 +112,71 @@ const AnswerSheet = ({
 
   const listeningPoints = Number(710 * 35 * listeningRightAnswersCount / listeningQuestionsCount / 100).toFixed(1)
 
+  const {
+    passages
+  } = reading.sections.selection
+
+
+  const readingSelectionRightAnswersCount = passages.map((passageValue, passageIndex) => {
+      const {
+        questions
+      } = passageValue
+      return (
+        questions.map((questionValue) => {
+          const {
+            optionSelected,
+            rightAnswer
+          } = questionValue
+          return (
+            optionSelected === rightAnswer ? 1 : 0
+          )
+        }).reduce((questionAccumulator, currentQuestionValue) => {
+          return (
+            currentQuestionValue + questionAccumulator
+          )
+        })
+      )
+    })
+    .reduce((passageAccumulator, currentModuleValue) => {
+      return (
+        currentModuleValue + passageAccumulator
+      )
+    })
+
+  const readingSelectionQuestionsCount = passages.map((passageValue, passageIndex) => {
+      const {
+        questions
+      } = passageValue
+      return (
+        questions.map((questionValue) => {
+          const {
+            optionSelected,
+            rightAnswer
+          } = questionValue
+          return (
+            1
+          )
+        }).reduce((questionAccumulator, currentQuestionValue) => {
+          return (
+            currentQuestionValue + questionAccumulator
+          )
+        })
+      )
+    })
+    .reduce((passageAccumulator, currentModuleValue) => {
+      return (
+        currentModuleValue + passageAccumulator
+      )
+    })
+
+  console.log({
+    readingSelectionRightAnswersCount,
+    readingSelectionQuestionsCount
+  })
+
+  const readingSelectionPoints = Number(710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100).toFixed(1)
+
+
 
   return (
     <View>
@@ -133,7 +198,14 @@ const AnswerSheet = ({
                 listeningQuestionsCount={listeningQuestionsCount}
                 listeningPoints={listeningPoints}
               />
-              <ReadingSheet reading={reading} mode={mode}/>
+              <ReadingSheet
+                reading={reading}
+                mode={mode}
+                readingSelectionRightAnswersCount={readingSelectionRightAnswersCount}
+                readingSelectionQuestionsCount={readingSelectionQuestionsCount}
+                readingSelectionPoints={readingSelectionPoints}
+
+              />
               <TranslationSheet translation={translation}/>
             </View>
           )
@@ -284,7 +356,10 @@ const ListeningSheet = ({
 
 const ReadingSheet = ({
   reading,
-  mode
+  mode,
+  readingSelectionRightAnswersCount,
+  readingSelectionQuestionsCount,
+  readingSelectionPoints
 }) => {
   const {
     sections
@@ -394,8 +469,6 @@ const ReadingSheet = ({
         )
       }
       {
-
-
         passages.filter((passageValue)=>{
           const {questions}=passageValue
           return(
@@ -411,6 +484,13 @@ const ReadingSheet = ({
             <CardItem header>
               <H3>
                 Sections C Selection
+              </H3>
+            </CardItem>
+            <CardItem>
+              <H3>
+                {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710= {
+                  readingSelectionPoints
+                }
               </H3>
             </CardItem>
             {
