@@ -50,6 +50,7 @@ import jwt_decode from 'jwt-decode'
 import {
   observer
 } from 'mobx-react'
+import HostoryListStore from '../home/HostoryListStore'
 import {
   TEST,
   SUBMITTING,
@@ -217,6 +218,7 @@ class PaperScreen extends Component < Props > {
                 const success = await submitAsync()
                 if(success){
                   this.props.navigation.pop()
+                  HostoryListStore.InitAsync()
                 }
               }}>
                 <Text>Submit</Text>
