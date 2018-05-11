@@ -8,10 +8,6 @@ import React, {
   Component
 } from 'react'
 import {
-  StackNavigator,
-  SwitchNavigator
-} from 'react-navigation' // Version can be specified in package.json
-import {
   //   ActivityIndicator,
   AsyncStorage,
   //   Button,
@@ -29,6 +25,7 @@ import {
   CardItem,
   Text,
   Icon,
+  Spinner,
   Right,
   StyleProvider
 } from 'native-base';
@@ -43,7 +40,13 @@ class HomeScreen extends Component < {
   navigation: Function
 }, {} > {
   static navigationOptions = {
-    title: 'Welcome to CETutor!'
+    tabBarIcon: ({
+      focused,
+      tintColor
+    }) => {
+      const iconName = `ios-paper${focused ? '' : '-outline'}`
+      return <Icon name={iconName} style={{color:tintColor}} />;
+    }
   }
   constructor() {
     super()
@@ -72,7 +75,7 @@ class HomeScreen extends Component < {
             paperList
           })}</Text> */}
 
-            {downloading?(<Text>Downloading</Text>):(<PaperList _showPaper={this._showPaper} paperList={paperList}/>)}
+            {downloading?(<Spinner/>):(<PaperList _showPaper={this._showPaper} paperList={paperList}/>)}
 
         {/* <Text>{JSON.stringify(CurrentUserStore)}</Text>
         <Text>app here</Text>

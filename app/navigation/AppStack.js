@@ -23,6 +23,7 @@ import CurrentUserStore from './CurrentUserStore'
 
 import HomeScreen from '../home/HomeScreen'
 import PaperScreen from '../paper/PaperScreen'
+import PaperTab from '../home/PaperTab'
 
 class OtherScreen extends Component < {
   navigation: Function
@@ -55,8 +56,11 @@ const styles = StyleSheet.create({
 })
 
 const AppStack = createStackNavigator({
-  Home: {
-    screen: HomeScreen
+  PaperTab: {
+    screen: PaperTab,
+    navigationOptions: {
+      title: 'CETutor papers',
+    }
   },
   Paper: {
     screen: PaperScreen
