@@ -113,13 +113,15 @@ const AnswerSheet = ({
   const listeningPoints = Number(710 * 35 * listeningRightAnswersCount / listeningQuestionsCount / 100).toFixed(1)
 
   const {
-    passages
-  } = reading.sections.selection
+    selection,
+    bankedCloze,
+    locating
+  } = reading.sections
 
   const {
     orderSelected,
     rightOrder
-  } = reading.sections.bankedCloze
+  } = bankedCloze
 
   const readingBankedClozeRightAnswersCount = orderSelected.filter((orderSelectedItemValue, orderSelectedItemIndex) => {
     return (
@@ -129,8 +131,32 @@ const AnswerSheet = ({
 
   const readingBankedClozeQuestionsCount = orderSelected.length
 
-  const readingBankedClozePoints = Number(710 * 35 * readingBankedClozeRightAnswersCount / readingBankedClozeQuestionsCount / 100).toFixed(1)
+  const readingBankedClozePoints = Number(710 * 5 * readingBankedClozeRightAnswersCount / readingBankedClozeQuestionsCount / 100).toFixed(1)
 
+
+  const {
+    questions
+  } = locating
+
+  const {
+    passages
+  } = selection
+
+  const readingLocatingRightAnswersCount = questions.map((questionValue, questionIndex) => {
+    const {
+      rightAnswer,
+      optionSelected
+    } = questionValue
+    return (rightAnswer === optionSelected ? 1 : 0)
+  }).reduce((accumulator, currentValue) => {
+    return (
+      accumulator + currentValue
+    )
+  })
+
+  const readingLocatingQuestionsCount = questions.length
+
+  const readingLocatingPoints = Number(710 * 10 * readingLocatingRightAnswersCount / readingLocatingQuestionsCount / 100).toFixed(1)
 
   const readingSelectionRightAnswersCount = passages.map((passageValue, passageIndex) => {
       const {
@@ -211,14 +237,19 @@ const AnswerSheet = ({
               <ReadingSheet
                 reading={reading}
                 mode={mode}
-                readingSelectionRightAnswersCount={readingSelectionRightAnswersCount}
-                readingSelectionQuestionsCount={readingSelectionQuestionsCount}
-                readingSelectionPoints={readingSelectionPoints}
                 readingBankedClozeRightAnswersCount={readingBankedClozeRightAnswersCount}
                 readingBankedClozeQuestionsCount={readingBankedClozeQuestionsCount}
                 readingBankedClozePoints={readingBankedClozePoints}
+                readingLocatingRightAnswersCount={readingLocatingRightAnswersCount}
+                readingLocatingQuestionsCount={readingLocatingQuestionsCount}
+                readingLocatingPoints={readingLocatingPoints}
+                readingSelectionRightAnswersCount={readingSelectionRightAnswersCount}
+                readingSelectionQuestionsCount={readingSelectionQuestionsCount}
+                readingSelectionPoints={readingSelectionPoints}
               />
-              <TranslationSheet translation={translation}/>
+              <TranslationSheet
+                translation={translation}
+              />
             </View>
           )
         }
@@ -369,12 +400,15 @@ const ListeningSheet = ({
 const ReadingSheet = ({
   reading,
   mode,
+  readingBankedClozeRightAnswersCount,
+  readingBankedClozeQuestionsCount,
+  readingBankedClozePoints,
+  readingLocatingRightAnswersCount,
+  readingLocatingQuestionsCount,
+  readingLocatingPoints,
   readingSelectionRightAnswersCount,
   readingSelectionQuestionsCount,
   readingSelectionPoints,
-  readingBankedClozeRightAnswersCount,
-  readingBankedClozeQuestionsCount,
-  readingBankedClozePoints
 }) => {
   const {
     sections
@@ -464,6 +498,15 @@ const ReadingSheet = ({
                 Sections B Locating
               </H3>
             </CardItem>
+            {mode!==TEST&&(
+              <CardItem >
+                <H3>
+                  {readingLocatingRightAnswersCount} / {readingLocatingQuestionsCount} * 10% * 710 = {
+                    readingLocatingPoints
+                  }
+                </H3>
+              </CardItem>
+            )}
             <CardItem>
               <Text>
                 {
