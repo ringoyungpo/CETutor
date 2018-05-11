@@ -189,7 +189,8 @@ const ReadingSheet = ({
   } = sections
   const {
     orderSelected,
-    options
+    options,
+    rightOrder
   } = bankedCloze
 
   const {
@@ -224,13 +225,22 @@ const ReadingSheet = ({
               <Text>
                 {orderSelected.map((orderSelectedItemValue,orderSelectedItemIndex)=>{
                   return(
-                    `${orderSelectedItemIndex+1}. ${orderSelectedItemValue!==null&&orderSelectedItemValue!==undefined?(
-                      options[orderSelectedItemValue]
-                    ):(
-                      '__'
-                    )}`
+                    <Text>
+                      {orderSelectedItemIndex+1}. {((orderSelectedItemValue!==null)&&(orderSelectedItemValue!==undefined))?(
+                        <Text style={{color:mode===TEST?('black'):(orderSelected[orderSelectedItemIndex]===rightOrder[orderSelectedItemIndex]?('green'):('red'))}}>
+                          {options[orderSelectedItemValue]}
+                        </Text>
+                      ):(
+                        '__'
+                      )}
+                    </Text>
                   )
-                }).join(', ')}
+                }).reduce((accumulator, currentValue)=>(
+                  <Text>
+                    {accumulator}{', '}
+                    {currentValue}
+                  </Text>
+                ))}
               </Text>
             </CardItem>
           </View>
