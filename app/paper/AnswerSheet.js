@@ -293,7 +293,7 @@ const ListeningSheet = ({
               mode!==TEST&&(
                 <CardItem>
                   <H3>
-                    {listeningRightAnswersCount} / {listeningQuestionsCount} * 35% * 710= {
+                    {listeningRightAnswersCount} / {listeningQuestionsCount} * 35% * 710 = {
                       listeningPoints
                     }
                   </H3>
@@ -420,7 +420,7 @@ const ReadingSheet = ({
             {mode!==TEST&&(
               <CardItem >
                 <H3>
-                  {readingBankedClozeRightAnswersCount} / {readingBankedClozeQuestionsCount} * 5% * 710= {
+                  {readingBankedClozeRightAnswersCount} / {readingBankedClozeQuestionsCount} * 5% * 710 = {
                     readingBankedClozePoints
                   }
                 </H3>
@@ -513,13 +513,13 @@ const ReadingSheet = ({
               mode!==TEST&&(
                 <CardItem>
                   <H3>
-                    {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710= {
+                    {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710 = {
                       readingSelectionPoints
                     }
                   </H3>
                 </CardItem>
               )
-            }            
+            }
             {
               passages.map((passageValue, passageIndex)=>{
                 const {questions}=passageValue
