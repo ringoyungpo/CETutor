@@ -8,8 +8,7 @@ import React, {
   Component
 } from 'react'
 import {
-  StackNavigator,
-  SwitchNavigator
+  createStackNavigator
 } from 'react-navigation' // Version can be specified in package.json
 import {
   ActivityIndicator,
@@ -55,9 +54,15 @@ const styles = StyleSheet.create({
   }
 })
 
-const AppStack = StackNavigator({
-  Home: HomeScreen,
-  Paper: PaperScreen,
-  Other: OtherScreen
+const AppStack = createStackNavigator({
+  Home: {
+    screen: HomeScreen
+  },
+  Paper: {
+    screen: PaperScreen
+  },
+  Other: {
+    screen: OtherScreen
+  }
 })
 export default AppStack

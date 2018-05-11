@@ -8,8 +8,7 @@ import React, {
   Component
 } from 'react'
 import {
-  StackNavigator,
-  SwitchNavigator
+  createStackNavigator
 } from 'react-navigation' // Version can be specified in package.json
 import {
   ActivityIndicator,
@@ -22,8 +21,12 @@ import {
 import SignInScreen from './SignInScreen'
 import SignUpScreen from './SignUpScreen'
 
-const AuthStack = StackNavigator({
-  SignIn: SignInScreen,
-  SignUp: SignUpScreen
+const AuthStack = createStackNavigator({
+  SignIn: {
+    screen: SignInScreen
+  },
+  SignUp: {
+    screen: SignUpScreen
+  }
 })
 export default AuthStack

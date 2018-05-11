@@ -20,14 +20,19 @@ import {
   View
 } from 'react-native'
 import {
-  StackNavigator,
-  SwitchNavigator
+  createSwitchNavigator
 } from 'react-navigation' // Version can be specified in package.json
 
-export default SwitchNavigator({
-  AuthLoading: AuthLoadingScreen,
-  App: AppStack,
-  Auth: AuthStack
+export default createSwitchNavigator({
+  AuthLoading: {
+    screen: AuthLoadingScreen
+  },
+  App: {
+    screen: AppStack
+  },
+  Auth: {
+    screen: AuthStack
+  }
 }, {
   initialRouteName: 'AuthLoading'
 })
