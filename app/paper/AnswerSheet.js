@@ -34,6 +34,85 @@ const AnswerSheet = ({
   toggleAnswerSheet,
   showAnswerSheet
 }) => {
+  const {
+    sections
+  } = listening
+
+  const listeningRightAnswersCount = sections.map((sectionValue, sectionIndex) => {
+      const {
+        modules
+      } = sectionValue
+      return (
+        modules.map((moduleValue, moduleIndex) => {
+          const {
+            questions
+          } = moduleValue
+          return (
+            questions.map((questionValue) => {
+              const {
+                optionSelected,
+                rightAnswer
+              } = questionValue
+              return (
+                optionSelected === rightAnswer ? 1 : 0
+              )
+            }).reduce((questionAccumulator, currentQuestionValue) => {
+              return (
+                currentQuestionValue + questionAccumulator
+              )
+            })
+          )
+        })
+        .reduce((moduleAccumulator, currentModuleValue) => {
+          return (
+            currentModuleValue + moduleAccumulator
+          )
+        })
+      )
+    })
+    .reduce((sectionAccumulator, currentSectionValue) => {
+      return (currentSectionValue + sectionAccumulator)
+    })
+
+  const listeningQuestionsCount = sections.map((sectionValue, sectionIndex) => {
+      const {
+        modules
+      } = sectionValue
+      return (
+        modules.map((moduleValue, moduleIndex) => {
+          const {
+            questions
+          } = moduleValue
+          return (
+            questions.map((questionValue) => {
+              const {
+                optionSelected,
+                rightAnswer
+              } = questionValue
+              return (
+                1
+              )
+            }).reduce((questionAccumulator, currentQuestionValue) => {
+              return (
+                currentQuestionValue + questionAccumulator
+              )
+            })
+          )
+        })
+        .reduce((moduleAccumulator, currentModuleValue) => {
+          return (
+            currentModuleValue + moduleAccumulator
+          )
+        })
+      )
+    })
+    .reduce((sectionAccumulator, currentSectionValue) => {
+      return (currentSectionValue + sectionAccumulator)
+    })
+
+  const listeningPoints = Number(710 * 35 * listeningRightAnswersCount / listeningQuestionsCount / 100).toFixed(1)
+
+
   return (
     <View>
       <Card>
@@ -47,7 +126,13 @@ const AnswerSheet = ({
           showAnswerSheet&&(
             <View>
               <WritingSheet writing={writing}/>
-              <ListeningSheet listening={listening} mode={mode} />
+              <ListeningSheet
+                listening={listening}
+                mode={mode}
+                listeningRightAnswersCount={listeningRightAnswersCount}
+                listeningQuestionsCount={listeningQuestionsCount}
+                listeningPoints={listeningPoints}
+              />
               <ReadingSheet reading={reading} mode={mode}/>
               <TranslationSheet translation={translation}/>
             </View>
@@ -88,7 +173,10 @@ const WritingSheet = ({
 
 const ListeningSheet = ({
   listening,
-  mode
+  mode,
+  listeningRightAnswersCount,
+  listeningQuestionsCount,
+  listeningPoints
 }) => {
   const {
     sections
@@ -117,75 +205,17 @@ const ListeningSheet = ({
             }).length)
         }).length?(
           <View>
-            <CardItem>
-              <H3>
-                {
-                  // (accumulator, currentValue)=>(
-                  //   <Text>
-                  //     {accumulator}{', '}
-                  //     {currentValue}
-                  //   </Text>
-                  // )
-                  sections.map((sectionValue, sectionIndex)=>{
-                    const {modules} = sectionValue
-                    return(
-                      modules.map((moduleValue, moduleIndex)=>{
-                        const {questions}=moduleValue
-                        return(
-                          questions.map((questionValue)=>{
-                            const {optionSelected,rightAnswer}=questionValue
-                            return(
-                              optionSelected===rightAnswer?1:0
-                            )
-                          }).reduce((questionAccumulator, currentQuestionValue)=>{
-                            return(
-                              currentQuestionValue+questionAccumulator
-                            )
-                          })
-                        )
-                      })
-                      .reduce((moduleAccumulator,currentModuleValue)=>{
-                        return(
-                          currentModuleValue+moduleAccumulator
-                        )
-                      })
-                    )
-                  })
-                  .reduce((sectionAccumulator,currentSectionValue)=>{
-                    return(currentSectionValue+sectionAccumulator)
-                  })
-                }/{
-                  sections.map((sectionValue, sectionIndex)=>{
-                    const {modules} = sectionValue
-                    return(
-                      modules.map((moduleValue, moduleIndex)=>{
-                        const {questions}=moduleValue
-                        return(
-                          questions.map((questionValue)=>{
-                            const {optionSelected,rightAnswer}=questionValue
-                            return(
-                              1
-                            )
-                          }).reduce((questionAccumulator, currentQuestionValue)=>{
-                            return(
-                              currentQuestionValue+questionAccumulator
-                            )
-                          })
-                        )
-                      })
-                      .reduce((moduleAccumulator,currentModuleValue)=>{
-                        return(
-                          currentModuleValue+moduleAccumulator
-                        )
-                      })
-                    )
-                  })
-                  .reduce((sectionAccumulator,currentSectionValue)=>{
-                    return(currentSectionValue+sectionAccumulator)
-                  })
-                }
-              </H3>
-            </CardItem>
+            {
+              mode!==TEST&&(
+                <CardItem>
+                  <H3>
+                    {listeningRightAnswersCount} / {listeningQuestionsCount} * 35% * 710= {
+                      listeningPoints
+                    }
+                  </H3>
+                </CardItem>
+              )
+            }
             {
               sections.map((sectionValue, sectionIndex)=>{
                 const {modules,sectionTitle}=sectionValue
