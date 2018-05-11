@@ -38,6 +38,8 @@ class PaperStore {
   @observable sectionSelected
   @observable audioPlaying
   @observable sound
+  @observable mode
+
 
 
 
@@ -48,7 +50,13 @@ class PaperStore {
     this.sectionSelected = null
     this.audioPlaying = false
     this.sound = null
+    this.mode = null
     Sound.setCategory('Playback')
+  }
+
+  @action.bound
+  setMode(mode) {
+    this.mode = mode
   }
 
   @action.bound

@@ -69,7 +69,6 @@ type Props = {
 
 @observer
 class PaperScreen extends Component < Props > {
-  mode: string
   static navigationOptions = {
     title: 'Paper Page'
     // title: this.props.navigation.getParam('mode') === TEST ? ('Testing Mode') : ('Practice Mode')
@@ -84,7 +83,10 @@ class PaperScreen extends Component < Props > {
   constructor(props: any) {
     super(props)
     this.init()
-    this.mode = this.props.navigation.getParam('mode')
+    const mode = this.props.navigation.getParam('mode')
+    PaperStore.setMode(mode)
+
+
   }
 
   componentWillUnmount() {
@@ -102,7 +104,12 @@ class PaperScreen extends Component < Props > {
       partSelected,
       sectionSelect,
       sectionSelected,
-      playAudio
+      playAudio,
+      setMode
+    } = PaperStore
+
+    let {
+      mode
     } = PaperStore
 
     const {
@@ -120,7 +127,7 @@ class PaperScreen extends Component < Props > {
       <View>
         <Card>
           <PaperHeader
-            date={date} title={title} level={level} mode={this.mode}
+            date={date} title={title} level={level} mode={mode}
             partSelect={partSelect} partSelected={partSelected}
           />
 
@@ -139,7 +146,7 @@ class PaperScreen extends Component < Props > {
             sectionSelected={sectionSelected}
             audioPlaying={audioPlaying}
             playAudio={playAudio}
-            mode={this.mode}
+            mode={mode}
           />
 
           <Reading
@@ -149,7 +156,7 @@ class PaperScreen extends Component < Props > {
             partSelected={partSelected}
             sectionSelect={sectionSelect}
             sectionSelected={sectionSelected}
-            mode={this.mode}
+            mode={mode}
 
           />
 
@@ -170,7 +177,7 @@ class PaperScreen extends Component < Props > {
         reading={reading}
         listening={listening}
         translation={translation}
-        mode={this.mode}
+        mode={mode}
       />)
 
 
@@ -180,13 +187,30 @@ class PaperScreen extends Component < Props > {
 
     const completeButton = (
       <View>
-        <Card>
-          <Button block button onPress={()=>{this.mode=SUBMITTING}}>
-            <Text>Complete</Text>
-          </Button>
-        </Card>
+        {
+          mode === TEST&&(
+            <Card>
+              <Button block button onPress={()=>{setMode(SUBMITTING)}}>
+                <Text>Complete</Text>
+              </Button>
+            </Card>
+          )
+        }
       </View>
+    )
 
+    const submitButton = (
+      <View>
+        {
+          mode === SUBMITTING&&(
+            <Card>
+              <Button block button onPress={()=>{setMode(SUBMITTING)}}>
+                <Text>Submit</Text>
+              </Button>
+            </Card>
+          )
+        }
+      </View>
     )
 
     return (
@@ -195,9 +219,14 @@ class PaperScreen extends Component < Props > {
 
             {downloading?(downloadingContent):(
               <View>
-                {PaperContent}
+                {
+                  mode!==SUBMITTING&&(
+                    PaperContent
+                  )
+                }
                 {answerSheetContent}
                 {completeButton}
+                {submitButton}
               </View>
             )}
 
