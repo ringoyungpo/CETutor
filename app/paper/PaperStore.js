@@ -146,8 +146,8 @@ class PaperStore {
     switch (partField) {
       case 'writing':
         {
-          const [writing, eassy] = [partField, ...partChild]
-          this.paper[writing][eassy] = value
+          const [writing, writingField] = [partField, ...partChild]
+          this.paper[writing][writingField] = value
         }
         break
       case 'listening':
@@ -211,8 +211,8 @@ class PaperStore {
         break
       case 'translation':
         {
-          const [translation, answer] = [partField, ...partChild]
-          this.paper[translation][answer] = value
+          const [translation, translationField] = [partField, ...partChild]
+          this.paper[translation][translationField] = value
         }
         break
       default:

@@ -34,6 +34,8 @@ const AnswerSheet = ({
   toggleAnswerSheet,
   showAnswerSheet
 }) => {
+  const writtingPoints = Number(710 * 15 * writing.level ? writing.level : 0 / 100).toFixed(1)
+
   const {
     sections
   } = listening
@@ -226,7 +228,11 @@ const AnswerSheet = ({
         {
           showAnswerSheet&&(
             <View>
-              <WritingSheet writing={writing}/>
+              <WritingSheet
+                writing={writing}
+                mode={mode}
+                writtingPoints={writtingPoints}
+              />
               <ListeningSheet
                 listening={listening}
                 mode={mode}
@@ -259,10 +265,13 @@ const AnswerSheet = ({
 }
 
 const WritingSheet = ({
-  writing
+  writing,
+  mode,
+  writtingPoints
 }) => {
   const {
-    essay
+    essay,
+    level
   } = writing
   return (
     <View>
@@ -275,11 +284,22 @@ const WritingSheet = ({
         essay&&(
           essay.replace(/(^\s*)|(\s*$)/g, "").length !==0
         )?(
-          <CardItem>
-            <Text>
-              {essay}
-            </Text>
-          </CardItem>
+          <View>
+              {mode!==TEST&&(
+                <CardItem >
+                  <H3>
+                    {Number(level?level:0)} * 15% * 710 = {
+                      writtingPoints
+                    }
+                  </H3>
+                </CardItem>
+              )}
+              <CardItem>
+                <Text>
+                  {essay}
+                </Text>
+              </CardItem>
+          </View>
         ):null
       }
     </View>
