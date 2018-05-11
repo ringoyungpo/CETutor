@@ -10,6 +10,7 @@ export const RECORD = 'RECORD'
 export const PRACTICE = 'PRACTICE'
 export const TEST = 'TEST'
 export const SUBMITTING = 'SUBMITTING'
+export const REVIEW = 'REVIEW'
 //PART SELECTED
 export const PAPER_HEADER = 'PAPER_HEADER'
 export const WRITING = 'WRITING'

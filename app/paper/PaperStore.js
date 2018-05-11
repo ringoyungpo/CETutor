@@ -24,7 +24,8 @@ import {
   READING,
   TRANSLATION,
   TEST,
-  SUBMITTING
+  SUBMITTING,
+  REVIEW
 } from '../../constant/paperConst'
 // import Sound from 'react-native-sound'
 import Sound from 'react-native-sound'
@@ -218,33 +219,27 @@ class PaperStore {
         }
         break
       default:
-
     }
     this.paper = { ...this.paper
     }
-
   }
 
   @action.bound
   InitAsync = flow(function*(_id) {
     this.downloading = true
+    const apiPath = this.mode === REVIEW ? 'api/answers/' : 'api/papers/'
 
     try {
       let {
         data
-      } = yield axios.get(API_BASE + 'api/papers/' + _id)
+      } = yield axios.get(API_BASE + apiPath + _id)
 
-      // console.log(data)
-      // data.writing.eassy = ''
-      // data.translation.answer = ''
-      data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
-      // console.log(data)
+      if (!data.reading.sections.bankedCloze.orderSelected)
+        data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
 
       this.paper = data
     } catch (e) {
       console.log(e)
-      // this.errors = e.response.data
-      // console.log(JSON.stringify(e.response.data))
     } finally {
       this.downloading = false
       // console.log('finally')

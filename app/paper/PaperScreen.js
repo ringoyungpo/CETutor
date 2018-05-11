@@ -83,11 +83,9 @@ class PaperScreen extends Component < Props > {
 
   constructor(props: any) {
     super(props)
-    this.init()
     const mode = this.props.navigation.getParam('mode')
     PaperStore.setMode(mode)
-
-
+    this.init()
   }
 
   componentWillUnmount() {

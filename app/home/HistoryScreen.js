@@ -13,6 +13,7 @@ import {
   //   Button,
   //   StatusBar,
   StyleSheet,
+  Button
   //   View,
 } from 'react-native'
 import CurrentUserStore from '../navigation/CurrentUserStore'
@@ -28,13 +29,16 @@ import {
   View,
   Spinner,
   Right,
-  StyleProvider
+  StyleProvider,
 } from 'native-base';
-import PaperListStore from './PaperListStore'
-import isEmpty from 'lodash'
+import HostoryListStore from './HostoryListStore'
+import {
+  isEmpty
+} from 'lodash'
 import {
   observer
 } from 'mobx-react'
+
 
 @observer
 class HistoryScreen extends Component < {
@@ -50,13 +54,48 @@ class HistoryScreen extends Component < {
     }
   }
 
+  constructor() {
+    super()
+    const {
+      historyList,
+      downloading,
+      InitAsync
+    } = HostoryListStore
+    if (isEmpty(historyList) && downloading === false) {
+      InitAsync()
+    }
+  }
+
+  _showPaper = (_id, mode) => {
+    this.props.navigation.navigate('Paper', {
+      _id: _id,
+      mode: mode
+    })
+  }
+
   render() {
+    const {
+      historyList,
+      downloading,
+      InitAsync
+    } = HostoryListStore
     return (
-      <View>
-        <Text>
-          hellow
-        </Text>
-      </View>
+      <Container>
+        <Content>
+          {/* <Text>{JSON.stringify({
+            downloading,
+            paperList
+          })}</Text> */}
+
+            {downloading?(<Spinner/>):(<PaperList historyMode={true} _showPaper={this._showPaper} paperList={historyList}/>)}
+
+        {/* <Text>{JSON.stringify(CurrentUserStore)}</Text>
+        <Text>app here</Text>
+        <Button title="Show me more of the app" onPress={this._showMoreApp} />
+        <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
+      </View> */}
+        </Content>
+      </Container>
     )
   }
 }

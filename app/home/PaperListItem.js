@@ -26,11 +26,13 @@ import {
   CET_4,
   CET_6,
   PRACTICE,
-  TEST
+  TEST,
+  REVIEW
 } from '../../constant/paperConst'
 
 type Props = {
   _showPaper: Function,
+  historyMode: boolean,
   paper: {
     _id: string,
     title: string,
@@ -39,17 +41,35 @@ type Props = {
   }
 }
 
+import {
+  observer
+} from 'mobx-react'
+
+import HostoryListStore from './HostoryListStore'
+
+@observer
 class PaperListItem extends Component < Props > {
 
   render() {
     const {
+      paper,
+      _showPaper,
+      historyMode
+    } = this.props
+    const {
       _id,
       title,
       level,
-      date
-    } = this.props.paper
+      date,
+    } = paper
+
+    const {
+      deleteAsync,
+      InitAsync
+    } = HostoryListStore
+
     return (
-      <CardItem button onPress={()=>this.props._showPaper(_id, PRACTICE)}>
+      <CardItem button onPress={()=>_showPaper(_id, historyMode?REVIEW:PRACTICE)}>
         <Left>
           {
             level===CET_4
@@ -64,9 +84,21 @@ class PaperListItem extends Component < Props > {
 
         <Right>
           <Moment element={Text} fromNow ago>{date}</Moment>
-          <Button info onPress={()=>this.props._showPaper(_id, TEST)}>
-            <Icon name="arrow-forward" />
-          </Button>
+          {
+            historyMode?(
+              <Button danger onPress={async()=>{
+                await deleteAsync(_id)
+                await InitAsync()
+              }}>
+                <Icon type="Entypo" name="cross" />
+
+              </Button>
+            ):(
+              <Button info onPress={()=>_showPaper(_id, TEST)}>
+                <Icon name="arrow-forward" />
+              </Button>
+            )
+          }
         </Right>
       </CardItem>
     );

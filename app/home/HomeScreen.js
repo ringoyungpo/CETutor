@@ -27,10 +27,14 @@ import {
   Icon,
   Spinner,
   Right,
-  StyleProvider
+  StyleProvider,
+  Button
+
 } from 'native-base';
 import PaperListStore from './PaperListStore'
-import isEmpty from 'lodash'
+import {
+  isEmpty
+} from 'lodash'
 import {
   observer
 } from 'mobx-react'
@@ -47,6 +51,7 @@ class HomeScreen extends Component < {
       const iconName = `ios-paper${focused ? '' : '-outline'}`
       return <Icon name={iconName} style={{color:tintColor}} />;
     }
+
   }
   constructor() {
     super()
