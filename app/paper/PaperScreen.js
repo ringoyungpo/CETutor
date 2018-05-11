@@ -196,7 +196,9 @@ class PaperScreen extends Component < Props > {
         {
           mode === TEST&&(
             <Card>
-              <Button block button onPress={()=>{setMode(SUBMITTING)}}>
+              <Button block button onPress={async ()=>{
+                setMode(SUBMITTING)
+              }}>
                 <Text>Complete</Text>
               </Button>
             </Card>
@@ -210,7 +212,12 @@ class PaperScreen extends Component < Props > {
         {
           mode === SUBMITTING&&(
             <Card>
-              <Button block button disabled={submitting} onPress={()=>{submitAsync()}}>
+              <Button block button disabled={submitting} onPress={async ()=>{
+                const success = await submitAsync()
+                if(success){
+                  this.props.navigation.navigate('Home')
+                }
+              }}>
                 <Text>Submit</Text>
               </Button>
             </Card>

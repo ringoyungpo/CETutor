@@ -4,6 +4,9 @@ import {
 
 import axios from 'axios'
 import setAuthToken from '../utils/setAuthToken'
+import {
+  AsyncStorage
+} from 'react-native'
 
 import {
   computed,
@@ -255,10 +258,13 @@ class PaperStore {
     this.submitting = true
 
     try {
-      // let response = yield axios.post(API_BASE + 'api/answers/', this.paper)
-      console.log(this.paper)
+      let response = yield axios.post(API_BASE + 'api/answers/', this.paper)
+      // console.log(response)
+      return response.status === 200
     } catch (e) {
       console.log(e)
+      return e
+
     } finally {
       this.submitting = false
     }
