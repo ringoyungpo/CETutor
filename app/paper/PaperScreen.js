@@ -38,6 +38,7 @@ import {
   Body,
   Card,
   CardItem,
+  Spinner,
   Label,
   View,
 } from 'native-base';
@@ -188,7 +189,9 @@ class PaperScreen extends Component < Props > {
 
 
     const downloadingContent = (
-      <Text>Downloading</Text>
+      <View>
+        <Spinner/>
+      </View>
     )
 
     const completeButton = (
