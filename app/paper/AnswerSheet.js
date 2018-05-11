@@ -116,6 +116,21 @@ const AnswerSheet = ({
     passages
   } = reading.sections.selection
 
+  const {
+    orderSelected,
+    rightOrder
+  } = reading.sections.bankedCloze
+
+  const readingBankedClozeRightAnswersCount = orderSelected.filter((orderSelectedItemValue, orderSelectedItemIndex) => {
+    return (
+      orderSelected[orderSelectedItemIndex] === rightOrder[orderSelectedItemIndex]
+    )
+  }).length
+
+  const readingBankedClozeQuestionsCount = orderSelected.length
+
+  const readingBankedClozePoints = Number(710 * 35 * readingBankedClozeRightAnswersCount / readingBankedClozeQuestionsCount / 100).toFixed(1)
+
 
   const readingSelectionRightAnswersCount = passages.map((passageValue, passageIndex) => {
       const {
@@ -169,11 +184,6 @@ const AnswerSheet = ({
       )
     })
 
-  console.log({
-    readingSelectionRightAnswersCount,
-    readingSelectionQuestionsCount
-  })
-
   const readingSelectionPoints = Number(710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100).toFixed(1)
 
 
@@ -204,7 +214,9 @@ const AnswerSheet = ({
                 readingSelectionRightAnswersCount={readingSelectionRightAnswersCount}
                 readingSelectionQuestionsCount={readingSelectionQuestionsCount}
                 readingSelectionPoints={readingSelectionPoints}
-
+                readingBankedClozeRightAnswersCount={readingBankedClozeRightAnswersCount}
+                readingBankedClozeQuestionsCount={readingBankedClozeQuestionsCount}
+                readingBankedClozePoints={readingBankedClozePoints}
               />
               <TranslationSheet translation={translation}/>
             </View>
@@ -359,7 +371,10 @@ const ReadingSheet = ({
   mode,
   readingSelectionRightAnswersCount,
   readingSelectionQuestionsCount,
-  readingSelectionPoints
+  readingSelectionPoints,
+  readingBankedClozeRightAnswersCount,
+  readingBankedClozeQuestionsCount,
+  readingBankedClozePoints
 }) => {
   const {
     sections
@@ -394,7 +409,6 @@ const ReadingSheet = ({
         orderSelected&&orderSelected.filter((orderSelectedItemValue)=>{
           return (
             orderSelectedItemValue !== null && orderSelectedItemValue !== undefined
-
           )
         }).length>0&&(
           <View>
@@ -403,6 +417,15 @@ const ReadingSheet = ({
                 Sections A Bankedcloze
               </H3>
             </CardItem>
+            {mode!==TEST&&(
+              <CardItem >
+                <H3>
+                  {readingBankedClozeRightAnswersCount} / {readingBankedClozeQuestionsCount} * 5% * 710= {
+                    readingBankedClozePoints
+                  }
+                </H3>
+              </CardItem>
+            )}
             <CardItem>
               <Text>
                 {orderSelected.map((orderSelectedItemValue,orderSelectedItemIndex)=>{
@@ -486,13 +509,17 @@ const ReadingSheet = ({
                 Sections C Selection
               </H3>
             </CardItem>
-            <CardItem>
-              <H3>
-                {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710= {
-                  readingSelectionPoints
-                }
-              </H3>
-            </CardItem>
+            {
+              mode!==TEST&&(
+                <CardItem>
+                  <H3>
+                    {readingSelectionRightAnswersCount} / {readingSelectionQuestionsCount} * 20% * 710= {
+                      readingSelectionPoints
+                    }
+                  </H3>
+                </CardItem>
+              )
+            }            
             {
               passages.map((passageValue, passageIndex)=>{
                 const {questions}=passageValue
