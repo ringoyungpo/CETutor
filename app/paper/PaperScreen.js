@@ -105,7 +105,9 @@ class PaperScreen extends Component < Props > {
       sectionSelect,
       sectionSelected,
       playAudio,
-      setMode
+      setMode,
+      showAnswerSheet,
+      toggleAnswerSheet
     } = PaperStore
 
     let {
@@ -178,6 +180,8 @@ class PaperScreen extends Component < Props > {
         listening={listening}
         translation={translation}
         mode={mode}
+        showAnswerSheet={showAnswerSheet}
+        toggleAnswerSheet={toggleAnswerSheet}
       />)
 
 

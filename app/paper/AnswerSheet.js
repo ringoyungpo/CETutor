@@ -30,21 +30,29 @@ const AnswerSheet = ({
   reading,
   listening,
   translation,
-  mode
+  mode,
+  toggleAnswerSheet,
+  showAnswerSheet
 }) => {
   return (
     <View>
       <Card>
-        <CardItem>
+        <CardItem button onPress={toggleAnswerSheet}>
           <H1>
             Answer Sheet
           </H1>
         </CardItem>
 
-        <WritingSheet writing={writing}/>
-        <ListeningSheet listening={listening} mode={mode} />
-        <ReadingSheet reading={reading} mode={mode}/>
-        <TranslationSheet translation={translation}/>
+        {
+          showAnswerSheet&&(
+            <View>
+              <WritingSheet writing={writing}/>
+              <ListeningSheet listening={listening} mode={mode} />
+              <ReadingSheet reading={reading} mode={mode}/>
+              <TranslationSheet translation={translation}/>
+            </View>
+          )
+        }
       </Card>
     </View>
   )

@@ -39,6 +39,9 @@ class PaperStore {
   @observable audioPlaying
   @observable sound
   @observable mode
+  @observable showAnswerSheet
+
+
 
 
 
@@ -51,6 +54,7 @@ class PaperStore {
     this.audioPlaying = false
     this.sound = null
     this.mode = null
+    this.showAnswerSheet = false
     Sound.setCategory('Playback')
   }
 
@@ -67,6 +71,12 @@ class PaperStore {
     this.sectionSelected = null
     this.audioPlaying = false
     this.sound = null
+    this.showAnswerSheet = false
+  }
+
+  @action.bound
+  toggleAnswerSheet() {
+    this.showAnswerSheet = !this.showAnswerSheet
   }
 
   @action.bound
