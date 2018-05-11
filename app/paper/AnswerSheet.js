@@ -117,6 +117,75 @@ const ListeningSheet = ({
             }).length)
         }).length?(
           <View>
+            <CardItem>
+              <H3>
+                {
+                  // (accumulator, currentValue)=>(
+                  //   <Text>
+                  //     {accumulator}{', '}
+                  //     {currentValue}
+                  //   </Text>
+                  // )
+                  sections.map((sectionValue, sectionIndex)=>{
+                    const {modules} = sectionValue
+                    return(
+                      modules.map((moduleValue, moduleIndex)=>{
+                        const {questions}=moduleValue
+                        return(
+                          questions.map((questionValue)=>{
+                            const {optionSelected,rightAnswer}=questionValue
+                            return(
+                              optionSelected===rightAnswer?1:0
+                            )
+                          }).reduce((questionAccumulator, currentQuestionValue)=>{
+                            return(
+                              currentQuestionValue+questionAccumulator
+                            )
+                          })
+                        )
+                      })
+                      .reduce((moduleAccumulator,currentModuleValue)=>{
+                        return(
+                          currentModuleValue+moduleAccumulator
+                        )
+                      })
+                    )
+                  })
+                  .reduce((sectionAccumulator,currentSectionValue)=>{
+                    return(currentSectionValue+sectionAccumulator)
+                  })
+                }/{
+                  sections.map((sectionValue, sectionIndex)=>{
+                    const {modules} = sectionValue
+                    return(
+                      modules.map((moduleValue, moduleIndex)=>{
+                        const {questions}=moduleValue
+                        return(
+                          questions.map((questionValue)=>{
+                            const {optionSelected,rightAnswer}=questionValue
+                            return(
+                              1
+                            )
+                          }).reduce((questionAccumulator, currentQuestionValue)=>{
+                            return(
+                              currentQuestionValue+questionAccumulator
+                            )
+                          })
+                        )
+                      })
+                      .reduce((moduleAccumulator,currentModuleValue)=>{
+                        return(
+                          currentModuleValue+moduleAccumulator
+                        )
+                      })
+                    )
+                  })
+                  .reduce((sectionAccumulator,currentSectionValue)=>{
+                    return(currentSectionValue+sectionAccumulator)
+                  })
+                }
+              </H3>
+            </CardItem>
             {
               sections.map((sectionValue, sectionIndex)=>{
                 const {modules,sectionTitle}=sectionValue
