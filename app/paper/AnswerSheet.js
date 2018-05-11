@@ -263,15 +263,23 @@ const ReadingSheet = ({
               <Text>
                 {
                   questions.map((questionValue, questionIndex)=>{
-                    const {optionSelected} =  questionValue
+                    const {optionSelected,rightAnswer} =  questionValue
                     return(
-                      `${questionIndex+1}. ${optionSelected!==null&&optionSelected!==undefined?(
-                        String.fromCharCode(optionSelected+65)
-                      ):(
-                        '  '
-                      )}`
+                      <Text>
+                        {questionIndex + 1}{'. '}
+                          {optionSelected===null?('  '):(
+                            <Text style={{color:mode===TEST?('black'):(optionSelected===rightAnswer?('green'):('red'))}}>
+                              {String.fromCharCode(optionSelected + 65)}
+                            </Text>
+                          )}
+                      </Text>
                     )
-                  }).join(', ')
+                  }).reduce((accumulator, currentValue)=>(
+                    <Text>
+                      {accumulator}{', '}
+                      {currentValue}
+                    </Text>
+                  ))
                 }
               </Text>
             </CardItem>
