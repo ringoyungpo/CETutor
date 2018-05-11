@@ -179,6 +179,10 @@ const ReadingSheet = ({
     questions
   } = locating
 
+  const {
+    passages
+  } = selection
+
   return (
     <View>
       <CardItem>
@@ -244,6 +248,50 @@ const ReadingSheet = ({
                 }
               </Text>
             </CardItem>
+          </View>
+        )
+      }
+      {
+
+
+        passages.filter((passageValue)=>{
+          const {questions}=passageValue
+          return(
+            questions.filter((questionValue)=>{
+              const {optionSelected}=questionValue
+              return(
+                optionSelected!==null&&optionSelected!==undefined
+              )
+            }).length>0
+          )
+        }).length>0&&(
+          <View>
+            <CardItem header>
+              <H3>
+                Sections C Selection
+              </H3>
+            </CardItem>
+            {
+              passages.map((passageValue, passageIndex)=>{
+                const {questions}=passageValue
+                return(
+                <View key={passageIndex}>
+                  <CardItem>
+                    <Text>
+                      {
+                        questions.map((questionValue, questionIndex)=>{
+                          const {optionSelected}=questionValue
+                          return(
+                            `${questionIndex + 1}. ${optionSelected===null?'  ':String.fromCharCode(optionSelected + 65)}  `
+                          )}).reduce((accumulator, currentValue)=>(
+                            accumulator + currentValue
+                          ))
+                        }
+                      </Text>
+                    </CardItem>
+                  </View>
+                )})
+            }
           </View>
         )
       }
