@@ -254,9 +254,9 @@ const Locating = ({
     paragraphs,
     questions,
   } = locating
-  console.log({
-    mode
-  })
+  // console.log({
+  //   mode
+  // })
   return (
     <View>
       <CardItem header>

@@ -159,7 +159,26 @@ const ListeningSheet = ({
   )
 }
 
-const ReadingSheet = () => {
+const ReadingSheet = ({
+  reading
+}) => {
+  const {
+    sections
+  } = reading
+  const {
+    bankedCloze,
+    locating,
+    selection
+  } = sections
+  const {
+    orderSelected,
+    options
+  } = bankedCloze
+
+  const {
+    questions
+  } = locating
+
   return (
     <View>
       <CardItem>
@@ -167,6 +186,67 @@ const ReadingSheet = () => {
           Part III Reading Comprehension
         </H2>
       </CardItem>
+      {
+        orderSelected&&orderSelected.filter((orderSelectedItemValue)=>{
+          return (
+            orderSelectedItemValue !== null && orderSelectedItemValue !== undefined
+
+          )
+        }).length>0&&(
+          <View>
+            <CardItem header>
+              <H3>
+                Sections A Bankedcloze
+              </H3>
+            </CardItem>
+            <CardItem>
+              <Text>
+                {orderSelected.map((orderSelectedItemValue,orderSelectedItemIndex)=>{
+                  return(
+                    `${orderSelectedItemIndex+1}. ${orderSelectedItemValue!==null&&orderSelectedItemValue!==undefined?(
+                      options[orderSelectedItemValue]
+                    ):(
+                      '__'
+                    )}`
+                  )
+                }).join(', ')}
+              </Text>
+            </CardItem>
+          </View>
+        )
+      }
+      {
+        questions.filter((questionValue)=>{
+          const {optionSelected} = questionValue
+          return(
+            Number.isInteger(optionSelected)
+          )
+        }).length>0&&(
+          <View>
+            <CardItem header>
+              <H3>
+                Sections B Locating
+              </H3>
+            </CardItem>
+            <CardItem>
+              <Text>
+                {
+                  questions.map((questionValue, questionIndex)=>{
+                    const {optionSelected} =  questionValue
+                    return(
+                      `${questionIndex+1}. ${optionSelected!==null&&optionSelected!==undefined?(
+                        String.fromCharCode(optionSelected+65)
+                      ):(
+                        '  '
+                      )}`
+                    )
+                  }).join(', ')
+                }
+              </Text>
+            </CardItem>
+          </View>
+        )
+      }
     </View>
   )
 }

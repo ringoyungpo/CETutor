@@ -214,7 +214,7 @@ class PaperStore {
       // data.writing.eassy = ''
       // data.translation.answer = ''
       data.reading.sections.bankedCloze.orderSelected = [null, null, null, null, null, null, null, null, null, null]
-      // console.log(data)
+      console.log(data)
 
       this.paper = data
     } catch (e) {
