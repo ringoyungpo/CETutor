@@ -215,7 +215,7 @@ class PaperScreen extends Component < Props > {
               <Button block button disabled={submitting} onPress={async ()=>{
                 const success = await submitAsync()
                 if(success){
-                  this.props.navigation.navigate('Home')
+                  this.props.navigation.pop()
                 }
               }}>
                 <Text>Submit</Text>
