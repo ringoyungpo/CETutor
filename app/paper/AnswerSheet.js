@@ -214,6 +214,8 @@ const AnswerSheet = ({
 
   const readingSelectionPoints = Number(710 * 20 * readingSelectionRightAnswersCount / readingSelectionQuestionsCount / 100).toFixed(1)
 
+  const translationPoints = Number(710 * 15 * translation.level ? translation.level : 0 / 100).toFixed(1)
+
 
 
   return (
@@ -255,6 +257,8 @@ const AnswerSheet = ({
               />
               <TranslationSheet
                 translation={translation}
+                mode={mode}
+                translationPoints={translationPoints}
               />
             </View>
           )
@@ -622,10 +626,13 @@ const ReadingSheet = ({
 }
 
 const TranslationSheet = ({
-  translation
+  translation,
+  mode,
+  translationPoints
 }) => {
   const {
-    answer
+    answer,
+    level
   } = translation
   return (
     <View>
@@ -638,11 +645,22 @@ const TranslationSheet = ({
         answer&&(
           answer.replace(/(^\s*)|(\s*$)/g, "").length !==0
         )?(
-          <CardItem>
-            <Text>
-              {answer}
-            </Text>
-          </CardItem>
+          <View>
+            {mode!==TEST&&(
+              <CardItem >
+                <H3>
+                  {Number(level?level:0)} * 15% * 710 = {
+                    translationPoints
+                  }
+                </H3>
+              </CardItem>
+            )}
+            <CardItem>
+              <Text>
+                {answer}
+              </Text>
+            </CardItem>
+          </View>
         ):null
       }
     </View>
