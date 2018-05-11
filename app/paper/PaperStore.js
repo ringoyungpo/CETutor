@@ -20,7 +20,8 @@ import {
   LISTENING,
   READING,
   TRANSLATION,
-  TEST
+  TEST,
+  SUBMITTING
 } from '../../constant/paperConst'
 // import Sound from 'react-native-sound'
 import Sound from 'react-native-sound'
@@ -60,6 +61,9 @@ class PaperStore {
 
   @action.bound
   setMode(mode) {
+    if (mode === SUBMITTING) {
+      this.showAnswerSheet = true
+    }
     this.mode = mode
   }
 
