@@ -75,7 +75,7 @@ class InfoScreen extends Component < {
         <Content>
           <Card>
             <CardItem>
-              <Image source={{uri: 'https:'+avatar}} style={{height: 400, width: null, flex: 1}}/>
+              <Image source={{uri: 'https:'+avatar}} style={{height: 360, width: 360, flex: 1}}/>
             </CardItem>
             <CardItem>
               <Text>
