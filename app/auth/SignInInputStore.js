@@ -26,8 +26,8 @@ class SignInInputStore {
   @observable token
 
   constructor() {
-    this.email = 'ringoyungpo@163.com'
-    this.password = 'woods'
+    this.email = ''
+    this.password = ''
     this.errors = {}
     this.submitting = false
     this.token = ''
