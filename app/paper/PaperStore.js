@@ -227,7 +227,11 @@ class PaperStore {
   @action.bound
   InitAsync = flow(function*(_id) {
     this.downloading = true
-    const apiPath = this.mode === REVIEW ? 'api/answers/' : 'api/papers/'
+    let apiPath = 'api/papers/'
+    if (this.mode === REVIEW) {
+      apiPath = 'api/answers/'
+      this.showAnswerSheet = true
+    }
 
     try {
       let {

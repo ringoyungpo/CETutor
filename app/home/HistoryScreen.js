@@ -67,7 +67,7 @@ class HistoryScreen extends Component < {
     }
   }
 
-  _showPaper = (_id, mode) => {
+  _showPaper = async (_id, mode) => {
     this.props.navigation.navigate('Paper', {
       _id: _id,
       mode: mode

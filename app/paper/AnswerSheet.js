@@ -599,6 +599,11 @@ const ReadingSheet = ({
                 const {questions}=passageValue
                 return(
                 <View key={passageIndex}>
+                  <CardItem header>
+                    <Text>
+                      Passage {passageIndex+1}
+                    </Text>
+                  </CardItem>
                   <CardItem>
                     <Text>
                       {

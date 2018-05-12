@@ -103,9 +103,9 @@ class InfoScreen extends Component < {
           </Card>
           <Card>
 
-              <Button block onClick={async()=>{
+              <Button block onPress={async()=>{
                 this.props.navigation.navigate('Auth')
-                await AsyncStorage.clear()                
+                await AsyncStorage.clear()
               }}>
                 <Text>
                   Logout
