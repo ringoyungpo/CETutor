@@ -16,6 +16,7 @@ import {
   AsyncStorage
 } from 'react-native'
 
+import CountDown from 'react-native-countdown-component'
 
 import {
   Col,
@@ -54,7 +55,8 @@ import HostoryListStore from '../home/HostoryListStore'
 import {
   TEST,
   SUBMITTING,
-  PRACTICE
+  PRACTICE,
+  CET_4
 } from '../../constant/paperConst'
 import isEmpty from 'lodash'
 import setAuthToken from '../utils/setAuthToken'
@@ -198,7 +200,7 @@ class PaperScreen extends Component < Props > {
         {
           mode === TEST&&(
             <Card>
-              <Button block button onPress={async ()=>{
+              <Button block button onPress={()=>{
                 setMode(SUBMITTING)
               }}>
                 <Text>Complete</Text>
@@ -238,6 +240,19 @@ class PaperScreen extends Component < Props > {
                 {
                   mode!==SUBMITTING&&(
                     PaperContent
+                  )
+                }
+                {
+                  mode===TEST&&(
+                    <Card>
+                      <CountDown
+                        until={level===CET_4?(140*60):(145*60)}
+                        onFinish={() => setMode(SUBMITTING)}
+                        size={20}
+                        digitBgColor={'#FFF'}
+                        timeToShow={[ 'H', 'M', 'S']}
+                      />
+                    </Card>
                   )
                 }
                 {answerSheetContent}
