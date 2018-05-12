@@ -20,6 +20,7 @@ import {
 } from 'react-native'
 import HomeScreen from './HomeScreen'
 import HistoryScreen from './HistoryScreen'
+import InfoScreen from './InfoScreen'
 
 const PaperTab = createBottomTabNavigator({
   Home: {
@@ -27,6 +28,9 @@ const PaperTab = createBottomTabNavigator({
   },
   History: {
     screen: HistoryScreen
+  },
+  Info: {
+    screen: InfoScreen
   }
 })
 export default PaperTab

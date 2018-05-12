@@ -25,7 +25,7 @@ class CurrentUserStore {
   @observable user
 
   constructor() {
-    this.user = null
+    this.user = {}
   }
 
   @action.bound
